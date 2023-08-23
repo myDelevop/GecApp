@@ -1,0 +1,319 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<div  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:o="http://openfaces.org/"
+      xmlns:t="http://myfaces.apache.org/tomahawk" >
+
+	<div>
+		<b><h:outputText value="#{esitoImpegniRMFITFERBean._titoloPagina}" escape="true" /></b>
+		<br/><br/>
+		<table>
+		
+			<tr>
+				<td style="width:250">CUAA:</td>
+				<td><h:inputText value="#{esitoImpegniRMFITFERBean._esitoImpegni._cuaa}" size="30" readonly="#{esitoImpegniRMFITFERBean._readOnly}"
+					style="border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;"
+				/></td>
+			</tr>
+			
+			<tr>
+				<td>Campagna:</td>
+				<td>
+					<o:dropDownField id="selectCampagnaImpegni_remfitfer"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{esitoImpegniRMFITFERBean._esitoImpegni._campagna}"
+			               listItemStyle="white-space: nowrap;"  
+			               listStyle="height:100px !important;"             
+			               style="width:200px;border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;"
+			               disabled="#{esitoImpegniRMFITFERBean._readOnly}">
+						<o:dropDownItems value="#{esitoImpegniRMFITFERBean._listCampagna}"/>
+						<o:ajax event="change" render="selectMisuraImpegni_rmfitfer" listener="#{esitoImpegniRMFITFERBean.settingMisura}"/>
+					</o:dropDownField>
+				</td>
+			</tr>
+			
+			<tr>
+				<td>Domanda:</td>
+				<td><h:inputText value="#{esitoImpegniRMFITFERBean._esitoImpegni._domanda}" size="30" readonly="#{esitoImpegniRMFITFERBean._readOnly}"
+					style="width:200px;border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;"/></td>
+			</tr>
+			<tr>
+				<td>Misura:</td>
+				<td>
+					<o:dropDownField id="selectMisuraImpegni_rmfitfer"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{esitoImpegniRMFITFERBean._esitoImpegni._misura}"
+			               listItemStyle="white-space: nowrap;"               
+			               listStyle="height:100px !important;"
+						   style="width:200px;border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;"
+			               disabled="#{esitoImpegniRMFITFERBean._readOnly}">
+						<o:dropDownItems value="#{esitoImpegniRMFITFERBean._listMisura}"/>
+					</o:dropDownField>
+				</td>
+			</tr>
+			
+			<tr>
+				<td>Data del Controllo:</td>
+				<td>
+					<o:dateChooser id="dataControllo_rmfitfer"
+                             pattern="dd/MM/yyyy"
+                             value="#{esitoImpegniRMFITFERBean._esitoImpegni._data_contr}"
+                             locale="it_IT"
+                             todayText="Oggi"
+                             noneText="Nessuno"
+                             headerStyle="background: white; color: black;"
+                             daysHeaderStyle="background: #20386b; color: white;"
+                             dayStyle="border: 1px solid white;"
+                             rolloverDayStyle="border: 1px solid #f7a902; background: white; color: black;"
+                             rolloverWeekendDayStyle="border: 1px solid #f7a902; background: white; color: #ff8a00;"
+                             selectedDayStyle="border: 1px solid #20386b; color: #20386b; background: white;"
+                             weekendDayStyle="color: #ff8a00;"
+                             footerStyle="background: white; color: black; border-top: 1px solid #20386b;"
+			                 style="width: 200px!important;"
+                             typingAllowed="false"
+                             />
+				</td>
+			</tr>
+			
+			<tr>
+				<td>Stato:</td>
+				<td>
+					<o:dropDownField id="selectStatoEsitoImpegni_rmfitfer"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{esitoImpegniRMFITFERBean._esitoImpegni._stato}"
+			               listItemStyle="white-space: nowrap;"        
+			               listStyle="height:100px !important;"       
+			               style="width:200px;">
+						<o:dropDownItems value="#{esitoImpegniRMFITFERBean._listStato}"/>
+					</o:dropDownField>
+				</td>
+			</tr>
+						
+			<tr>
+				<td>Esito OPPAB:</td>
+				<td>
+					<o:dropDownField id="selectEsitoImpegni_rmfitfer"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{esitoImpegniRMFITFERBean._esitoImpegni._esito_oppab}"
+			               listItemStyle="white-space: nowrap;"   
+			               listStyle="height:100px !important;"            
+			               style="width:200px;">
+						<o:dropDownItems value="#{esitoImpegniRMFITFERBean._listEsito}"/>
+						<o:ajax event="change" render="percRidFIT percRidFER percTotOPPAB percCommissioneRiesame_rmfitfer negligenza_rmfitfer esclusione_rmfitfer esclusioneNote_rmfitfer progrAccEsclusione_rmfitfer reiterazione_rmfitfer progrAccReit_rmfitfer portata_rmfitfer portataNote_rmfitfer gravita_rmfitfer gravitaNote_rmfitfer durata_rmfitfer durataNote_rmfitfer segnalazione_rmfitfer approvazione_rmfitfer" 
+							listener="#{esitoImpegniRMFITFERBean.disablePercRid}"/>
+					</o:dropDownField>
+				</td>
+			</tr>
+			<tr>
+				<td>% Riduzione FIT:</td>
+				<td>
+					<h:inputText id="percRidFIT" disabled="#{esitoImpegniRMFITFERBean._disablePercRid}" 
+						value="#{esitoImpegniRMFITFERBean._esitoImpegni._percRidFIT}" size="30" />
+				</td>
+			</tr>
+			
+			<tr>
+				<td>% Riduzione FER:</td>
+				<td>
+					<h:inputText id="percRidFER" disabled="#{esitoImpegniRMFITFERBean._disablePercRid}" 
+						value="#{esitoImpegniRMFITFERBean._esitoImpegni._percRidFER}" size="30" />
+				</td>
+			</tr>
+			
+			<tr>
+				<td>% Riduzione totale OPPAB:</td>
+				<td>
+					<h:inputText id="percTotOPPAB" disabled="#{esitoImpegniRMFITFERBean._disablePercRid}" 
+						value="#{esitoImpegniRMFITFERBean._esitoImpegni._percTotOPPAB}" size="30" />
+				</td>
+			</tr>
+			
+			<tr>
+				<td>% Riduzione Commissione Riesame:</td>
+				<td>
+					<h:inputText id="percCommissioneRiesame_rmfitfer" disabled="#{esitoImpegniRMFITFERBean._disablePercRid}" 
+						value="#{esitoImpegniRMFITFERBean._esitoImpegni._percCommissRiesame}" size="30" />
+				</td>
+			</tr>
+			<tr>
+				<td>Stato Post Commissione Riesame:</td>
+				<td>
+					<o:dropDownField id="selectStatoPostCommissione_rmfitfer"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{esitoImpegniRMFITFERBean._esitoImpegni._statoPostCommissRiesame}"
+			               listItemStyle="white-space: nowrap;"  
+			               listStyle="height:100px !important;"             
+			               style="width:200px;">
+						<o:dropDownItems value="#{esitoImpegniRMFITFERBean._listStato}"/>
+					</o:dropDownField>
+				</td>
+			</tr>
+			<tr>
+				<td>Data Commissione Riesame:</td>
+				<td>
+					<o:dateChooser id="dataCommissioneRiesame_rmfitfer"
+                             pattern="dd/MM/yyyy"
+                             value="#{esitoImpegniRMFITFERBean._esitoImpegni._dataCommissRiesame}"
+                             locale="it_IT"
+                             todayText="Oggi"
+                             noneText="Nessuno"
+                             headerStyle="background: white; color: black;"
+                             daysHeaderStyle="background: #20386b; color: white;"
+                             dayStyle="border: 1px solid white;"
+                             rolloverDayStyle="border: 1px solid #f7a902; background: white; color: black;"
+                             rolloverWeekendDayStyle="border: 1px solid #f7a902; background: white; color: #ff8a00;"
+                             selectedDayStyle="border: 1px solid #20386b; color: #20386b; background: white;"
+                             weekendDayStyle="color: #ff8a00;"
+                             footerStyle="background: white; color: black; border-top: 1px solid #20386b;"
+                             style="width: 200px!important;"
+                             typingAllowed="false"
+                             />
+				</td>
+			</tr>			 
+			<tr>
+				<td style="width:250">Esclusione:</td>
+				<td>
+				<table>
+						<tr>
+							<td>
+					<o:selectOneRadio id="esclusione_rmfitfer" value="#{esitoImpegniRMFITFERBean._esitoImpegni._esclusione}"
+							disabled="#{esitoImpegniRMFITFERBean._disablePercRid}">
+						<f:selectItems value="#{esitoImpegniRMFITFERBean._listIntenzionalitaRadioButton}"/>       
+			        </o:selectOneRadio>
+			        </td>
+					        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					        <td>
+			        Note: 
+			        <h:inputText id="esclusioneNote_rmfitfer" value="#{esitoImpegniRMFITFERBean._esitoImpegni._esclusione_note}" size="58" 
+						disabled="#{esitoImpegniRMFITFERBean._disablePercRid}"/>
+							</td>
+						</tr>
+			        </table>
+				</td>
+			</tr>			
+			<tr>
+				<td style="width:250">Progr. Accertamento Esclusione:</td>
+				<td>
+					<o:selectOneRadio id="progrAccEsclusione_rmfitfer" value="#{esitoImpegniRMFITFERBean._esitoImpegni._progr_accert_esclusione}"
+							disabled="#{esitoImpegniRMFITFERBean._disablePercRid}">
+						<f:selectItems value="#{esitoImpegniRMFITFERBean._listProgrAccEsclusioneRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>			
+			<tr>
+				<td style="width:250">Reiterazione:</td>
+				<td>
+					<o:selectOneRadio id="reiterazione_rmfitfer" value="#{esitoImpegniRMFITFERBean._esitoImpegni._reiterazione}"
+							disabled="#{esitoImpegniRMFITFERBean._disablePercRid}">
+						<f:selectItems value="#{esitoImpegniRMFITFERBean._listReiterazioneRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:250">Progr. Accertamento Reiterazione:</td>
+				<td>
+					<o:selectOneRadio id="progrAccReit_rmfitfer" value="#{esitoImpegniRMFITFERBean._esitoImpegni._progr_accert_reiteraz}"
+							disabled="#{esitoImpegniRMFITFERBean._disablePercRid}">
+						<f:selectItems value="#{esitoImpegniRMFITFERBean._listProgrAccReitRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>	
+			 	
+			<tr>
+				<td style="width:250">Portata:</td>
+				<td>
+					<table>
+						<tr>
+							<td>
+					<o:selectOneRadio id="portata_rmfitfer" value="#{esitoImpegniRMFITFERBean._esitoImpegni._portata}"
+							disabled="#{esitoImpegniRMFITFERBean._disablePercRid}">
+						<f:selectItems value="#{esitoImpegniRMFITFERBean._listPortataRadioButton}"/>       
+			        </o:selectOneRadio>
+					        </td>
+					        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					        <td>
+			        Note: 
+			        <h:inputText id="portataNote_rmfitfer" value="#{esitoImpegniRMFITFERBean._esitoImpegni._portata_note}" size="58" 
+						disabled="#{esitoImpegniRMFITFERBean._disablePercRid}"/>
+							</td>
+						</tr>
+			        </table>
+				</td>
+			</tr>	
+			<tr>  
+				<td style="width:250">Gravita:</td>
+				<td>
+					<table>
+						<tr>
+							<td>
+					<o:selectOneRadio id="gravita_rmfitfer" value="#{esitoImpegniRMFITFERBean._esitoImpegni._gravita}"
+							disabled="#{esitoImpegniRMFITFERBean._disablePercRid}">
+						<f:selectItems value="#{esitoImpegniRMFITFERBean._listGravitaRadioButton}"/>       
+			        </o:selectOneRadio>
+			        		</td>
+					        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					        <td>
+			        Note:
+			        <h:inputText id="gravitaNote_rmfitfer" value="#{esitoImpegniRMFITFERBean._esitoImpegni._gravita_note}" size="58" 
+						disabled="#{esitoImpegniRMFITFERBean._disablePercRid}"/>
+							</td>
+						</tr>
+			        </table>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:250">Durata:</td>
+				<td>
+					<table>
+						<tr>
+							<td>
+					<o:selectOneRadio id="durata_rmfitfer" value="#{esitoImpegniRMFITFERBean._esitoImpegni._durata}"
+							disabled="#{esitoImpegniRMFITFERBean._disablePercRid}">
+						<f:selectItems value="#{esitoImpegniRMFITFERBean._listDurataRadioButton}"/>       
+			        </o:selectOneRadio>
+			        		</td>
+					        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					        <td>
+			        Note: 
+			        <h:inputText id="durataNote_rmfitfer" value="#{esitoImpegniRMFITFERBean._esitoImpegni._durata_note}" size="58" 
+						disabled="#{esitoImpegniRMFITFERBean._disablePercRid}"/>
+							</td>
+						</tr>
+			        </table>
+				</td>
+			</tr>			
+			<tr>
+				<td>Note:</td>
+				<td><h:inputText value="#{esitoImpegniRMFITFERBean._esitoImpegni._note}" size="80" /></td>
+			</tr>
+		</table>
+		<br/>
+			
+	    <br/>
+		<h:commandButton action="#{esitoImpegniRMFITFERBean.salvaEsito}" value="Salva" id="salvaEsitoImpegni_rmfitfer"/>
+		<h:outputText value="  " escape="false" />
+		<h:commandButton action="#{esitoImpegniRMFITFERBean.annullaEsito}" value="Annulla" id="annullaEsitoImpegni_rmfitfer"/>
+		<o:popupLayer id="popupEsitoImpegniEditLayer_rmfitfer"
+              visible="#{esitoImpegniRMFITFERBean._messageVisible}"
+              hideOnOuterClick="true"
+              hidingTimeout="5000"
+              styleClass="popupStyle"
+              left="200"
+              top="150">
+		  <h:outputText styleClass="popupMessage" value="#{esitoImpegniRMFITFERBean._message}"/>
+		</o:popupLayer>
+	</div>
+
+</div>
+    

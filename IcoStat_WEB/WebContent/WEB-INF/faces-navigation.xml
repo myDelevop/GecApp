@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<faces-config version="1.2" xmlns="http://java.sun.com/xml/ns/javaee"
+ xmlns:xi="http://www.w3.org/2001/XInclude"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee   http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
+ <navigation-rule>
+  <from-view-id>/stat/index.xhtml</from-view-id>
+  <navigation-case>
+   <from-outcome>Amministrazione</from-outcome>
+   <to-view-id>/stat/admin.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+  <from-view-id>/stat/admin.xhtml</from-view-id>
+  <navigation-case>
+   <from-outcome>Indietro</from-outcome>
+   <to-view-id>/stat/index.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+  <from-view-id>/loginError.xhtml</from-view-id>
+  <navigation-case>
+   <from-outcome>Indietro</from-outcome>
+   <to-view-id>/login.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+  <from-view-id>/stat/index.xhtml</from-view-id>
+  <navigation-case>
+   <from-outcome>Importa Dati</from-outcome>
+   <to-view-id>/stat/uploadForm.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+  <from-view-id>/stat/uploadForm.xhtml</from-view-id>
+  <navigation-case>
+   <from-outcome>Importa Dati</from-outcome>
+   <to-view-id>/stat/index.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+  <from-view-id>/stat/admin.xhtml</from-view-id>
+  <navigation-case>
+   <from-outcome>Info Applicazione</from-outcome>
+   <to-view-id>/stat/version.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+ </navigation-rule>
+</faces-config>

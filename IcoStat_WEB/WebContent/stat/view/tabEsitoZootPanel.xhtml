@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<div  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:o="http://openfaces.org/"
+      xmlns:t="http://myfaces.apache.org/tomahawk" >
+
+	<div>	
+		<b><h:outputText value="Stato Compilazione Esiti Zootecnia" escape="true" /></b>
+		<br/><br/>	
+		<o:dataTable id="tableEsitoZootecnia" 
+			var="esitoZoot" 
+			value ="#{esitoZootBean.elencoEsitoZoot}"
+			rowKey="#{esitoZoot._domanda}" 
+			
+			line-height="10px" 
+			horizontalGridLines="1px dotted gray"
+			verticalGridLines="1px dotted gray"
+			noDataRowStyle="color: black; text-align: left; font-size: 14px"
+			font-weight="plain"
+			cellpadding="3px"
+			pageSize="100"
+			styleClass="table" >
+			    
+			<f:facet name="below">
+	    		<o:dataTablePaginator id="paginator"/>
+	  		</f:facet>
+	  		<f:facet name="noDataMessage">
+    			<h:outputText value="#{searchBean._messageData}" />
+  			</f:facet>
+  			<!-- messaggio se la ricerca in tabella non ritorna risultati -->
+  			<f:facet name="noFilterDataMessage">
+    			<h:outputText value="Nessun dato corrisponde ai parametri di ricerca inseriti" />
+  			</f:facet>
+	  		<o:scrolling horizontal="true"/>
+	  		
+	  		<!-- permette il resizing della colonna -->
+	  		<o:columnResizing resizeHandleWidth="10px" minColWidth="50px"/>
+	  		
+	  		<!-- abilitare selezione singola della riga -->
+	  		<o:singleRowSelection rowData="#{esitoZootBean._selectedValue}" rowIndex="#{esitoZootBean._selectedValueIndex}" />
+	  		
+	  		<!--  <o:scrolling vertical="true"/>  --> 
+			<o:column id="cuaa" styleClass="tableAziendaRiga"  header="CUAA" width="130pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoZoot._cuaa}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoZoot._cuaa}" />
+			</o:column>
+			
+			<o:column id="campagna" styleClass="tableAziendaRiga"  header="Campagna" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoZoot._campagna}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoZoot._campagna}" />	
+			</o:column>
+			
+			<o:column id="domanda" styleClass="tableAziendaRiga"  header="Domanda" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoZoot._domanda}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoZoot._domanda}" />	
+			</o:column>
+			
+			<o:column id="statoComp" styleClass="tableAziendaRiga"  header="Stato Compilazione" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoZoot._statoCompilazione}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoZoot._statoCompilazione}" />	
+			</o:column>
+			
+			<o:column id="doc_controllo" styleClass="tableAziendaRiga"  header="Documentazione di controllo" width="100pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoZoot._documentazioneControllo}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoZoot._documentazioneControllo}" />	
+			</o:column>
+			
+			<o:column id="contr_amm_bovini" styleClass="tableAziendaRiga"  header="Controllo Amm. Bovini" width="100pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoZoot._contrAmmBovini}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoZoot._contrAmmBovini}" />	
+			</o:column>
+			
+			<o:column id="esito_amm_bovini" styleClass="tableAziendaRiga"  header="Esito Amm. Bovini" width="100pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoZoot._esitoAmmBovini}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoZoot._esitoAmmBovini}" />	
+			</o:column>
+			
+			<o:column id="contr_amm_ovicaprini" styleClass="tableAziendaRiga"  header="Controllo Amm. Ovicaprini" width="100pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoZoot._contrAmmOvicaprini}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoZoot._contrAmmOvicaprini}" />	
+			</o:column>
+			
+			<o:column id="esito_amm_ovicaprini" styleClass="tableAziendaRiga"  header="Esito Amm. Ovicaprini" width="100pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoZoot._esitoAmmOvicaprini}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoZoot._esitoAmmOvicaprini}" />	
+			</o:column>
+			
+			<o:column id="contr_cond" styleClass="tableAziendaRiga"  header="Controllo Condizionalita" width="100pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoZoot._contrCond}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoZoot._contrCond}" />	
+			</o:column>			
+			
+			<o:column id="userModifica" styleClass="tableAziendaRiga"  header="User Ultima Modifica" width="100pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoZoot._userModifica}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoZoot._userModifica}" />
+			</o:column>
+			
+			<o:column id="dataModifica" styleClass="tableAziendaRiga"  header="Data Ultima Modifica" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoZoot._dataModificaStr}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoZoot._dataModificaStr}" />
+			</o:column>	
+						
+		</o:dataTable>
+			
+	    <br/>
+		<h:commandButton action="#{esitoZootBean.aggiungiEsito}" value="Aggiungi" id="aggiungiEsitoZoot" rendered="#{request.isUserInRole('ROLE_WR_ZOOT')}"/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_ZOOT')}"/>
+		<h:commandButton action="#{esitoZootBean.modificaEsito}" value="Modifica" id="modificaEsitoZoot" rendered="#{request.isUserInRole('ROLE_WR_ZOOT')}"/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_ZOOT')}"/>
+		<h:commandButton action="#{esitoZootBean.cancellaEsito}" value="Cancella" id="cancellaEsitoZoot" rendered="#{request.isUserInRole('ROLE_WR_ZOOT')}">
+			<o:confirmation id="deleteEsitoZootConfirmation" 
+				message="Cancellare l'esito selezionato?"
+				details="" 
+				okButtonText="Si"
+                cancelButtonText="No"
+				draggable="true"/>
+		</h:commandButton>
+		<o:popupLayer id="popupEsitoZootLayer"
+              visible="#{esitoZootBean._messageVisible}"
+              hideOnOuterClick="true"
+              hidingTimeout="5000"
+              styleClass="popupStyle"
+              left="200"
+              top="150">
+		  <h:outputText styleClass="popupMessage" value="#{esitoZootBean._message}"/>
+		</o:popupLayer>
+	</div>
+
+</div>
+    

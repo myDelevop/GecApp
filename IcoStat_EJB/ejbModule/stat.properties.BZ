@@ -1,0 +1,13 @@
+user.OppabLdapContextSource.domain=PROV
+user.OppabLdapUserSearch.ldapServerUrl=ldap://s01028.prov.bz:389/dc=prov,dc=bz
+user.OppabLdapUserSearch.searchScope=OU=Central Administration,OU=prov.bz
+user.OppabLdapUserSearch.filter=(sAMAccountName={0})
+user.OppabLdapUserSearch.completeName=displayName
+file.jboss.tmp_folder=/opt/siag/s/c20t15/co/standalone/tmp
+file.jboss.tmp_folder.valar=/opt/jboss/server/all/dati/iconsulting
+file.jboss.tmp_folder.valar_dev=/opt/jboss/server/all/dati/iconsulting
+file.jboss.tmp_folder.develux=/opt/JBoss-6.0/server/default/tmp
+file.jboss.log_folder.ico=D:/WebServer/jboss-6.0.0.Final/server/default/log/
+file.jboss.log_folder.valar=file://localhost/opt/jboss/server/all/log/
+file.jboss.log_folder.valar_dev=file://localhost/opt/jboss/server/all/log/
+file.jboss.log_folder.develux=file://localhost/opt/JBoss-6.0/server/default/log/

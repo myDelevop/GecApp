@@ -1,0 +1,397 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<div  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:o="http://openfaces.org/"
+      xmlns:t="http://myfaces.apache.org/tomahawk"
+      xmlns:primeF="http://primefaces.org/ui">
+
+	<div>
+		<b><h:outputText value="#{esitoImpegniRMFITFERExtraBean._titoloPagina}" escape="true" /></b>
+		<br/><br/>
+		<table>
+		
+			<tr>
+				<td style="width:250">CUAA:</td>
+				<td>
+					<h:inputText id="selectCUAAImpegni_remfitferextra" value="#{esitoImpegniRMFITFERExtraBean._esitoImpegni._cuaa}" size="30" readonly="#{esitoImpegniRMFITFERExtraBean._readOnly}"
+						style="border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;">
+						<o:ajax event="change" render="domanda selectCUAAImpegni_remfitferextra selectCampagnaImpegni_remfitferextra" listener="#{esitoImpegniRMFITFERExtraBean.updateNumDomandaPSR}"/>
+					</h:inputText>
+					</td>
+			</tr>
+			
+			<tr>
+				<td>Campagna:</td>
+				<td>
+					<o:dropDownField id="selectCampagnaImpegni_remfitferextra"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{esitoImpegniRMFITFERExtraBean._esitoImpegni._campagna}"
+			               listItemStyle="white-space: nowrap;"       
+			               listStyle="height:100px !important;"        
+			               style="width:200px;border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;"
+			               disabled="#{esitoImpegniRMFITFERExtraBean._readOnly}">
+						<o:dropDownItems value="#{esitoImpegniRMFITFERExtraBean._listCampagna}"/>
+						<o:ajax event="change" render="selectMisuraImpegni_rmfitfer" listener="#{esitoImpegniRMFITFERExtraBean.settingMisura}"/>
+						<o:ajax event="change" render="domanda selectCUAAImpegni_remfitferextra selectCampagnaImpegni_remfitferextra" listener="#{esitoImpegniRMFITFERExtraBean.updateNumDomandaPSR}"/>
+					</o:dropDownField>
+				</td>
+			</tr>
+			
+			<tr>
+				<td>Domanda:</td>
+				<td>
+				<h:inputText id="domanda" value="#{esitoImpegniRMFITFERExtraBean._esitoImpegni._domanda}" size="30" readonly="#{esitoImpegniRMFITFERExtraBean._readOnly}"
+					style="width:200px;border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;">
+						<o:ajax event="change" render="domanda" listener="#{esitoImpegniRMFITFERExtraBean.updateRender}"/>
+					</h:inputText>
+					
+				</td>
+			</tr>
+			<tr>
+				<td>Misura:</td>
+				<td>
+					<o:dropDownField id="selectMisuraImpegni_rmfitferextra"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{esitoImpegniRMFITFERExtraBean._esitoImpegni._misura}"
+			               listItemStyle="white-space: nowrap;"       
+			               listStyle="height:100px !important;"        
+						   style="width:200px; border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;"
+			               disabled="#{esitoImpegniRMFITFERExtraBean._readOnly}">
+						<o:dropDownItems value="#{esitoImpegniRMFITFERExtraBean._listMisura}"/>
+							<o:ajax event="change" render="selectMisuraImpegni_rmfitferextra" listener="#{esitoImpegniRMFITFERExtraBean.updateRender}"/>
+					</o:dropDownField>
+				</td>
+			</tr>
+			
+			<tr>
+				<td>Data del Controllo:</td>
+				<td>
+					<o:dateChooser id="dataControllo_rmfitferextra"
+                             pattern="dd/MM/yyyy"
+                             value="#{esitoImpegniRMFITFERExtraBean._esitoImpegni._data_contr}"
+                             locale="it_IT"
+                             todayText="Oggi"
+                             noneText="Nessuno"
+                             headerStyle="background: white; color: black;"
+                             daysHeaderStyle="background: #20386b; color: white;"
+                             dayStyle="border: 1px solid white;"
+                             rolloverDayStyle="border: 1px solid #f7a902; background: white; color: black;"
+                             rolloverWeekendDayStyle="border: 1px solid #f7a902; background: white; color: #ff8a00;"
+                             selectedDayStyle="border: 1px solid #20386b; color: #20386b; background: white;"
+                             weekendDayStyle="color: #ff8a00;"
+                             footerStyle="background: white; color: black; border-top: 1px solid #20386b;"
+			                 style="width: 200px!important; border-style: solid !important; border-width: 2px; border-color: #FFC266 !important; background: #FFF5E6 !important;"
+                             typingAllowed="false">
+                             <o:ajax event="change" render="dataControllo_rmfitferextra" listener="#{esitoImpegniRMFITFERExtraBean.updateRender}"/>
+				</o:dateChooser>
+				</td>
+			</tr>
+			
+			<tr>
+				<td>Stato:</td>
+				<td>
+					<o:dropDownField id="selectStatoEsitoImpegni_rmfitferextra"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{esitoImpegniRMFITFERExtraBean._esitoImpegni._stato}"
+			               listItemStyle="white-space: nowrap;"  
+			               listStyle="height:100px !important;"             
+			               style="width:200px;">
+						<o:dropDownItems value="#{esitoImpegniRMFITFERExtraBean._listStato}"/>
+						<o:ajax event="change" render="selectStatoEsitoImpegni_rmfitferextra" listener="#{esitoImpegniRMFITFERExtraBean.updateRender}"/>
+					</o:dropDownField>
+				</td>
+			</tr>
+						
+			<tr>
+				<td>Esito OPPAB:</td>
+				<td>
+					<o:dropDownField id="selectEsitoImpegni_rmfitferextra"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{esitoImpegniRMFITFERExtraBean._esitoImpegni._esito_oppab}"
+			               listItemStyle="white-space: nowrap;"     
+			               listStyle="height:100px !important;"          
+			               style="width:200px;">
+						<o:dropDownItems value="#{esitoImpegniRMFITFERExtraBean._listEsito}"/>
+						<o:ajax event="change" render="selectEsitoImpegni_rmfitferextra percRidFITextra percRidFERextra percTotOPPABextra percCommissioneRiesame_rmfitferextra negligenza_rmfitferextra esclusione_rmfitferextra esclusioneNote_rmfitferextra progrAccEsclusione_rmfitferextra reiterazione_rmfitferextra progrAccReit_rmfitferextra portata_rmfitferextra portataNote_rmfitferextra gravita_rmfitferextra gravitaNote_rmfitferextra durata_rmfitferextra durataNote_rmfitferextra segnalazione_rmfitferextra approvazione_rmfitferextra" 
+							listener="#{esitoImpegniRMFITFERExtraBean.disablePercRid}"/>
+					</o:dropDownField>
+				</td>
+			</tr>
+			<tr>
+				<td>% Riduzione FIT:</td>
+				<td>
+					<h:inputText id="percRidFITextra" disabled="#{esitoImpegniRMFITFERExtraBean._disablePercRid}" 
+						value="#{esitoImpegniRMFITFERExtraBean._esitoImpegni._percRidFIT}" size="30">
+						<o:ajax event="change" render="percRidFITextra" listener="#{esitoImpegniRMFITFERExtraBean.updateRender}"/>
+						<o:ajax event="change" render="percRidFITextra percRidFERextra percTotOPPABextra" listener="#{esitoImpegniRMFITFERExtraBean.selezioneRiduzioneFitFer}"/>
+					</h:inputText>
+				</td>
+			</tr>
+			 
+			<tr>
+				<td>% Riduzione FER:</td>
+				<td>
+					<h:inputText id="percRidFERextra" disabled="#{esitoImpegniRMFITFERExtraBean._disablePercRid}" 
+						value="#{esitoImpegniRMFITFERExtraBean._esitoImpegni._percRidFER}" size="30">
+						<o:ajax event="change" render="percRidFERextra" listener="#{esitoImpegniRMFITFERExtraBean.updateRender}"/>
+						<o:ajax event="change" render="percRidFITextra percRidFERextra percTotOPPABextra" listener="#{esitoImpegniRMFITFERExtraBean.selezioneRiduzioneFitFer}"/>
+					</h:inputText>
+				</td>
+			</tr>
+			
+			<tr>
+				<td>% Riduzione totale OPPAB:</td>
+				<td>
+					<h:inputText id="percTotOPPABextra" disabled="#{esitoImpegniRMFITFERExtraBean._disablePercRid}" 
+						value="#{esitoImpegniRMFITFERExtraBean._esitoImpegni._percTotOPPAB}" size="30">
+							<o:ajax event="change" render="percTotOPPABextra" listener="#{esitoImpegniRMFITFERExtraBean.updateRender}"/>
+					</h:inputText>
+				</td>
+			</tr>
+<!-- 			<tr>
+				<td style="width:250">Negligenza:</td>
+				<td>
+					<o:selectOneRadio id="negligenza_rmfitferextra" value="#{esitoImpegniRMFITFERExtraBean._esitoImpegni._negligenza}"
+							disabled="#{esitoImpegniRMFITFERExtraBean._disablePercRid}">
+						<f:selectItems value="#{esitoImpegniRMFITFERExtraBean._listNegligenzaRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr> -->			 
+			<tr>
+				<td style="width:250">Esclusione:</td>
+				<td>
+				<table>
+						<tr>
+							<td>
+					<o:selectOneRadio id="esclusione_rmfitferextra" value="#{esitoImpegniRMFITFERExtraBean._esitoImpegni._esclusione}"
+							disabled="#{esitoImpegniRMFITFERExtraBean._disablePercRid}">
+						<f:selectItems value="#{esitoImpegniRMFITFERExtraBean._listEsclusioneRadioButton}"/>
+						  <o:ajax event="change" render="esclusione_rmfitferextra" listener="#{esitoImpegniRMFITFERExtraBean.updateRender}"/>     
+			        	  <o:ajax event="change" render="percRidFITextra percRidFERextra percTotOPPABextra" listener="#{esitoImpegniRMFITFERExtraBean.selezioneEsclusione}"/>
+			        </o:selectOneRadio>
+			        </td>
+					        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					        <td>
+			        Note: 
+			        <h:inputText id="esclusioneNote_rmfitferextra" value="#{esitoImpegniRMFITFERExtraBean._esitoImpegni._esclusione_note}" size="58" 
+						disabled="#{esitoImpegniRMFITFERExtraBean._disablePercRid}">
+						<o:ajax event="change" render="esclusioneNote_rmfitferextra" listener="#{esitoImpegniRMFITFERExtraBean.updateRender}"/>
+					</h:inputText>
+							</td>
+						</tr>
+			        </table>
+				</td>
+			</tr>	
+			
+			<ui:remove>	
+			<tr>
+				<td style="width:250">Progr. Accertamento Esclusione:</td>
+				<td>
+					<o:selectOneRadio id="progrAccEsclusione_rmfitferextra" value="#{esitoImpegniRMFITFERExtraBean._esitoImpegni._progr_accert_esclusione}"
+							disabled="#{esitoImpegniRMFITFERExtraBean._disablePercRid}">
+						<f:selectItems value="#{esitoImpegniRMFITFERExtraBean._listProgrAccEsclusioneRadioButton}"/>
+						<o:ajax event="change" render="progrAccEsclusione_rmfitferextra" listener="#{esitoImpegniRMFITFERExtraBean.updateRender}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>	
+			</ui:remove>	
+					
+			<tr>
+				<td style="width:250">Reiterazione:</td>
+				<td>
+					<o:selectOneRadio id="reiterazione_rmfitferextra" value="#{esitoImpegniRMFITFERExtraBean._esitoImpegni._reiterazione}"
+							disabled="#{esitoImpegniRMFITFERExtraBean._disablePercRid}">
+						<f:selectItems value="#{esitoImpegniRMFITFERExtraBean._listReiterazioneRadioButton}"/>     
+						<o:ajax event="change" render="reiterazione_rmfitferextra" listener="#{esitoImpegniRMFITFERExtraBean.updateRender}"/>   
+			        </o:selectOneRadio>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:250">Progr. Accertamento Reiterazione:</td>
+				<td>
+					<o:selectOneRadio id="progrAccReit_rmfitferextra" value="#{esitoImpegniRMFITFERExtraBean._esitoImpegni._progr_accert_reiteraz}"
+							disabled="#{esitoImpegniRMFITFERExtraBean._disablePercRid}">
+						<f:selectItems value="#{esitoImpegniRMFITFERExtraBean._listProgrAccReitRadioButton}"/>  
+						<o:ajax event="change" render="progrAccReit_rmfitferextra" listener="#{esitoImpegniRMFITFERExtraBean.updateRender}"/>     
+			        </o:selectOneRadio>
+				</td>
+			</tr>	
+			 	
+			 	
+			<tr>
+				<td style="width:250">Inadempienza Grave:</td>
+				<td>
+					<o:selectOneRadio id="InadempGrave_rmfitferextra" value="#{esitoImpegniRMFITFERExtraBean._esitoImpegni._inadempienza_grave}">
+						<f:selectItems value="#{esitoImpegniRMFITFERExtraBean._listInadempienzaGraveRadioButton}"/>
+						<o:ajax event="change" render="InadempGrave_rmfitferextra" listener="#{esitoImpegniRMFITFERExtraBean.updateRender}"/>    
+			        </o:selectOneRadio>
+				</td>
+			</tr>	
+			
+			<tr>
+				<td style="width:250">Portata:</td>
+				<td>
+					<table>
+						<tr>
+							<td>
+					<o:selectOneRadio id="portata_rmfitferextra" value="#{esitoImpegniRMFITFERExtraBean._esitoImpegni._portata}"
+							disabled="#{esitoImpegniRMFITFERExtraBean._disablePercRid}">
+						<f:selectItems value="#{esitoImpegniRMFITFERExtraBean._listPortataRadioButton}"/>
+						<o:ajax event="change" render="portata_rmfitferextra" listener="#{esitoImpegniRMFITFERExtraBean.updateRender}"/>       
+			        </o:selectOneRadio>
+					        </td>
+					        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					        <td>
+			        Note: 
+			        <h:inputText id="portataNote_rmfitferextra" value="#{esitoImpegniRMFITFERExtraBean._esitoImpegni._portata_note}" size="58" 
+						disabled="#{esitoImpegniRMFITFERExtraBean._disablePercRid}">
+						<o:ajax event="change" render="portataNote_rmfitferextra" listener="#{esitoImpegniRMFITFERExtraBean.updateRender}"/>
+					</h:inputText>
+							</td>
+						</tr>
+			        </table>
+				</td>
+			</tr>	
+			<tr>  
+				<td style="width:250">Gravita:</td>
+				<td>
+					<table>
+						<tr>
+							<td>
+					<o:selectOneRadio id="gravita_rmfitferextra" value="#{esitoImpegniRMFITFERExtraBean._esitoImpegni._gravita}"
+							disabled="#{esitoImpegniRMFITFERExtraBean._disablePercRid}">
+						<f:selectItems value="#{esitoImpegniRMFITFERExtraBean._listGravitaRadioButton}"/>
+						<o:ajax event="change" render="gravita_rmfitferextra" listener="#{esitoImpegniRMFITFERExtraBean.updateRender}"/>    
+			        </o:selectOneRadio>
+			        		</td>
+					        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					        <td>
+			        Note:
+			        <h:inputText id="gravitaNote_rmfitferextra" value="#{esitoImpegniRMFITFERExtraBean._esitoImpegni._gravita_note}" size="58" 
+						disabled="#{esitoImpegniRMFITFERExtraBean._disablePercRid}">
+						<o:ajax event="change" render="gravitaNote_rmfitferextra" listener="#{esitoImpegniRMFITFERExtraBean.updateRender}"/>
+					</h:inputText>
+							</td>
+						</tr>
+			        </table>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:250">Durata:</td>
+				<td>
+					<table>
+						<tr>
+							<td>
+					<o:selectOneRadio id="durata_rmfitferextra" value="#{esitoImpegniRMFITFERExtraBean._esitoImpegni._durata}"
+							disabled="#{esitoImpegniRMFITFERExtraBean._disablePercRid}">
+						<f:selectItems value="#{esitoImpegniRMFITFERExtraBean._listDurataRadioButton}"/> 
+						<o:ajax event="change" render="durata_rmfitferextra" listener="#{esitoImpegniRMFITFERExtraBean.updateRender}"/>      
+			        </o:selectOneRadio>
+			        		</td>
+					        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					        <td>
+			        Note: 
+			        <h:inputText id="durataNote_rmfitferextra" value="#{esitoImpegniRMFITFERExtraBean._esitoImpegni._durata_note}" size="58" 
+						disabled="#{esitoImpegniRMFITFERExtraBean._disablePercRid}">
+						<o:ajax event="change" render="durataNote_rmfitferextra" listener="#{esitoImpegniRMFITFERExtraBean.updateRender}"/>
+						</h:inputText>
+							</td>
+						</tr>
+			        </table>
+				</td>
+			</tr>			
+			<tr>
+				<td style="width:250">Segnalazione:</td>
+				<td>
+					<o:selectOneRadio id="segnalazione_rmfitferextra" value="#{esitoImpegniRMFITFERExtraBean._esitoImpegni._segnalazione}">
+						<f:selectItems value="#{esitoImpegniRMFITFERExtraBean._listSegnalazioneRadioButton}"/>       
+						<o:ajax event="change" render="segnalazione_rmfitferextra" listener="#{esitoImpegniRMFITFERExtraBean.updateRender}"/>
+			        </o:selectOneRadio>
+				</td>
+			</tr>	
+			<tr>
+				<td style="width:250">Approvazione:</td>
+				<td>
+					<o:selectOneRadio id="approvazione_rmfitferextra" value="#{esitoImpegniRMFITFERExtraBean._esitoImpegni._approvazione}">
+						<f:selectItems value="#{esitoImpegniRMFITFERExtraBean._listApprovazioneRadioButton}"/>       
+						<o:ajax event="change" render="approvazione_rmfitferextra" listener="#{esitoImpegniRMFITFERExtraBean.updateRender}"/>
+			        </o:selectOneRadio>
+				</td>
+			</tr>
+			
+			<tr>
+				<td>Numero Decreto:</td>
+				<td>
+					<h:inputText id="numeroDecretoFITFERExtra" 
+						value="#{esitoImpegniRMFITFERExtraBean._esitoImpegni._numero_decreto}" size="30">
+						<o:ajax event="change" render="numeroDecretoFITFERExtra" listener="#{esitoImpegniRMFITFERExtraBean.updateRender}"/>
+						</h:inputText>
+				</td>
+			</tr>
+				
+			<tr>
+				<td>Data Decreto:</td>
+				<td>
+					<o:dateChooser id="dataDecreto_rmfitferextra"
+                             pattern="dd/MM/yyyy"
+                             value="#{esitoImpegniRMFITFERExtraBean._esitoImpegni._data_decreto}"
+                             locale="it_IT"
+                             todayText="Oggi"
+                             noneText="Nessuno"
+                             headerStyle="background: white; color: black;"
+                             daysHeaderStyle="background: #20386b; color: white;"
+                             dayStyle="border: 1px solid white;"
+                             rolloverDayStyle="border: 1px solid #f7a902; background: white; color: black;"
+                             rolloverWeekendDayStyle="border: 1px solid #f7a902; background: white; color: #ff8a00;"
+                             selectedDayStyle="border: 1px solid #20386b; color: #20386b; background: white;"
+                             weekendDayStyle="color: #ff8a00;"
+                             footerStyle="background: white; color: black; border-top: 1px solid #20386b;"
+			                 style="width: 200px!important;"
+                             typingAllowed="false">
+                             <o:ajax event="change" render="dataDecreto_rmfitferextra" listener="#{esitoImpegniRMFITFERExtraBean.updateRender}"/>
+                             </o:dateChooser>
+				</td>
+			</tr>	
+			
+			<tr>
+				<td>Note:</td>
+				<td><h:inputText id="noteRMFITFERExtra" value="#{esitoImpegniRMFITFERExtraBean._esitoImpegni._note}" size="80">
+					<o:ajax event="change" render="noteRMFITFERExtra" listener="#{esitoImpegniRMFITFERExtraBean.updateRender}"/>
+				</h:inputText></td>
+			</tr>
+		</table>
+		<br/>
+			
+	    <br/>
+	    
+	   <primeF:messages for="esitoImpegniRMFITFERExtraBeanWarningMessages" id="esitoImpegniRMFITFERExtraBeanMessages" showDetail="true" closable="false" />
+	 
+	    <primeF:idleMonitor timeout="500">
+	        <primeF:ajax event="active" listener="#{esitoImpegniRMFITFERExtraBean.checkForWarningsRMFITFEREsitoImpegniExtra}" update="esitoImpegniRMFITFERExtraBeanMessages" />
+	    </primeF:idleMonitor>
+	    
+		<h:commandButton action="#{esitoImpegniRMFITFERExtraBean.salvaEsito}" value="Salva" id="salvaEsitoImpegni_rmfitferextra"/>
+		<h:outputText value="  " escape="false" />
+		<h:commandButton action="#{esitoImpegniRMFITFERExtraBean.annullaEsito}" value="Annulla" id="annullaEsitoImpegni_rmfitferextra"/>
+		<o:popupLayer id="popupEsitoImpegniEditLayer_rmfitferextra"
+              visible="#{esitoImpegniRMFITFERExtraBean._messageVisible}"
+              hideOnOuterClick="true"
+              hidingTimeout="5000"
+              styleClass="popupStyle"
+              left="200"
+              top="150">
+		  <h:outputText styleClass="popupMessage" value="#{esitoImpegniRMFITFERExtraBean._message}"/>
+		</o:popupLayer>
+	</div>
+
+</div>
+    

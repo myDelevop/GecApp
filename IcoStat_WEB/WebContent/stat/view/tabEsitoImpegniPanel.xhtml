@@ -1,0 +1,531 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<div  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:o="http://openfaces.org/"
+      xmlns:t="http://myfaces.apache.org/tomahawk" >
+
+	<div>	
+		<b><h:outputText value="Esiti Impegni" escape="true" /></b>
+		<br/><br/>	
+		<o:dataTable id="tableEsitoImpegni" 
+			var="esitoImpegni" 
+			value ="#{esitoImpegniBean.elencoEsitoImpegni}"
+			rowKey="#{esitoImpegni._cuaa}" 
+			
+			line-height="10px" 
+			horizontalGridLines="1px dotted gray"
+			verticalGridLines="1px dotted gray"
+			noDataRowStyle="color: black; text-align: left; font-size: 14px"
+			font-weight="plain"
+			cellpadding="3px"
+			pageSize="100"
+			styleClass="table" >
+			    
+			<f:facet name="below">
+	    		<o:dataTablePaginator id="paginator"/>
+	  		</f:facet>
+	  		<f:facet name="noDataMessage">
+    			<h:outputText value="#{searchBean._messageData}" />
+  			</f:facet>
+  			<!-- messaggio se la ricerca in tabella non ritorna risultati -->
+  			<f:facet name="noFilterDataMessage">
+    			<h:outputText value="Nessun dato corrisponde ai parametri di ricerca inseriti" />
+  			</f:facet>
+	  		<o:scrolling horizontal="true"/>
+	  		
+	  		<!-- permette il resizing della colonna -->
+	  		<o:columnResizing resizeHandleWidth="10px" minColWidth="50px"/>
+	  		
+	  		<!-- abilitare selezione singola della riga -->
+	  		<o:singleRowSelection rowData="#{esitoImpegniBean._selectedValue}" rowIndex="#{esitoImpegniBean._selectedValueIndex}" />
+	  		
+	  		<!--  <o:scrolling vertical="true"/>  --> 
+			<o:column id="cuaa" styleClass="tableAziendaRiga"  header="CUAA" width="130pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegni._cuaa}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegni._cuaa}" />
+			</o:column>
+			
+			<o:column id="campagna" styleClass="tableAziendaRiga"  header="Campagna" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegni._campagna}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegni._campagna}" />	
+			</o:column>
+			
+			<o:column id="domanda" styleClass="tableAziendaRiga"  header="Domanda" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegni._domanda}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegni._domanda}" />	
+			</o:column>
+			
+			<o:column id="intervento" styleClass="tableAziendaRiga"  header="Intervento" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegni._intervento}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegni._intervento}" />	
+			</o:column>
+			
+			<o:column id="sottointervento" styleClass="tableAziendaRiga"  header="Sub-Intervento" width="90pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegni._sottointervento}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegni._sottointervento}" />	
+			</o:column>
+			
+			<o:column id="controllo_estivo" styleClass="tableAziendaRiga"  header="Controllo Estivo" width="90pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegni._controllo_estivo}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegni._controllo_estivo}" />	
+			</o:column>
+			<!-- togliere dalla visualizzazione perche inserita in un altra tabella
+			<o:column id="dataControllo" styleClass="tableAziendaRiga"  header="Data Controllo" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegni._dataControlloStr}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegni._dataControlloStr}" />	
+			</o:column>
+			 -->
+			
+			<o:column id="esito" styleClass="tableAziendaRiga"  header="Esito OPPAB" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegni._esito}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegni._esito}" />	
+			</o:column>
+			
+			<o:column id="percRid" styleClass="tableAziendaRiga"  header="% Riduzione OPPAB" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegni._percRid}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegni._percRid}" />
+			</o:column>
+
+			<o:column id="stato" styleClass="tableAziendaRiga"  header="Stato" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegni._stato}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegni._stato}" />	
+			</o:column>
+			
+			<o:column id="inadempGrave" styleClass="tableAziendaRiga"  header="Inadempienza Grave" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegni._inadempienza_grave}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegni._inadempienza_grave}" />	
+			</o:column>
+
+			<o:column id="reiterazione" styleClass="tableAziendaRiga"  header="Reiterazione" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegni._reiterazione}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegni._reiterazione}" />	
+			</o:column>
+
+			<o:column id="progrReiterazione" styleClass="tableAziendaRiga"  header="Progr. Reiterazione" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegni._progrReiterazione}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegni._progrReiterazione}" />	
+			</o:column>
+
+			<o:column id="perc_rid_carico_bestiameImpegni" styleClass="tableAziendaRiga"  header="% Riduzione Carico Bestiame" width="150pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegni._perc_rid_carico_bestiame}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegni._perc_rid_carico_bestiame}" />
+			</o:column>	
+			<o:column id="esitoTrasformazioneLatteImpegni" styleClass="tableAziendaRiga"  header="Esito Trasformazione Latte" width="100pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegni._esito_trasformazione_latte}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegni._esito_trasformazione_latte}" />
+			</o:column>
+			
+			<o:column id="esitoPremioTraspLatte" styleClass="tableAziendaRiga"  header="Esito premio Trasporto Latte" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegni._esitoPremioTrasporto}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegni._esitoPremioTrasporto}" />
+			</o:column>
+			<o:column id="percRidPremioTraspLatte" styleClass="tableAziendaRiga"  header="% Riduzione Premio Trasporto Latte" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegni._percRidPremioTrasporto}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegni._percRidPremioTrasporto}" />
+			</o:column>
+			
+			<!-- colonna eliminata su richiesta di Michaela - 27 gennaio 2016 
+			<o:column id="caricoAlpeggio" styleClass="tableAziendaRiga"  header="Carico Alpeggio" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegni._caricoAlpeggio}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegni._caricoAlpeggio}" />
+			</o:column>
+			-->
+			<o:column id="esitoInsilato" styleClass="tableAziendaRiga"  header="Esito Rinuncia Insilato" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegni._esitoRinunciaInsilato}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegni._esitoRinunciaInsilato}" />
+			</o:column>
+			<o:column id="percRidInsilato" styleClass="tableAziendaRiga"  header="Importo Riduzione Rinuncia Insilato" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegni._importoRidRinunciaInsilato}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegni._importoRidRinunciaInsilato}" />
+			</o:column>
+			
+			<o:column id="percRidCommRiesame" styleClass="tableAziendaRiga"  header="% Riduzione Commissione Riesame" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegni._percRidCommissRiesame}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegni._percRidCommissRiesame}" />
+			</o:column>
+			
+			<o:column id="statoPostCommRiesame" styleClass="tableAziendaRiga"  header="Stato post Commissione Riesame" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegni._statoPostCommissRiesame}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegni._statoPostCommissRiesame}" />
+			</o:column>
+			
+			<o:column id="dataCommRiesame" styleClass="tableAziendaRiga"  header="Data Commissione Riesame" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegni._dataCommissRiesameStr}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegni._dataCommissRiesameStr}" />
+			</o:column>
+			
+			<o:column id="userModifica" styleClass="tableAziendaRiga"  header="User Ultima Modifica" width="100pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegni._userModifica}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegni._userModifica}" />
+			</o:column>
+			
+			<o:column id="dataModifica" styleClass="tableAziendaRiga"  header="Data Ultima Modifica" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegni._dataModificaStr}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegni._dataModificaStr}" />
+			</o:column>	
+			<o:column id="noteImpegni" styleClass="tableAziendaRiga"  header="Note" width="150pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegni._note}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegni._note}" />
+			</o:column>	
+			
+		</o:dataTable>
+			
+	    <br/>
+		<h:commandButton action="#{esitoImpegniBean.aggiungiEsito}" value="Aggiungi" id="aggiungiEsitoImpegni" rendered="#{request.isUserInRole('ROLE_WR_IMP')}"/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_IMP')}"/>
+		<h:commandButton action="#{esitoImpegniBean.modificaEsito}" value="Modifica" id="modificaEsitoImpegni" rendered="#{request.isUserInRole('ROLE_WR_IMP')}"/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_IMP')}"/>
+		<h:commandButton action="#{esitoImpegniBean.cancellaEsito}" value="Cancella" id="cancellaEsitoImpegni" rendered="#{request.isUserInRole('ROLE_WR_IMP')}">
+			<o:confirmation id="deleteEsitoImpegniConfirmation" 
+				message="Cancellare l'esito selezionato?"
+				details="" 
+				okButtonText="Si"
+                cancelButtonText="No"
+				draggable="true"/>
+		</h:commandButton>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_IMP')}"/>
+		<h:commandButton action="#{esitoImpegniBean.esportaEsito}" value="Esporta Dati" id="esportaEsitoImpegni"/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_IMP')}"/>
+		<h:commandButton action="#{esitoImpegniBean.importaEsito}" value="Importa Dati" id="importaEsitoImpegni" rendered="#{request.isUserInRole('ROLE_WR_IMP')}"/>
+		<o:popupLayer id="popupEsitoImpegniLayer"
+              visible="#{esitoImpegniBean._messageVisible}"
+              hideOnOuterClick="true"
+              hidingTimeout="5000"
+              styleClass="popupStyle"
+              left="200"
+              top="150">
+		  <h:outputText styleClass="popupMessage" value="#{esitoImpegniBean._message}"/>
+		</o:popupLayer>
+	</div>
+	
+	<br/><br/>
+
+<div>	
+		<b><h:outputText value="Esiti Impegni Extracampione" escape="true" /></b>
+		<br/><br/>	
+		<o:dataTable id="tableEsitoImpegniExtra" 
+			var="esitoImpegniExtra" 
+			value ="#{esitoImpegniExtraBean.elencoEsitoImpegni}"
+			rowKey="#{esitoImpegniExtra._cuaa}" 
+			
+			line-height="10px" 
+			horizontalGridLines="1px dotted gray"
+			verticalGridLines="1px dotted gray"
+			noDataRowStyle="color: black; text-align: left; font-size: 14px"
+			font-weight="plain"
+			cellpadding="3px"
+			pageSize="100"
+			styleClass="table" >
+			    
+			<f:facet name="below">
+	    		<o:dataTablePaginator id="paginator"/>
+	  		</f:facet>
+	  		<f:facet name="noDataMessage">
+    			<h:outputText value="#{searchBean._messageData}" />
+  			</f:facet>
+  			<!-- messaggio se la ricerca in tabella non ritorna risultati -->
+  			<f:facet name="noFilterDataMessage">
+    			<h:outputText value="Nessun dato corrisponde ai parametri di ricerca inseriti" />
+  			</f:facet>
+	  		<o:scrolling horizontal="true"/>
+	  		
+	  		<!-- permette il resizing della colonna -->
+	  		<o:columnResizing resizeHandleWidth="10px" minColWidth="50px"/>
+	  		
+	  		<!-- abilitare selezione singola della riga -->
+	  		<o:singleRowSelection rowData="#{esitoImpegniExtraBean._selectedValue}" rowIndex="#{esitoImpegniExtraBean._selectedValueIndex}" />
+	  		
+	  		<!--  <o:scrolling vertical="true"/>  --> 
+			<o:column id="cuaa" styleClass="tableAziendaRiga"  header="CUAA" width="130pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniExtra._cuaa}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniExtra._cuaa}" />
+			</o:column>
+			
+			<o:column id="campagnaExtra" styleClass="tableAziendaRiga"  header="Campagna" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniExtra._campagna}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniExtra._campagna}" />	
+			</o:column>
+			
+			<o:column id="domandaExtra" styleClass="tableAziendaRiga"  header="Domanda" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniExtra._domanda}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniExtra._domanda}" />	
+			</o:column>
+			
+			<o:column id="interventoExtra" styleClass="tableAziendaRiga"  header="Intervento" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniExtra._intervento}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniExtra._intervento}" />	
+			</o:column>
+			
+			<o:column id="sottointerventoExtra" styleClass="tableAziendaRiga"  header="Sottointervento" width="90pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniExtra._sottointervento}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniExtra._sottointervento}" />	
+			</o:column>
+
+			<o:column id="impegno_impegniExtra" styleClass="tableAziendaRiga"  header="Impegno" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniExtra._impegno}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniExtra._impegno}" />
+			</o:column>
+
+			<o:column id="dataControllo_impegniExtra" styleClass="tableAziendaRiga"  header="Data del Controllo" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniExtra._data_controlloStr}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniExtra._data_controlloStr}" />
+			</o:column>
+			
+			<o:column id="esitoExtra" styleClass="tableAziendaRiga"  header="Esito" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniExtra._esito}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniExtra._esito}" />	
+			</o:column>
+			
+			<o:column id="percRidExtra" styleClass="tableAziendaRiga"  header="% Riduzione" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniExtra._percRid}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniExtra._percRid}" />
+			</o:column>
+
+			<o:column id="statoExtra" styleClass="tableAziendaRiga"  header="Stato" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniExtra._stato}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniExtra._stato}" />	
+			</o:column>
+
+			<o:column id="esitoInsilatoExtra" styleClass="tableAziendaRiga"  header="Esito Rinuncia Insilato" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniExtra._esitoRinunciaInsilato}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniExtra._esitoRinunciaInsilato}" />
+			</o:column>
+			<o:column id="percRidInsilatoExtra" styleClass="tableAziendaRiga"  header="Importo Riduzione Rinuncia Insilato" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniExtra._importoRidRinunciaInsilato}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniExtra._importoRidRinunciaInsilato}" />
+			</o:column>
+
+			<!-- Esclusione -->
+			<o:column id="esclusione_impegniExtra" styleClass="tableAziendaRiga"  header="Esclusione" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniExtra._esclusione}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniExtra._esclusione}" />
+			</o:column>
+			
+			<o:column id="esclusioneNote_impegniExtra" styleClass="tableAziendaRiga"  header="Note Esclusione" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniExtra._esclusioneNote}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniExtra._esclusioneNote}" />
+			</o:column>
+			
+			<o:column id="Reiterazione_impegniExtra" styleClass="tableAziendaRiga"  header="Reiterazione" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniExtra._reiterazione}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniExtra._reiterazione}" />
+			</o:column>
+			
+			<o:column id="PrgAccReit_impegniExtra" styleClass="tableAziendaRiga"  header="Progressivo Accertamento Reiterazione" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniExtra._progr_accert_reiteraz}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniExtra._progr_accert_reiteraz}" />
+			</o:column>
+			
+			<o:column id="InadempGrave_impegniExtra" styleClass="tableAziendaRiga"  header="Inadempienza Grave" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniExtra._inadempienza_grave}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniExtra._inadempienza_grave}" />
+			</o:column>
+			
+			<o:column id="Portata_impegniExtra" styleClass="tableAziendaRiga"  header="Portata" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniExtra._portata}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniExtra._portata}" />
+			</o:column>
+			
+			<o:column id="PortataNote_impegniExtra" styleClass="tableAziendaRiga"  header="Note Portata" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniExtra._portata_note}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniExtra._portata_note}" />
+			</o:column>
+			
+			<o:column id="Gravita_impegniExtra" styleClass="tableAziendaRiga"  header="Gravita" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniExtra._gravita}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniExtra._gravita}" />
+			</o:column>
+			
+			<o:column id="GravitaNote_impegniExtra" styleClass="tableAziendaRiga"  header="Note Gravita" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniExtra._gravita_note}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniExtra._gravita_note}" />
+			</o:column>
+			
+			<o:column id="Durata_impegniExtra" styleClass="tableAziendaRiga"  header="Durata" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniExtra._durata}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniExtra._durata}" />
+			</o:column>
+			
+			<o:column id="DurataNote_impegniExtra" styleClass="tableAziendaRiga"  header="Note Durata" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniExtra._durata_note}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniExtra._durata_note}" />
+			</o:column>
+			
+			<o:column id="Segnalazione_impegniExtra" styleClass="tableAziendaRiga"  header="Segnalazione" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniExtra._segnalazione}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniExtra._segnalazione}" />
+			</o:column>
+			
+			<o:column id="Approvazione_impegniExtra" styleClass="tableAziendaRiga"  header="Approvazione" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniExtra._approvazione}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniExtra._approvazione}" />
+			</o:column>
+
+			<o:column id="numeroDecreto_impegniExtra" styleClass="tableAziendaRiga"  header="Numero Decreto" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniExtra._numero_decreto}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniExtra._numero_decreto}" />
+			</o:column>
+			
+			<o:column id="dataDecreto_impegniExtra" styleClass="tableAziendaRiga"  header="Data Decreto" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniExtra._data_decretoString}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniExtra._data_decretoString}" />
+			</o:column>
+
+			<o:column id="userModificaExtra" styleClass="tableAziendaRiga"  header="User Ultima Modifica" width="100pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniExtra._user_modifica}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniExtra._user_modifica}" />
+			</o:column>
+			
+			<o:column id="dataModificaExtra" styleClass="tableAziendaRiga"  header="Data Ultima Modifica" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniExtra._data_modificaStr}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniExtra._data_modificaStr}" />
+			</o:column>	
+			<o:column id="noteImpegniExtra" styleClass="tableAziendaRiga"  header="Note" width="150pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniExtra._note}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniExtra._note}" />
+			</o:column>	
+			
+		</o:dataTable>
+			
+	    <br/>
+		<h:commandButton action="#{esitoImpegniExtraBean.aggiungiEsito}" value="Aggiungi" id="aggiungiEsitoImpegniExtra" rendered="#{request.isUserInRole('ROLE_WR_IMP')}"/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_IMP')}"/>
+		<h:commandButton action="#{esitoImpegniExtraBean.modificaEsito}" value="Modifica" id="modificaEsitoImpegniExtra" rendered="#{request.isUserInRole('ROLE_WR_IMP')}"/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_IMP')}"/>
+		<h:commandButton action="#{esitoImpegniExtraBean.cancellaEsito}" value="Cancella" id="cancellaEsitoImpegniExtra" rendered="#{request.isUserInRole('ROLE_WR_IMP')}">
+			<o:confirmation id="deleteEsitoImpegniConfirmationExtra" 
+				message="Cancellare l'esito selezionato?"
+				details="" 
+				okButtonText="Si"
+                cancelButtonText="No"
+				draggable="true"/>
+		</h:commandButton>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_IMP')}"/>
+		<h:commandButton action="#{esitoImpegniExtraBean.esportaEsito}" value="Esporta Dati" id="esportaEsitoImpegniExtra"/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_IMP')}"/>
+		<h:commandButton action="#{esitoImpegniExtraBean.importaEsito}" value="Importa Dati" id="importaEsitoImpegniExtra" rendered="#{request.isUserInRole('ROLE_WR_IMP')}"/>
+		<o:popupLayer id="popupEsitoImpegniLayerExtra"
+              visible="#{esitoImpegniExtraBean._messageVisible}"
+              hideOnOuterClick="true"
+              hidingTimeout="5000"
+              styleClass="popupStyle"
+              left="200"
+              top="150">
+		  <h:outputText styleClass="popupMessage" value="#{esitoImpegniExtraBean._message}"/>
+		</o:popupLayer>
+	</div>
+</div>
+    

@@ -1,0 +1,503 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<div  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:o="http://openfaces.org/"
+      xmlns:t="http://myfaces.apache.org/tomahawk" >
+
+	<div>
+		<b><h:outputText value="Esiti condizionalit&agrave; per azienda" escape="true" /></b>
+		<br/><br/>		
+		<o:dataTable id="tableCond" 
+			var="esitoCond" 
+			value ="#{esitoCondBean._elencoEsito}"
+			rowKey="#{esitoCond._cuaa}" 
+			
+			line-height="10px" 
+			horizontalGridLines="1px dotted gray"
+			verticalGridLines="1px dotted gray"
+			noDataRowStyle="color: black; text-align: left; font-size: 14px"
+			font-weight="plain"
+			cellpadding="3px"
+			pageSize="100"
+			styleClass="table" >
+		
+			<f:facet name="below">
+	    		<o:dataTablePaginator id="paginator"/>
+	  		</f:facet>
+	  		<f:facet name="noDataMessage">
+    			<h:outputText value="#{searchBean._messageData}" />
+  			</f:facet>
+  			<!-- messaggio se la ricerca in tabella non ritorna risultati -->
+  			<f:facet name="noFilterDataMessage">
+    			<h:outputText value="Nessun dato corrisponde ai parametri di ricerca inseriti" />
+  			</f:facet>
+	  		<o:scrolling horizontal="true"/>
+	  		
+	  		<!-- permette il resizing della colonna -->
+	  		<o:columnResizing resizeHandleWidth="10px" minColWidth="50px"/>
+	  		
+	  		<!-- abilitare selezione singola della riga -->
+	  		<o:singleRowSelection rowData="#{esitoCondBean._selectedValue}" rowIndex="#{esitoCondBean._selectedValueIndex}"/>
+	  		
+	  		<!--  <o:scrolling vertical="true"/>  --> 
+	  		
+			<o:column id="cuaa" styleClass="tableAziendaRiga"  header="CUAA" width="140pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoCond._cuaa}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCond._cuaa}" />
+			</o:column>
+			
+			<o:column id="campagna" styleClass="tableAziendaRiga"  header="Campagna" width="70pt" 
+					sortingExpression="#{esitoCond._campagna}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCond._campagna}" />	
+			</o:column>
+			<o:column id="data_controllo" styleClass="tableAziendaRiga"  header="Data Controllo" width="80pt"
+					headerStyle="white-space: normal;"   
+					sortingExpression="#{esitoCond._dataControlloStr}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCond._dataControlloStr}" />	
+			</o:column>
+			
+			<o:column id="esito_finale" styleClass="tableAziendaRiga"  header="Esito Finale" width="90pt"
+					headerStyle="white-space: normal;"   
+					sortingExpression="#{esitoCond._esitoFinale}"
+            		sortingComparator="caseInsensitiveText">
+	            <h:outputText value="#{esitoCond._esitoFinale}" />	
+			</o:column>
+					
+			<o:column id="perc_rid_psr" styleClass="tableAziendaRiga"  header="Perc. Riduzione PSR" width="60pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{esitoCond._ridPercPSR}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCond._ridPercPSR}" />	
+			</o:column>
+			
+			<o:column id="perc_rid_du" styleClass="tableAziendaRiga"  header="Perc. Riduzione DU" width="60pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{esitoCond._ridPercDU}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCond._ridPercDU}" />	
+			</o:column>
+			
+			<o:column id="stato" styleClass="tableAziendaRiga"  header="Stato" width="110pt" 
+					sortingExpression="#{esitoCond._stato}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCond._stato}" />	
+			</o:column>
+			
+			<o:column id="note" styleClass="tableAziendaRiga"  header="Note" width="150pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{esitoCond._note}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCond._note}" />	
+			</o:column>
+			
+			<o:column id="utente_modifica" styleClass="tableAziendaRiga"  header="Utente Modifica" width="100pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{esitoCond._userModifica}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCond._userModifica}" />	
+			</o:column>
+			
+			<o:column id="data_modifica" styleClass="tableAziendaRiga"  header="Data Modifica" width="90pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{esitoCond._dataModificaStr}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCond._dataModificaStr}" />	
+			</o:column>
+			
+			<o:column id="numero_decreto" styleClass="tableAziendaRiga"  header="Numero Decreto" width="90pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{esitoCond._numero_decreto}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCond._numero_decreto}" />	
+			</o:column>	
+			
+			<o:column id="data_decreto" styleClass="tableAziendaRiga"  header="Data Decreto" width="90pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{esitoCond._data_decretoStr}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCond._data_decretoStr}" />	
+			</o:column>	
+			
+			<o:column id="noteDecreto" styleClass="tableAziendaRiga"  header="Note Decreto" width="150pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{esitoCond._note_decreto}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCond._note_decreto}" />	
+			</o:column>
+			
+		</o:dataTable>
+			
+	    <br/>
+		<h:commandButton action="#{esitoCondBean.aggiungiEsito}" value="Aggiungi" id="aggiungiEsitoCond" rendered="#{request.isUserInRole('ROLE_WR_COND')}"/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_COND')}"/>
+		<h:commandButton action="#{esitoCondBean.modificaEsito}" value="Modifica" id="modificaEsitoCond" rendered="#{request.isUserInRole('ROLE_WR_COND')}"/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_COND')}"/>
+		<h:commandButton action="#{esitoCondBean.cancellaEsito}" value="Cancella" id="cancellaEsitoCond" rendered="#{request.isUserInRole('ROLE_WR_COND')}">
+			<o:confirmation id="deleteEsitoConfirmation" 
+				message="Cancellare l'esito selezionato?"
+				details="" 
+				okButtonText="Si"
+                cancelButtonText="No"
+				draggable="true"/>
+		</h:commandButton>
+		
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_COND')}"/>	
+		<h:commandButton action="#{esitoCondBean.esportaEsito}" value="Esporta Dati" id="esportaEsitoCond"/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_COND')}"/>
+		<h:commandButton action="#{esitoCondBean.importaEsito}" value="Importa Dati" id="importaEsitoCond" rendered="#{request.isUserInRole('ROLE_WR_COND')}"/>		
+	</div>
+	<br/><br/>
+	<div>
+		<b><h:outputText value="Esiti condizionalit&agrave; per atto" escape="true" /></b>
+		<br/><br/>		
+		<o:dataTable id="tableCondAtto" 
+			var="esitoCondAtto" 
+			value ="#{esitoCondBean._elencoEsitoAtto}"
+			
+			line-height="10px" 
+			horizontalGridLines="1px dotted gray"
+			verticalGridLines="1px dotted gray"
+			noDataRowStyle="color: black; text-align: left; font-size: 14px"
+			font-weight="plain"
+			cellpadding="3px"
+			pageSize="100"
+			styleClass="table" >
+		
+			<f:facet name="below">
+	    		<o:dataTablePaginator id="paginator"/>
+	  		</f:facet>
+	  		<f:facet name="noDataMessage">
+    			<h:outputText value="#{searchBean._messageData}" />
+  			</f:facet>
+  			<!-- messaggio se la ricerca in tabella non ritorna risultati -->
+  			<f:facet name="noFilterDataMessage">
+    			<h:outputText value="Nessun dato corrisponde ai parametri di ricerca inseriti" />
+  			</f:facet>
+	  		<o:scrolling horizontal="true"/>
+	  		
+	  		<!-- permette il resizing della colonna -->
+	  		<o:columnResizing resizeHandleWidth="10px" minColWidth="50px"/>
+	  		
+	  		<!-- abilitare selezione singola della riga -->
+	  		<o:singleRowSelection rowData="#{esitoCondBean._selectedValueAtto}" rowIndex="#{esitoCondBean._selectedValueAttoIndex}"/>
+
+	  		<!--  <o:scrolling vertical="true"/>  --> 
+	  		
+			<o:column id="cuaaAtto" styleClass="tableAziendaRiga"  header="CUAA" width="130pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoCondAtto._cuaa}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCondAtto._cuaa}" />
+			</o:column>
+			
+			<o:column id="campagnaAtto" styleClass="tableAziendaRiga"  header="Campagna" width="60pt" 
+					sortingExpression="#{esitoCondAtto._campagna}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCondAtto._campagna}" />	
+			</o:column>
+			
+			<o:column id="cod_condAtto" styleClass="tableAziendaRiga"  header="Codice Condizionalita" width="90pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{esitoCondAtto._cod_cond}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCondAtto._cod_cond}" />	
+			</o:column>
+			
+			<o:column id="atto_contrAtto" styleClass="tableAziendaRiga"  header="Atto Controllato" width="80pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{esitoCondAtto._atto_contr}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCondAtto._atto_contr}" />	
+			</o:column>
+			
+			<o:column id="resp_controlloAtto" styleClass="tableAziendaRiga"  header="Responsabile Controllo" width="80pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{esitoCondAtto._resp_controllo}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCondAtto._resp_controllo}" />	
+			</o:column>
+			
+			<o:column id="data_1_contrAtto" styleClass="tableAziendaRiga"  header="Data 1 Controllo" width="60pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{esitoCondAtto._data_1_contrStr}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCondAtto._data_1_contrStr}" />	
+			</o:column>
+			
+			<o:column id="infrazioneAtto" styleClass="tableAziendaRiga"  header="Infrazione" width="60pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{esitoCondAtto._infrazione}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCondAtto._infrazione}" />	
+			</o:column>
+			
+			<o:column id="tipoControlloAtto" styleClass="tableAziendaRiga"  header="Tipo Controllo" width="80pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{esitoCondAtto._tipoControllo}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCondAtto._tipoControllo}" />	
+			</o:column>
+			
+			<o:column id="rich_az_corrAtto" styleClass="tableAziendaRiga"  header="Richiesta Azione Correttiva" width="60pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{esitoCondAtto._rich_az_corr}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCondAtto._rich_az_corr}" />	
+			</o:column>
+			
+			<o:column id="az_corr_eseguitaAtto" styleClass="tableAziendaRiga"  header="Azione Correttiva Eseguita" width="60pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{esitoCondAtto._az_corr_eseguita}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCondAtto._az_corr_eseguita}" />	
+			</o:column>
+			
+			<o:column id="rich_imp_riprAtto" styleClass="tableAziendaRiga"  header="Impegno di ripristino richiesto" width="60pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{esitoCondAtto._rich_imp_ripr}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCondAtto._rich_imp_ripr}" />	
+			</o:column>
+			
+			<o:column id="imp_ripr_eseguitoAtto" styleClass="tableAziendaRiga"  header="Impegno di ripristino Eseguito" width="80pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{esitoCondAtto._imp_ripr_eseguito}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCondAtto._imp_ripr_eseguito}" />	
+			</o:column>
+		
+			<o:column id="data_2_contrAtto" styleClass="tableAziendaRiga"  header="Data 2 Controllo" width="60pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{esitoCondAtto._data_2_contrStr}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCondAtto._data_2_contrStr}" />	
+			</o:column>
+			
+<!-- 			<o:column id="esito_2_contrAtto" styleClass="tableAziendaRiga"  header="Esito 2 Controllo" width="60pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{esitoCondAtto._esito_2_contr}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCondAtto._esito_2_contr}" />	
+			</o:column> -->
+			
+			<o:column id="inadempienzaAtto" styleClass="tableAziendaRiga"  header="Inadempienza Minore" width="80pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{esitoCondAtto._inadempienza}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCondAtto._inadempienza}" />	
+			</o:column>
+			
+			<o:column id="negligenzaAtto" styleClass="tableAziendaRiga"  header="Negligenza" width="80pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{esitoCondAtto._negligenza}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCondAtto._negligenza}" />
+			</o:column>
+			
+			<o:column id="intenzionalitaAtto" styleClass="tableAziendaRiga"  header="Intenzionalita" width="80pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{esitoCondAtto._intenzionalita}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCondAtto._intenzionalita}" />
+			</o:column>
+			
+			<o:column id="progr_accert_intenzAtto" styleClass="tableAziendaRiga"  header="Progr. Accertamento Intenzionalita" width="80pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{esitoCondAtto._progr_accert_intenz}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCondAtto._progr_accert_intenz}" />	
+			</o:column>
+			
+			<o:column id="intenz_note_intenzAtto" styleClass="tableAziendaRiga"  header="Intenzionalita Note" width="80pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{esitoCondAtto._intenzionalita_note}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCondAtto._intenzionalita_note}" />	
+			</o:column>
+			
+			<o:column id="reiterazioneAtto" styleClass="tableAziendaRiga"  header="Reiterazione" width="80pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{esitoCondAtto._reiterazione}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCondAtto._reiterazione}" />	
+			</o:column>
+			
+			<o:column id="progr_Accert_reitAtto" styleClass="tableAziendaRiga"  header="Progr. Accertamento Reiterazione" width="80pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{esitoCondAtto._progr_Accert_reit}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCondAtto._progr_Accert_reit}" />
+			</o:column>
+			
+			<o:column id="portataAtto" styleClass="tableAziendaRiga"  header="Portata" width="60pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{esitoCondAtto._portata}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCondAtto._portata}" />	
+			</o:column>
+			
+			<o:column id="gravitaAtto" styleClass="tableAziendaRiga"  header="Gravit&agrave;" width="60pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{esitoCondAtto._gravita}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCondAtto._gravita}" />	
+			</o:column>
+			
+			<o:column id="durataAtto" styleClass="tableAziendaRiga"  header="Durata" width="60pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{esitoCondAtto._durata}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCondAtto._durata}" />	
+			</o:column>
+			
+			<o:column id="perc_ridAtto" styleClass="tableAziendaRiga"  header="Perc. Riduzione" width="60pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{esitoCondAtto._perc_rid}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCondAtto._perc_rid}" />	
+			</o:column>
+		 	
+			<o:column id="ammonizioneAtto" styleClass="tableAziendaRiga"  header="Ammonizione" width="80pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{esitoCondAtto._ammonizione}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCondAtto._ammonizione}" />	
+			</o:column>
+			
+			<ui:remove>
+				<o:column id="codViolIntenzImp" styleClass="tableAziendaRiga"  header="Cod. Violazione Intenzionale Impegni" width="80pt"
+						headerStyle="white-space: normal;"  
+						sortingExpression="#{esitoCondAtto._cod_viol_intenz_impegni}"
+	            		sortingComparator="caseInsensitiveText">
+					<h:outputText value="#{esitoCondAtto._cod_viol_intenz_impegni}" />	
+				</o:column>
+				
+				<o:column id="autodich_tratt_non_chimicoAtto" styleClass="tableAziendaRiga"  header="Autodich. Trattamento non Chimico" width="80pt"
+						headerStyle="white-space: normal;"  
+						sortingExpression="#{esitoCondAtto._autodich_tratt_non_chimico}"
+	            		sortingComparator="caseInsensitiveText">
+					<h:outputText value="#{esitoCondAtto._autodich_tratt_non_chimico}" />	
+				</o:column>
+				
+				<o:column id="autodich_gasolio" styleClass="tableAziendaRiga"  header="Autodich. Gasolio" width="80pt"
+						headerStyle="white-space: normal;"  
+						sortingExpression="#{esitoCondAtto._autodich_gasolio}"
+	            		sortingComparator="caseInsensitiveText">
+					<h:outputText value="#{esitoCondAtto._autodich_gasolio}" />	
+				</o:column>
+			</ui:remove>
+			
+			<o:column id="Segnalazione_cond_atto" styleClass="tableAziendaRiga"  header="Segnalazione" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoCondAtto._segnalazione}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCondAtto._segnalazione}" />
+			</o:column>
+			
+			<o:column id="Approvazione_cond_atto" styleClass="tableAziendaRiga"  header="Approvazione" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoCondAtto._approvazione}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCondAtto._approvazione}" />
+			</o:column>
+			
+			<o:column id="noteAtto" styleClass="tableAziendaRiga"  header="Note" width="150pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{esitoCondAtto._note}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCondAtto._note}" />	
+			</o:column>
+			
+			<o:column id="notePortata" styleClass="tableAziendaRiga"  header="Note Portata" width="150pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{esitoCondAtto._portata_note}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCondAtto._portata_note}" />	
+			</o:column>
+			
+			<o:column id="noteGravita" styleClass="tableAziendaRiga"  header="Note Gravita" width="150pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{esitoCondAtto._gravita_note}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCondAtto._gravita_note}" />	
+			</o:column>
+			
+			<o:column id="noteDurata" styleClass="tableAziendaRiga"  header="Note Durata" width="150pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{esitoCondAtto._durata_note}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCondAtto._durata_note}" />	
+			</o:column>
+			
+			<o:column id="utente_modifica" styleClass="tableAziendaRiga"  header="Utente Modifica" width="100pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{esitoCondAtto._userModifica}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCondAtto._userModifica}" />	
+			</o:column>
+			
+			<o:column id="data_modifica" styleClass="tableAziendaRiga"  header="Data Modifica" width="90pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{esitoCondAtto._dataModificaStr}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoCondAtto._dataModificaStr}" />	
+			</o:column>
+
+		</o:dataTable>
+			
+	    <br/>
+		<h:commandButton action="#{esitoCondBean.aggiungiEsitoAtto}" value="Aggiungi" id="aggiungiEsitoAtto" rendered="#{request.isUserInRole('ROLE_WR_COND')}"/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_COND')}"/>
+		<h:commandButton action="#{esitoCondBean.modificaEsitoAtto}" value="Modifica" id="modificaEsitoAtto" rendered="#{request.isUserInRole('ROLE_WR_COND')}"/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_COND')}"/>
+		<h:commandButton action="#{esitoCondBean.cancellaEsitoAtto}" value="Cancella" id="cancellaEsitoAtto" rendered="#{request.isUserInRole('ROLE_WR_COND')}">
+			<o:confirmation id="deleteEsitoAttoConfirmation" 
+				message="Cancellare l'esito selezionato?"
+				details="" 
+				okButtonText="Si"
+                cancelButtonText="No"
+				draggable="true"/>
+		</h:commandButton>	
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_COND')}"/>	
+		<h:commandButton action="#{esitoCondBean.esportaEsitoAtto}" value="Esporta Dati" id="esportaEsitoAtto"/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_COND')}"/>
+		<h:commandButton action="#{esitoCondBean.importaEsitoAtto}" value="Importa Dati" id="importaEsitoAtto" rendered="#{request.isUserInRole('ROLE_WR_COND')}"/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_COND')}"/>
+		<h:commandButton action="#{esitoCondBean.visualizzaMenuExport}" value="Esporta Layout" id="esportaLayoutCondAtto"/>
+		<o:popupLayer id="popupEsitoCondLayer"
+              visible="#{esitoCondBean._messageVisible}"
+              hideOnOuterClick="true"
+              hidingTimeout="5000"
+              styleClass="popupStyle"
+              left="200"
+              top="150">
+		  <h:outputText styleClass="popupMessage" value="#{esitoCondBean._message}"/>
+		</o:popupLayer>
+		<o:popupLayer id="exportLayoutAttiCond"
+                  width="380px"
+                  modal="true"
+                  draggable="true"
+                  visible="#{esitoCondBean._exportLayoutVisible}"
+                  modalLayerClass="modalLayer"
+                  style="left: 200px; top: 150px;">
+	      <h:panelGroup>
+	        <div style="padding:40px 40px 40px 40px;">
+				<b>Selezionare il layout da esportare:</b>
+				<br/><br/>
+				<o:selectOneRadio value="#{esitoCondBean._exportLayoutSelection}" layout="pageDirection">
+		          <f:selectItems value="#{esitoCondBean._listLayout}"/>          
+		        </o:selectOneRadio>  
+		        <br/><br/>
+		     	 <h:commandButton value="Esporta" action="#{esitoCondBean.esportaLayout}" />
+		     	 <h:outputText value="  " escape="false"/>
+	     	   	 <h:commandButton value="Annulla" action="#{esitoCondBean.chiudiEsportaLayout}"  />	  
+	        </div>	       
+	      </h:panelGroup>
+	    </o:popupLayer>
+	</div>		
+</div>

@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:o="http://openfaces.org/">
+<h:head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <title>Gestione Esiti Controlli</title>
+  <link rel="stylesheet" href="../css/commonStyles.css" type="text/css" />
+  <link rel="stylesheet" href="../css/tabbedpane.css" type="text/css" />
+  <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon" />
+  
+</h:head>
+
+<h:body>	        
+
+<div id="mainPageStyle">
+		   	<!-- HEADER -->
+	        <div id="headerStyle">
+	        	<ui:insert name="pageHeader">
+	        		<ui:include src="../stat/header.xhtml"/>
+	        		<ui:include src="../stat/menuBar.xhtml"/> 
+	        	</ui:insert>
+			</div>
+			<br/>
+			
+			<!-- CORPO DELLA PAGINA -->		
+	        <div id="bodyPageStyle"> 	
+	        	<ui:insert name="pageBody">
+	        		<ui:include src="../stat/BorderLayoutPanel_core.xhtml"/>  
+	        	</ui:insert>
+	        </div>
+		</div>
+</h:body>
+</html>

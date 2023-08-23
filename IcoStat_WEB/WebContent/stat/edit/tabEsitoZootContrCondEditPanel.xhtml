@@ -1,0 +1,203 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<div  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:o="http://openfaces.org/"
+      xmlns:t="http://myfaces.apache.org/tomahawk" >
+
+	<div>
+		<b><h:outputText value="#{esitoZootBean._titoloPagina}" escape="true" /></b>
+		<br/><br/>
+		
+		<h:outputText value="Dati azienda" escape="true" style="text-decoration:underline" />
+		<br/><br/>
+		<table>					
+			<tr >
+				<td>CUAA:</td>
+				<td><h:outputText value="#{esitoZootBean._esitoZootStato._cuaa}"/></td>
+			</tr>
+			<tr>
+				<td>Campagna:</td>
+				<td><h:outputText value="#{esitoZootBean._esitoZootStato._campagna}"/></td>
+			</tr>
+			<tr>
+				<td>Domanda:</td>
+				<td><h:outputText value="#{esitoZootBean._esitoZootStato._domanda}"/></td>
+			</tr>
+		</table>
+		<br/><br/>
+		
+		<h:outputText value="Verifica sistema IR ed indicazione dei capi animale" escape="true" style="text-decoration:underline" />
+		<br/><br/>
+		<table>
+			<tr>
+				<td>Azienda non registrata in BDN/ASL:</td>
+				<td>
+					<o:selectOneRadio value="#{esitoZootBean._esitoZootControlloCond._flgAziNonRegBDN}">
+						<f:selectItems value="#{esitoZootBean._listRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>
+			<tr>
+				<td>Registro aziendale assente:</td>
+				<td>
+					<o:selectOneRadio value="#{esitoZootBean._esitoZootControlloCond._flgRegAziAss}">
+						<f:selectItems value="#{esitoZootBean._listRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>
+			<tr>
+				<td>Registro aziendale non conforme:</td>
+				<td>
+					<o:selectOneRadio value="#{esitoZootBean._esitoZootControlloCond._flgRegAziNonConforme}">
+						<f:selectItems value="#{esitoZootBean._listRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>
+			<tr>
+				<td>Presenza di capi ovicaprini e/o suini senza marcatura e documenti attestanti provenienza e dati identificativi:</td>
+				<td>
+					<o:selectOneRadio value="#{esitoZootBean._esitoZootControlloCond._flgOviSuiNoMarcDoc}">
+						<f:selectItems value="#{esitoZootBean._listRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>
+			<tr>
+				<td>Presenza di capi bovini / bufalini / ovicaprini  non registrati / scaricati in BDN:</td>
+				<td>
+					<o:selectOneRadio value="#{esitoZootBean._esitoZootControlloCond._flgBovBufOviNoReg}">
+						<f:selectItems value="#{esitoZootBean._listRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>
+			<tr>
+				<td>Presenza di capi con identificazione incompleta/non conforme per marchi e documenti (bovini, bufalini, ovicaprini nati dopo 9.07.2005):</td>
+				<td>
+					<o:selectOneRadio value="#{esitoZootBean._esitoZootControlloCond._flgBovBufOviIdentNoConf}">
+						<f:selectItems value="#{esitoZootBean._listRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>
+			<tr>
+				<td>Presenza di capi Ovicaprini e/o suini con marcatura non conforme:</td>
+				<td>
+					<o:selectOneRadio value="#{esitoZootBean._esitoZootControlloCond._flgOviSuiMarcNoConf}">
+						<f:selectItems value="#{esitoZootBean._listRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>
+			<tr>
+				<td>Presenza di capi bovini/bufalini senza passaporto e/o marchi auricolari e/o documenti attestanti provenienza e dati identificativi:</td>
+				<td>
+					<o:selectOneRadio value="#{esitoZootBean._esitoZootControlloCond._flgBovBufNoPassMarchiDoc}">
+						<f:selectItems value="#{esitoZootBean._listRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>		
+			<tr>
+				<td>Anomalie a carico del produttore:</td>
+				<td>
+					<o:selectOneRadio value="#{esitoZootBean._esitoZootControlloCond._flgAnomalie}">
+						<f:selectItems value="#{esitoZootBean._listRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>				
+		</table>
+		
+		<br/><br/>
+		<table>
+			<tr>
+				<td style="width:350px">		
+					<h:outputText value="Totale capi anomali" escape="true" style="text-decoration:underline" />
+					<br/><br/>
+					<table>
+						<tr>
+							<td>Totale di cui:</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>- Bovini:</td>
+							<td><h:inputText value="#{esitoZootBean._esitoZootControlloCond._capiAnomaliBovini}" size="11" /></td>
+						</tr>
+						<tr>
+							<td>- Suini:</td>
+							<td><h:inputText value="#{esitoZootBean._esitoZootControlloCond._capiAnomaliSuini}" size="11" /></td>
+						</tr>
+						<tr>
+							<td>- Ovini:</td>
+							<td><h:inputText value="#{esitoZootBean._esitoZootControlloCond._capiAnomaliOvini}" size="11" /></td>
+						</tr>
+					</table>
+				</td>
+				<td style="width:350px">		
+					<h:outputText value="Totale consistenza capi (per specie)" escape="true" style="text-decoration:underline" />
+					<br/><br/>
+					<table>
+						<tr>
+							<td>Totale di cui:</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>- Bovini:</td>
+							<td><h:inputText value="#{esitoZootBean._esitoZootControlloCond._capiConsistenzaBovini}" size="11" /></td>
+						</tr>
+						<tr>
+							<td>- Suini:</td>
+							<td><h:inputText value="#{esitoZootBean._esitoZootControlloCond._capiConsistenzaSuini}" size="11" /></td>
+						</tr>
+						<tr>
+							<td>- Ovini:</td>
+							<td><h:inputText value="#{esitoZootBean._esitoZootControlloCond._capiConsistenzaOvini}" size="11" /></td>
+						</tr>
+					</table>
+				</td>
+				<td>
+					<h:outputText value="Totale capi controllati (per specie)" escape="true" style="text-decoration:underline" />
+					<br/><br/>
+					<table>
+						<tr>
+							<td>Totale di cui:</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>- Bovini:</td>
+							<td><h:inputText value="#{esitoZootBean._esitoZootControlloCond._capiControllatiBovini}" size="11" /></td>
+						</tr>
+						<tr>
+							<td>- Suini:</td>
+							<td><h:inputText value="#{esitoZootBean._esitoZootControlloCond._capiControllatiSuini}" size="11" /></td>
+						</tr>
+						<tr>
+							<td>- Ovini:</td>
+							<td><h:inputText value="#{esitoZootBean._esitoZootControlloCond._capiControllatiOvini}" size="11" /></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		
+		
+		<br/>
+		
+		Note: <h:inputText value="#{esitoZootBean._esitoZootControlloCond._note}" size="80" />
+		
+		<br/><br/>
+		<h:commandButton action="#{esitoZootBean.salvaContrCond}" value="Salva" id="salvaContrCondZoot"/>
+		<h:outputText value="  " escape="false" />
+		<h:commandButton action="#{esitoZootBean.annullaContrCond}" value="Annulla" id="annullaContrCondZoot"/>
+		
+		<o:popupLayer id="popupZootContrCondEditLayer"
+              visible="#{esitoZootBean._messageVisible}"
+              hideOnOuterClick="true"
+              hidingTimeout="5000"
+              styleClass="popupStyle"
+              left="200"
+              top="150">
+		  <h:outputText styleClass="popupMessage" value="#{esitoZootBean._message}"/>
+		</o:popupLayer>
+				
+	
+	</div>
+
+</div>
+    

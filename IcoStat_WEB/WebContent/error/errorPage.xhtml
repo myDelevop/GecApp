@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<f:view>
+	<head>
+		<title>Errore</title>
+	</head>
+	<body>
+		<h:form id="errorForm" prependId="false">
+			<h:graphicImage url="#{layoutBean._pathImage}" styleClass="headerFooterImages"/>
+			<div align="center">
+				<h1>Gestione Esiti Controlli</h1>
+				<br/>
+				<h3>Errore</h3>
+				<b><h:outputText value="Codice errore: #{infoAppBean._responseStatusCode}" escape="true" /></b>
+				<br/><br/>
+				<h:outputText value="#{infoAppBean._responseStatusDescr}" escape="true" />
+				<br/><br/>
+				<h:outputLink value="#{request.contextPath}/stat/index.xhtml">Torna alla home page</h:outputLink>
+			</div>
+		</h:form>
+		</body>
+	</f:view>
+</html>

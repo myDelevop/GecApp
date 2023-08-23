@@ -1,0 +1,473 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<div  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:o="http://openfaces.org/"
+      xmlns:t="http://myfaces.apache.org/tomahawk" 
+      xmlns:primeF="http://primefaces.org/ui">
+
+	<div>
+		<b><h:outputText value="#{esitoCondBean._titoloPagina}" escape="true" /></b>
+		<br/><br/>
+		<table>
+			<tr>
+				<td>Campagna:</td>
+				<td><o:dropDownField id="selectCampagnaCondAtto"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{esitoCondBean._esitoAtto._campagna}"
+			               listStyle="height:100px !important;"
+			               listItemStyle="white-space: nowrap;"               
+			               style="width:200px;border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;"
+			               disabled="#{esitoCondBean._readOnly}">
+						<o:dropDownItems value="#{esitoCondBean._listCampagna}"/>						
+						<o:ajax event="change" render="data1Controllo respControllo selectTipoControlloCondAtto" listener="#{esitoCondBean.aggiornaDati}"/>
+						<o:ajax event="change" render="selectAttoCondContr" listener="#{esitoCondBean.settingAttoContr}"/>
+						<o:ajax event="change" render="selectCodCond" listener="#{esitoCondBean.settingCodiceCond}"/>
+					</o:dropDownField></td>
+			</tr>
+			<tr>
+				<td style="width:250">CUAA:</td>
+				<td>
+					<h:inputText value="#{esitoCondBean._esitoAtto._cuaa}" size="30" readonly="#{esitoCondBean._readOnly}" 
+						style="border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;">
+						<o:ajax event="change" render="data1Controllo respControllo selectTipoControlloCondAtto" listener="#{esitoCondBean.aggiornaDati}"/>
+					</h:inputText>
+				</td>
+			</tr>
+			
+			<tr>
+				<td style="width:250">Atto Controllato:</td>
+				<td>
+					<o:dropDownField id="selectAttoCondContr"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{esitoCondBean._esitoAtto._atto_contr}"
+			               listStyle="height:100px !important;"
+			               listItemStyle="white-space: nowrap;"               
+			               style="width:200px;border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;"
+			               disabled="#{esitoCondBean._readOnly}">
+						<o:dropDownItems value="#{esitoCondBean._listAttoContr}"/>
+						<o:ajax event="change" render="selectCodCond" listener="#{esitoCondBean.attoChanged}"/>
+					</o:dropDownField>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:250">Codice Condizionalita:</td>
+				<td>
+					<o:dropDownField id="selectCodCond"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{esitoCondBean._esitoAtto._cod_cond}"
+			               listItemStyle="white-space: nowrap;"   
+			               listStyle="height:100px !important;"            
+			               style="width:200px;border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;"
+			               disabled="#{esitoCondBean._readOnly}">
+						<o:dropDownItems value="#{esitoCondBean._listCodCond}"/>
+					</o:dropDownField>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:250">Infrazione:</td>
+				<td>
+					<o:selectOneRadio value="#{esitoCondBean._esitoAtto._infrazione}"
+						style="border-style: dashed; border-width: 2px; border-color: #FFC266; background: #FFF5E6;">
+						<f:selectItems value="#{esitoCondBean._listRadioButton}"/>
+						<o:ajax event="change" render="#{esitoCondBean._listElementRenderInfrazione}" 
+							listener="#{esitoCondBean.infrazioneCompilaDatiDefault}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:250">Data 1 Controllo:</td>
+				<td>
+					<o:dateChooser id="data1Controllo"
+                             pattern="dd/MM/yyyy"
+                             value="#{esitoCondBean._esitoAtto._data_1_contr}"
+                             locale="it_IT"
+                             todayText="Oggi"
+                             noneText="Nessuno"
+                             headerStyle="background: white; color: black;"
+                             daysHeaderStyle="background: #20386b; color: white;"
+                             dayStyle="border: 1px solid white;"
+                             rolloverDayStyle="border: 1px solid #f7a902; background: white; color: black;"
+                             rolloverWeekendDayStyle="border: 1px solid #f7a902; background: white; color: #ff8a00;"
+                             selectedDayStyle="border: 1px solid #20386b; color: #20386b; background: white;"
+                             weekendDayStyle="color: #ff8a00;"
+                             footerStyle="background: white; color: black; border-top: 1px solid #20386b;"
+                             style="width:200px;border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;"
+                             typingAllowed="false"
+                             />
+            	</td>
+			</tr>
+			<tr>
+				<td style="width:250">Responsabile Controllo:</td>
+				<td>
+					<o:selectOneRadio id="respControllo" value="#{esitoCondBean._esitoAtto._resp_controllo}"
+			               style="border-style: dashed; border-width: 2px; border-color: #FFC266; background: #FFF5E6;">
+						<f:selectItems value="#{esitoCondBean._listRadioButtonRespControllo}"/>
+						<o:ajax event="change" render="respControllo" listener="#{esitoCondBean.updateRender}"/>
+						<o:ajax event="change" render="selectTipoControlloCondAtto" listener="#{esitoCondBean.selezioneRespControllo}"/>
+			        </o:selectOneRadio>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:250">Tipo Controllo:</td>
+				<td><o:dropDownField id="selectTipoControlloCondAtto"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{esitoCondBean._esitoAtto._tipoControllo}"
+			               listItemStyle="white-space: nowrap;" 
+			               listStyle="height:100px !important;"              
+			               style="width:250px;border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;">
+						<o:dropDownItems value="#{esitoCondBean._listTipoControllo}"/>
+						<o:ajax event="change" render="selectTipoControlloCondAtto" listener="#{esitoCondBean.updateRender}"/>
+					</o:dropDownField></td>
+			</tr>
+			<tr>
+				<td style="width:250">Richiesta Azione Correttiva:</td>
+				<td>
+					<o:selectOneRadio id="richAzCorr" value="#{esitoCondBean._esitoAtto._rich_az_corr}" 
+							disabled="#{esitoCondBean._disableComponent}">
+						<f:selectItems value="#{esitoCondBean._listRadioButton}"/>
+						<o:ajax event="change" render="richAzCorr" listener="#{esitoCondBean.updateRender}"/>      
+			        </o:selectOneRadio>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:250">Azione Correttiva Eseguita:</td>
+				<td>
+					<o:dropDownField id="selectAzCorrEsegCondAtto"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               listStyle="height:100px !important;"
+			               value="#{esitoCondBean._esitoAtto._az_corr_eseguita}"
+			               listItemStyle="white-space: nowrap;"               
+			               style="width:200px;"
+			               disabled="#{esitoCondBean._disableComponent}">
+						<o:dropDownItems value="#{esitoCondBean._listAzioneCorrEseg}"/>
+						<o:ajax event="change" render="selectAzCorrEsegCondAtto" listener="#{esitoCondBean.updateRender}"/>
+					</o:dropDownField>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:250">Impegno di ripristino richiesto:</td>
+				<td>
+					<o:selectOneRadio id="impRiprRich" value="#{esitoCondBean._esitoAtto._rich_imp_ripr}"
+							disabled="#{esitoCondBean._disableComponent}">
+						<f:selectItems value="#{esitoCondBean._listRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:250">Impegno di ripristino eseguito:</td>
+				<td><o:dropDownField id="selectImpRiprEsegCondAtto"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{esitoCondBean._esitoAtto._imp_ripr_eseguito}"
+			               listItemStyle="white-space: nowrap;"      
+			               listStyle="height:100px !important;"         
+			               style="width:200px;"
+			               disabled="#{esitoCondBean._disableComponent}">
+						<o:dropDownItems value="#{esitoCondBean._listImpegnoRipristinoEseg}"/>
+						<o:ajax event="change" render="selectImpRiprEsegCondAtto" listener="#{esitoCondBean.updateRender}"/>
+					</o:dropDownField></td>
+			</tr> 
+			<tr>
+				<td style="width:250">Data 2 Controllo:</td>
+				<td>
+					<o:dateChooser id="data2Controllo"
+                             pattern="dd/MM/yyyy"
+                             value="#{esitoCondBean._esitoAtto._data_2_contr}"
+                             locale="it_IT"
+                             todayText="Oggi"
+                             noneText="Nessuno"
+                             headerStyle="background: white; color: black;"
+                             daysHeaderStyle="background: #20386b; color: white;"
+                             dayStyle="border: 1px solid white;"
+                             rolloverDayStyle="border: 1px solid #f7a902; background: white; color: black;"
+                             rolloverWeekendDayStyle="border: 1px solid #f7a902; background: white; color: #ff8a00;"
+                             selectedDayStyle="border: 1px solid #20386b; color: #20386b; background: white;"
+                             weekendDayStyle="color: #ff8a00;"
+                             footerStyle="background: white; color: black; border-top: 1px solid #20386b;"
+                             style="width: 200px!important;"
+                             typingAllowed="false"
+                             disabled="#{esitoCondBean._disableComponent}">
+                             	<o:ajax event="change" render="data2Controllo" listener="#{esitoCondBean.updateRender}"/>
+                             </o:dateChooser>
+            	</td>
+			</tr>
+<!-- 			<tr>
+				<td style="width:250">Esito 2 Controllo:</td>
+				<td><o:dropDownField id="selectEsito2ContrCondAtto"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{esitoCondBean._esitoAtto._esito_2_contr}"
+			               listStyle="height:100px !important;"
+			               listItemStyle="white-space: nowrap;"               
+			               style="width:200px;"
+			               disabled="#{esitoCondBean._disableComponent}">
+						<o:dropDownItems value="#{esitoCondBean._listEsito}"/>
+					</o:dropDownField></td>
+			</tr> -->
+			<tr>
+				<td style="width:250">Inadempienza Minore:</td>
+				<td>
+					<o:selectOneRadio id="inadempienza" value="#{esitoCondBean._esitoAtto._inadempienza}" 
+							disabled="#{esitoCondBean._disableComponent}">
+						<f:selectItems value="#{esitoCondBean._listRadioButton}"/>  
+						<o:ajax event="change" render="inadempienza" listener="#{esitoCondBean.updateRender}"/>     
+			        </o:selectOneRadio>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:250">Negligenza:</td>
+				<td>
+					<o:selectOneRadio id="negligenza" value="#{esitoCondBean._esitoAtto._negligenza}"
+							disabled="#{esitoCondBean._disableComponent}">
+						<f:selectItems value="#{esitoCondBean._listRadioButton}"/> 
+						<o:ajax event="change" render="negligenza" listener="#{esitoCondBean.updateRender}"/>      
+			        </o:selectOneRadio>
+				</td>
+			</tr>			 
+			<tr>
+				<td style="width:250">Intenzionalita:</td>
+				<td>
+				<table>
+				<tr>
+					<td>
+					<o:selectOneRadio id="intenzionalita" value="#{esitoCondBean._esitoAtto._intenzionalita}"
+							disabled="#{esitoCondBean._disableComponent}">
+						<f:selectItems value="#{esitoCondBean._listRadioButton}"/>  
+						<o:ajax event="change" render="intenzionalita" listener="#{esitoCondBean.updateRender}"/>   
+						<o:ajax event="change" render="percRid" listener="#{esitoCondBean.selezioneIntenzionalita}"/>  
+			        </o:selectOneRadio>
+					</td>
+				        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+				        <td>
+			        Note: 
+			        <h:inputText id="IntenzNote_cond_atto" value="#{esitoCondBean._esitoAtto._intenzionalita_note}" size="58" 
+						disabled="#{esitoCondBean._disableComponent}">
+						<o:ajax event="change" render="IntenzNote_cond_atto" listener="#{esitoCondBean.updateRender}"/>
+					</h:inputText>
+							</td>
+						</tr>
+			        </table>
+				</td>
+			</tr>			
+			<tr>
+				<td style="width:250">Progr. Accertamento Intenzionalita:</td>
+				<td>
+					<o:selectOneRadio id="progrAccIntenz" value="#{esitoCondBean._esitoAtto._progr_accert_intenz}"
+							disabled="#{esitoCondBean._disableComponent}">
+						<f:selectItems value="#{esitoCondBean._listRadioButtonProgrAcc}"/>
+						<o:ajax event="change" render="progrAccIntenz" listener="#{esitoCondBean.updateRender}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>			
+			<tr>
+				<td style="width:250">Reiterazione:</td>
+				<td>
+					<o:selectOneRadio id="reiterazione" value="#{esitoCondBean._esitoAtto._reiterazione}"
+							disabled="#{esitoCondBean._disableComponent}">
+						<f:selectItems value="#{esitoCondBean._listRadioButton}"/>
+						<o:ajax event="change" render="reiterazione" listener="#{esitoCondBean.updateRender}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:250">Progr. Accertamento Reiterazione:</td>
+				<td>
+					<o:selectOneRadio id="progrAccReit" value="#{esitoCondBean._esitoAtto._progr_Accert_reit}"
+							disabled="#{esitoCondBean._disableComponent}">
+						<f:selectItems value="#{esitoCondBean._listRadioButtonProgrAcc}"/> 
+						<o:ajax event="change" render="progrAccReit" listener="#{esitoCondBean.updateRender}"/> 
+			        </o:selectOneRadio>
+				</td>
+			</tr>	
+			 	
+			<tr>
+				<td style="width:250">Portata:</td>
+				<td>
+					<table>
+						<tr>
+							<td>
+					<o:selectOneRadio id="portata" value="#{esitoCondBean._esitoAtto._portata}"
+							disabled="#{esitoCondBean._disableComponent}">
+						<f:selectItems value="#{esitoCondBean._listRadioButton135}"/>
+						<o:ajax event="change" render="portata" listener="#{esitoCondBean.updateRender}"/>       
+			        </o:selectOneRadio>
+					        </td>
+					        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					        <td>
+			        Note: 
+			        <h:inputText id="portataNote" value="#{esitoCondBean._esitoAtto._portata_note}" size="58" 
+						disabled="#{esitoCondBean._disableComponent}">
+						<o:ajax event="change" render="portataNote" listener="#{esitoCondBean.updateRender}"/>
+					</h:inputText>
+							</td>
+						</tr>
+			        </table>
+				</td>
+			</tr>	
+			<tr>
+				<td style="width:250">Gravita:</td>
+				<td>
+					<table>
+						<tr>
+							<td>
+					<o:selectOneRadio id="gravita" value="#{esitoCondBean._esitoAtto._gravita}"
+							disabled="#{esitoCondBean._disableComponent}">
+						<f:selectItems value="#{esitoCondBean._listRadioButton135}"/>  
+						<o:ajax event="change" render="gravita" listener="#{esitoCondBean.updateRender}"/>     
+			        </o:selectOneRadio>
+			        		</td>
+					        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					        <td>
+			        Note:
+			        <h:inputText id="gravitaNote" value="#{esitoCondBean._esitoAtto._gravita_note}" size="58" 
+						disabled="#{esitoCondBean._disableComponent}">
+					<o:ajax event="change" render="gravitaNote" listener="#{esitoCondBean.updateRender}"/>
+					</h:inputText>
+							</td>
+						</tr>
+			        </table>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:250">Durata:</td>
+				<td>
+					<table>
+						<tr>
+							<td>
+					<o:selectOneRadio id="durata" value="#{esitoCondBean._esitoAtto._durata}"
+							disabled="#{esitoCondBean._disableComponent}">
+						<f:selectItems value="#{esitoCondBean._listRadioButton135}"/> 
+						<o:ajax event="change" render="durata" listener="#{esitoCondBean.updateRender}"/>      
+			        </o:selectOneRadio>
+			        		</td>
+					        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					        <td>
+			        Note: 
+			        <h:inputText id="durataNote" value="#{esitoCondBean._esitoAtto._durata_note}" size="58" 
+						disabled="#{esitoCondBean._disableComponent}">
+					<o:ajax event="change" render="durataNote" listener="#{esitoCondBean.updateRender}"/>
+					</h:inputText>
+							</td>
+						</tr>
+			        </table>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:250">Perc. Riduzione:</td>
+				<td>
+					<h:inputText id="percRid" value="#{esitoCondBean._esitoAtto._perc_rid}" size="30" 
+						disabled="#{esitoCondBean._disableComponent}">
+						<o:ajax event="change" render="percRid" listener="#{esitoCondBean.updateRender}"/>
+					</h:inputText>
+				</td>
+			</tr>
+			
+			<tr>
+				<td style="width:250">Ammonizione:</td>
+				<td>
+					<o:selectOneRadio id="ammonizione" value="#{esitoCondBean._esitoAtto._ammonizione}"
+							disabled="#{esitoCondBean._disableComponent}">
+						<f:selectItems value="#{esitoCondBean._listRadioButton}"/>
+						<o:ajax event="change" render="ammonizione" listener="#{esitoCondBean.updateRender}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>
+			<ui:remove>
+			<tr>
+				<td style="width:250">Cod. violazione intenzionale impegni:</td>
+				<td>
+					<h:inputText id="codViolazIntenzImp" value="#{esitoCondBean._esitoAtto._cod_viol_intenz_impegni}" size="30" 
+						disabled="#{esitoCondBean._disableComponent}"/>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:250">Autodich. Trattamento non Chimico:</td>
+				<td>
+					<o:selectOneRadio id="autodichTrattNonChimico" value="#{esitoCondBean._esitoAtto._autodich_tratt_non_chimico}"
+							disabled="#{esitoCondBean._disableComponent}">
+						<f:selectItems value="#{esitoCondBean._listRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:250">Autodich. Gasolio:</td>
+				<td>
+					<o:selectOneRadio id="autodichGasolio" value="#{esitoCondBean._esitoAtto._autodich_gasolio}"
+							disabled="#{esitoCondBean._disableComponent}">
+						<f:selectItems value="#{esitoCondBean._listRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>
+						</ui:remove>
+			
+			<tr>
+				<td style="width:250">Segnalazione:</td>
+				<td>
+					<o:selectOneRadio id="segnalazione_cond_Atto" value="#{esitoCondBean._esitoAtto._segnalazione}">
+						<f:selectItems value="#{esitoCondBean._listSegnalazioneRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>	
+			<tr>
+				<td style="width:250">Approvazione:</td>
+				<td>
+					<o:selectOneRadio id="approvazione_cond_atto" value="#{esitoCondBean._esitoAtto._approvazione}">
+						<f:selectItems value="#{esitoCondBean._listApprovazioneRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:250">Note:</td>
+				<td>
+					<h:inputText id="esitoCondBeanNote" value="#{esitoCondBean._esitoAtto._note}" size="100">
+						<o:ajax event="change" render="esitoCondBeanNote" listener="#{esitoCondBean.updateRender}"/>
+					</h:inputText>
+				</td>
+			</tr>
+		</table>
+		<br/>
+			
+	    <div style="display:#{esitoCondBean._showMessageDataControllo}">
+			ATTENZIONE: Data 1 Controllo reperita dal Controllo. Bisogna salvare per rendere le modifiche permanenti.
+		</div>
+		<br/>
+		<br/>
+		
+		
+		<primeF:messages for="esitoCondAttoWarningMessages" id="esitoCondAttoMessages" showDetail="true" closable="false" />
+	 
+	    <primeF:idleMonitor timeout="500">
+	        <primeF:ajax event="active" listener="#{esitoCondBean.esitoCondAttoCheckForWarnings}" update="esitoCondAttoMessages" />
+	    </primeF:idleMonitor>
+		
+		
+		<h:commandButton action="#{esitoCondBean.salvaEsitoAtto}" value="Salva" id="salvaEsitoCondAtto"/>
+		<h:outputText value="  " escape="false" />
+		<h:commandButton action="#{esitoCondBean.annullaEsitoAtto}" value="Annulla" id="annullaEsitoCondAtto"/>
+		
+		<o:popupLayer id="popupEsitoCondAttoEditLayer"
+              visible="#{esitoCondBean._messageVisible}"
+              hideOnOuterClick="true"
+              hidingTimeout="5000"
+              styleClass="popupStyle"
+              left="200"
+              top="150">
+		  <h:outputText styleClass="popupMessage" value="#{esitoCondBean._message}"/>
+		</o:popupLayer>
+	</div>
+
+</div>
+    

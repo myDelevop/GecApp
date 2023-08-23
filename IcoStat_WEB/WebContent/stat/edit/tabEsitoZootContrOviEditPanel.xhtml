@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<div  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:o="http://openfaces.org/"
+      xmlns:t="http://myfaces.apache.org/tomahawk" >
+
+	<div>
+		<b><h:outputText value="#{esitoZootBean._titoloPagina}" escape="true" /></b>
+		<br/><br/>
+		
+		<table>
+			<tr>
+				<td>
+					<h:outputText value="Dati azienda" escape="true" style="text-decoration:underline" />
+					<br/><br/>
+					<table width="300">					
+						<tr>
+							<td>CUAA:</td>
+							<td><h:outputText value="#{esitoZootBean._esitoZootStato._cuaa}"/></td>
+						</tr>
+						<tr>
+							<td>Campagna:</td>
+							<td><h:outputText value="#{esitoZootBean._esitoZootStato._campagna}"/></td>
+						</tr>
+						<tr>
+							<td>Domanda:</td>
+							<td><h:outputText value="#{esitoZootBean._esitoZootStato._domanda}"/></td>
+						</tr>
+					</table>
+				</td>
+		</tr>
+		</table>
+		<br />		
+		<h:outputText value="Regimi di intervento interessati (DM 18 novembre 2014 n.6513 )" escape="true" style="text-decoration:underline" />
+		<br/><br/>
+		<table>					
+			<tr>
+				<td>Int. 320 - Agnelle da rimonta : <h:outputText value=" #{esitoZootBean._esitoZootStato._flg320}" /></td>
+				<td></td>
+			</tr>
+		</table>		
+				
+		<br/>
+		<h:outputText value="Verifica consistenza aziendale con registro e banca dati anagrafe zootecnia" escape="true" style="text-decoration:underline" />
+		<br/><br/>
+		<table>					
+			<tr>
+				<td>Capi in Anagrafe :</td>
+				<td><h:inputText value="#{esitoZootBean._esitoZootControlloAmmOvi._capiAnagrafeTot}" size="11" /></td>
+			</tr>
+			<tr>
+				<td>Capi sul Registro :</td>
+				<td><h:inputText value="#{esitoZootBean._esitoZootControlloAmmOvi._capiRegistroTot}" size="11" /></td>
+			</tr>
+			<tr>
+				<td>Capi TOT. contati in azienda :</td>
+				<td><h:inputText value="#{esitoZootBean._esitoZootControlloAmmOvi._capiAziendaTot}" size="11" /></td>
+			</tr>
+			<tr>
+				<td>Inosservanza da parte del detentore delle norme identif. e registrazione:</td>
+				<td>
+					<o:selectOneRadio value="#{esitoZootBean._esitoZootControlloAmmOvi._flgInosservanzaNorme}">
+						<f:selectItems value="#{esitoZootBean._listRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>
+			<tr>
+				<td>Totale capi non conformi al sistema di identificazione e registrazione :</td>
+				<td><h:inputText value="#{esitoZootBean._esitoZootControlloAmmOvi._capiNonConformiTot}" size="11" /></td>
+			</tr>
+			<tr>
+				<td>Anomalie a carico produttore:</td>
+				<td>
+					<o:selectOneRadio value="#{esitoZootBean._esitoZootControlloAmmOvi._flgAnomalie}">
+						<f:selectItems value="#{esitoZootBean._listRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>			
+		</table>
+		
+		<br/><br/>
+		<h:outputText value="Registro Aziendale" escape="true" style="text-decoration:underline" />
+		<br/><br/>
+		<table>
+			<tr>
+				<td>Assente o non regolarmente compilato:</td>
+				<td>
+					<o:selectOneRadio value="#{esitoZootBean._esitoZootControlloAmmOvi._flgRegAziAssNonComp}">
+						<f:selectItems value="#{esitoZootBean._listRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>
+			<tr>
+				<td>Non regolarmente compilato ma accertata una situazione soddisfacente sin dall’inizio del periodo di detenzione:</td>
+				<td>
+					<o:selectOneRadio value="#{esitoZootBean._esitoZootControlloAmmOvi._flgRegAziNonCompSitSod}">
+						<f:selectItems value="#{esitoZootBean._listRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>
+			<tr>
+				<td>Regolarmente compilato:</td>
+				<td>
+					<o:selectOneRadio value="#{esitoZootBean._esitoZootControlloAmmOvi._flgRegAziComp}">
+						<f:selectItems value="#{esitoZootBean._listRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>					
+			<tr>
+				<td>Eventuali dichiarazioni del produttore o suo rappresentante:</td>
+				<td><h:inputText value="#{esitoZootBean._esitoZootControlloAmmOvi._dichiarazioniProduttore}" size="80" /></td>
+			</tr>
+			<tr>
+				<td>Eventuali dichiarazioni del controllore:</td>
+				<td><h:inputText value="#{esitoZootBean._esitoZootControlloAmmOvi._dichiarazioniControllore}" size="80" /></td>
+			</tr>
+			<tr>
+				<td>I capi anomali da controllo in loco sono potenzialmente ammissibili nello scarico BDN</td>
+				<td>
+					<o:selectOneRadio value="#{esitoZootBean._esitoZootControlloAmmOvi._capi_anom_amm_scarico_bdn}">
+						<f:selectItems value="#{esitoZootBean._listRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>
+		</table>
+		<br/>
+		
+		Note: <h:inputText value="#{esitoZootBean._esitoZootControlloAmmOvi._note}" size="80" />
+		
+		<br/><br/>
+		<h:commandButton action="#{esitoZootBean.salvaContrAmmOvi}" value="Salva" id="salvaContrOviZoot"/>
+		<h:outputText value="  " escape="false" />
+		<h:commandButton action="#{esitoZootBean.annullaContrAmmOvi}" value="Annulla" id="annullaContrOviZoot"/>
+		
+		<o:popupLayer id="popupZootContrOviEditLayer"
+              visible="#{esitoZootBean._messageVisible}"
+              hideOnOuterClick="true"
+              hidingTimeout="5000"
+              styleClass="popupStyle"
+              left="200"
+              top="150">
+		  <h:outputText styleClass="popupMessage" value="#{esitoZootBean._message}"/>
+		</o:popupLayer>
+			
+	</div>
+
+</div>
+    

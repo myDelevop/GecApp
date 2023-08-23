@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<div xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:f="http://java.sun.com/jsf/core"
+     xmlns:o="http://openfaces.org/"
+     xmlns:ui="http://java.sun.com/jsf/facelets">
+     
+	<h:form id="adminUsers">
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+			<p>Di seguito l'assegnamento dei ruoli per ciascun utente:</p>
+       		<o:dataTable id="tableUtenti" 
+				var="utente" 
+				value ="#{usersBean.elencoUtenti}"
+				rowKey="#{utente._username}" 
+								
+				line-height="10px" 
+				horizontalGridLines="1px dotted gray"
+				verticalGridLines="1px dotted gray"
+				noDataRowStyle="color: black; text-align: left; font-size: 14px"
+				font-weight="plain"
+				cellpadding="3px"
+				styleClass="table" >
+				
+				<f:facet name="below">
+		    		<o:dataTablePaginator id="paginator"/>
+		  		</f:facet>
+		  		<f:facet name="noDataMessage">
+	    			<h:outputText value="Nessun dato caricato" />
+	  			</f:facet>
+	  			<!-- messaggio se la ricerca in tabella non ritorna risultati -->
+	  			<f:facet name="noFilterDataMessage">
+	    			<h:outputText value="Nessun dato corrisponde ai parametri di ricerca inseriti" />
+	  			</f:facet>
+	  			<o:scrolling horizontal="true" vertical="true"/>
+		  		
+		  		<o:column id="username" styleClass="tableAziendaRiga"  header="Utente" width="80pt" 
+						headerStyle="white-space: normal;"
+						sortingExpression="#{utente._username}"
+	            		sortingComparator="caseInsensitiveText">
+					<h:outputText value="#{utente._username}" rendered="#{utente._username!='' and utente._completeName!=''}" />
+					<h:inputText value="#{utente._username}" id="usernameInput"  
+					rendered="#{utente._username=='' or utente._completeName==''}" width="100pt"/>
+				</o:column>
+				
+				<o:column id="completeName" styleClass="tableAziendaRiga"  header="Nome Completo" width="120pt" 
+						headerStyle="white-space: normal;"
+						sortingExpression="#{utente._completeName}"
+	            		sortingComparator="caseInsensitiveText">
+					<h:outputText value="#{utente._completeName}" rendered="#{utente._username!='' and utente._completeName!=''}"/>
+					<h:inputText value="#{utente._completeName}" id="completeNameInput"
+						rendered="#{utente._username=='' or utente._completeName==''}" width="100pt"/>
+					<h:outputText style="color:red" value="#{usersBean.userNotFound}" rendered="#{utente._completeName==''}"/>
+					<h:outputText style="color:red" value="#{usersBean.userLength}" rendered="#{utente._completeName==''}"/>
+				</o:column>
+				
+				<o:column id="delete" styleClass="tableAziendaRiga" header="" width="130pt" 
+						headerStyle="white-space: normal; align: center" style="text-align:center">						
+					<h:commandButton value="Salva" action="#{usersBean.salvaUtente(utente)}" rendered="#{utente._username=='' or utente._completeName==''}"/>
+					<h:outputText value="  " escape="false" />
+					<h:commandButton value="Cancella" action="#{usersBean.cancellaUtente(utente)}" rendered="#{!usersBean.isUserLogged(utente)}"/>
+				</o:column>
+				
+				<o:column id="adminUser" styleClass="tableAziendaRiga"  header="Amministratore Utente" width="100pt" 
+						headerStyle="white-space: normal; nowrap: true; align: center" style="text-align:center">
+					<h:selectBooleanCheckbox value="#{utente._roleAdminUser}" disabled="#{usersBean.isUserLogged(utente)}" >
+						<f:ajax event="valueChange" listener="#{usersBean.checked(utente)}"/>
+					</h:selectBooleanCheckbox>
+				</o:column>
+				<o:column id="adminAnag" styleClass="tableAziendaRiga"  header="Amministratore Anagrafiche" width="100pt" 
+						headerStyle="white-space: normal; nowrap: true; align: center" style="text-align:center">
+					<h:selectBooleanCheckbox value="#{utente._roleAdminDescription}" >
+						<f:ajax event="valueChange" listener="#{usersBean.checked(utente)}"/>
+					</h:selectBooleanCheckbox>
+				</o:column>
+				<o:column id="read" styleClass="tableAziendaRiga" header="Lettura" width="80pt" 
+						headerStyle="white-space: normal; align: center" style="text-align:center">
+					<h:selectBooleanCheckbox disabled="true" value="#{utente._roleUser}">
+						<f:ajax event="valueChange" listener="#{usersBean.checked(utente)}"/>
+					</h:selectBooleanCheckbox>
+				</o:column>
+				<o:column id="wrImp" styleClass="tableAziendaRiga"  header="Scrittura Esiti Impegni" width="100pt" 
+						headerStyle="white-space: normal; align: center" style="text-align:center">
+					<h:selectBooleanCheckbox  value="#{utente._roleWrImp}" >
+						<f:ajax event="valueChange" listener="#{usersBean.checked(utente)}"/>
+					</h:selectBooleanCheckbox>
+				</o:column>
+				<o:column id="wrRMFITFER" styleClass="tableAziendaRiga"  header="Scrittura Esiti RMFITFER" width="100pt" 
+						headerStyle="white-space: normal; align: center" style="text-align:center">
+					<h:selectBooleanCheckbox  value="#{utente._roleWrRMFITFER}" >
+						<f:ajax event="valueChange" listener="#{usersBean.checked(utente)}"/>
+					</h:selectBooleanCheckbox>
+				</o:column>
+				<o:column id="wrCond" styleClass="tableAziendaRiga"  header="Scrittura Condizionalità" width="100pt" 
+						headerStyle="white-space: normal; align: center" style="text-align:center">
+					<h:selectBooleanCheckbox value="#{utente._roleWrCond}">
+						<f:ajax event="valueChange" listener="#{usersBean.checked(utente)}"/>
+					</h:selectBooleanCheckbox>
+				</o:column>
+				<o:column id="wrSup" styleClass="tableAziendaRiga"  header="Scrittura Esiti Superfici" width="100pt" 
+						headerStyle="white-space: normal; align: center" style="text-align:center">
+					<h:selectBooleanCheckbox value="#{utente._roleWrSup}" >
+						<f:ajax event="valueChange" listener="#{usersBean.checked(utente)}"/>
+					</h:selectBooleanCheckbox>
+				</o:column>
+				<o:column id="wrAcque" styleClass="tableAziendaRiga"  header="Scrittura Tutela Acque" width="100pt" 
+						headerStyle="white-space: normal; align: center" style="text-align:center">
+					<h:selectBooleanCheckbox value="#{utente._roleWrAcque}" >
+						<f:ajax event="valueChange" listener="#{usersBean.checked(utente)}"/>
+					</h:selectBooleanCheckbox>
+				</o:column>
+				<o:column id="wrCamp" styleClass="tableAziendaRiga"  header="Scrittura Campione" width="100pt" 
+						headerStyle="white-space: normal; align: center" style="text-align:center">
+					<h:selectBooleanCheckbox value="#{utente._roleWrCamp}" >
+						<f:ajax event="valueChange" listener="#{usersBean.checked(utente)}"/>
+					</h:selectBooleanCheckbox>
+				</o:column>
+				<o:column id="wrUBA" styleClass="tableAziendaRiga"  header="Scrittura UBA" width="80pt" 
+						headerStyle="white-space: normal; align: center" style="text-align:center">
+					<h:selectBooleanCheckbox value="#{utente._roleWrUba}" >
+						<f:ajax event="valueChange" listener="#{usersBean.checked(utente)}"/>
+					</h:selectBooleanCheckbox>
+				</o:column>
+				<o:column id="wrZOOT" styleClass="tableAziendaRiga"  header="Scrittura Zootecnia" width="80pt" 
+						headerStyle="white-space: normal; align: center" style="text-align:center">
+					<h:selectBooleanCheckbox value="#{utente._roleWrZoot}">
+						<f:ajax event="valueChange" listener="#{usersBean.checked(utente)}"/>
+					</h:selectBooleanCheckbox>
+				</o:column>
+			</o:dataTable>
+			<br/><br/>
+			<h:commandButton action="#{usersBean.aggiungiUtente}" value="Aggiungi" id="aggiungi"/>
+			<h:outputText value="  " escape="false" />
+			<h:commandButton action="#{usersBean.updateUtenti}" value="Salva Modifiche" id="salva"></h:commandButton>
+			<h:outputText value="  " escape="false" />
+			<h:commandButton action="#{usersBean.esportaListaUtenti}" value="Esporta Lista" id="esportaLista"></h:commandButton>
+			<o:popupLayer id="popupUtentiLayer"
+              visible="#{usersBean._messageVisible}"
+              hideOnOuterClick="true"
+              hidingTimeout="5000"
+              styleClass="popupStyle"
+              left="300"
+              top="300">
+		  <h:outputText styleClass="popupMessage" value="#{usersBean._message}"/>
+		  </o:popupLayer>
+		  <br/><br/>
+		  <h:commandButton action="version.xhtml" value="Info Applicazione" id="infoApp" rendered="#{request.isUserInRole('ROLE_ADMIN_USER')}" />
+	</h:form>
+</div>

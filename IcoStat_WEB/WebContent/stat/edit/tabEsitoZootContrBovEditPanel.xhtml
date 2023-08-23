@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<div  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:o="http://openfaces.org/"
+      xmlns:t="http://myfaces.apache.org/tomahawk" >
+
+	<div>
+		<b><h:outputText value="#{esitoZootBean._titoloPagina}" escape="true" /></b>
+		<br/><br/>
+		
+		<h:outputText value="Dati azienda" escape="true" style="text-decoration:underline" />
+		<br/><br/>
+		<table>					
+			<tr >
+				<td>CUAA:</td>
+				<td><h:outputText value="#{esitoZootBean._esitoZootStato._cuaa}"/></td>
+			</tr>
+			<tr>
+				<td>Campagna:</td>
+				<td><h:outputText value="#{esitoZootBean._esitoZootStato._campagna}"/></td>
+			</tr>
+			<tr>
+				<td>Domanda:</td>
+				<td><h:outputText value="#{esitoZootBean._esitoZootStato._domanda}"/></td>
+			</tr>
+		</table>
+		<br/><br/>
+		
+		<h:outputText value="Regimi di intervento interessati (DM 18 novembre 2014 n.6513 )" escape="true" style="text-decoration:underline" />
+		<br/><br/>
+		<table>					
+			<tr>
+				<td>Int. 310 - Vacche da latte : <h:outputText value=" #{esitoZootBean._esitoZootStato._flg310}" /></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Int. 311 - Vacche da latte (allevamenti montani) : <h:outputText value=" #{esitoZootBean._esitoZootStato._flg311}" /></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Int. 313 - Vacche nutrici o a duplice attitudine : <h:outputText value=" #{esitoZootBean._esitoZootStato._flg313}" /></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Int. 322 - Vacche nutrici non iscritte nei LG o nel RA : <h:outputText value=" #{esitoZootBean._esitoZootStato._flag322}" /></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Int. 315 - Bovni macellati 12-24 mesi (allevati almeno 6 mesi) : <h:outputText value=" #{esitoZootBean._esitoZootStato._flg315}" /></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Int. 316 - Bovni macellati 12-24 mesi (allevati almeno 12 mesi) : <h:outputText value=" #{esitoZootBean._esitoZootStato._flg316}" /></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Int. 318 - Bovni macellati 12-24 mesi (sist. etichettatura) : <h:outputText value=" #{esitoZootBean._esitoZootStato._flg318}" /></td>
+				<td></td>
+			</tr>
+		</table>
+		<br/><br/>
+		
+		<h:outputText value="Verifica consistenza aziendale con registro e banca dati anagrafe zootecnia" escape="true" style="text-decoration:underline" />
+		<br/><br/>
+		<table>					
+			<tr>
+				<td>Capi in Anagrafe:</td>
+				<td><h:inputText value="#{esitoZootBean._esitoZootControlloAmmBov._capiAnagrafe}" size="11" /></td>
+			</tr>
+			<tr>
+				<td>Capi sul Registro:</td>
+				<td><h:inputText value="#{esitoZootBean._esitoZootControlloAmmBov._capiRegistro}" size="11" /></td>
+			</tr>
+			<tr>
+				<td>Capi presenti in Azienda:</td>
+				<td><h:inputText value="#{esitoZootBean._esitoZootControlloAmmBov._capiPresenti}" size="11" /></td>
+			</tr>
+			<tr>
+				<td>Registro Assente:</td>
+				<td>
+					<o:selectOneRadio value="#{esitoZootBean._esitoZootControlloAmmBov._flgRegistroAssente}">
+						<f:selectItems value="#{esitoZootBean._listRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>
+			<tr>
+				<td>Inosservanza da parte del detentore delle norme identif. e registrazione:</td>
+				<td>
+					<o:selectOneRadio value="#{esitoZootBean._esitoZootControlloAmmBov._flgInosservanzaNorme}">
+						<f:selectItems value="#{esitoZootBean._listRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>
+			<tr>
+				<td>Totale capi non conformi al sistema di identificazione e registrazione</td>
+				<td><h:inputText value="#{esitoZootBean._esitoZootControlloAmmBov._capiNonConformiTot}" size="11" /></td>
+			</tr>
+			<tr>
+				<td>I capi anomali da controllo in loco sono potenzialmente ammissibili nello scarico BDN</td>
+				<td>
+					<o:selectOneRadio value="#{esitoZootBean._esitoZootControlloAmmBov._capi_anom_amm_scarico_bdn}">
+						<f:selectItems value="#{esitoZootBean._listRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>Tot. capi richiesti</td>
+				<td>Capi irregolari richiesti</td>
+			</tr>
+			<tr>
+				<td>- Capi - Int. 310:</td>
+				<td><h:inputText value="#{esitoZootBean._esitoZootControlloAmmBov._capi_richiesti_int_310}" size="11" /></td>
+				<td><h:inputText value="#{esitoZootBean._esitoZootControlloAmmBov._capi_irreg_int_310}" size="11" /></td>
+				
+			</tr>
+			<tr>
+				<td>- Capi - Int. 311:</td>
+				<td><h:inputText value="#{esitoZootBean._esitoZootControlloAmmBov._capi_richiesti_int_311}" size="11" /></td>
+				<td><h:inputText value="#{esitoZootBean._esitoZootControlloAmmBov._capi_irreg_int_311}" size="11" /></td>
+				
+			</tr>
+			<tr>
+				<td>- Capi - Int. 313:</td>
+				<td><h:inputText value="#{esitoZootBean._esitoZootControlloAmmBov._capi_richiesti_int_313}" size="11" /></td>
+				<td><h:inputText value="#{esitoZootBean._esitoZootControlloAmmBov._capi_irreg_int_313}" size="11" /></td>
+			</tr>
+			<tr>
+				<td>- Capi - Int. 322:</td>
+				<td><h:inputText value="#{esitoZootBean._esitoZootControlloAmmBov._capi_richiesti_int_322}" size="11" /></td>
+				<td><h:inputText value="#{esitoZootBean._esitoZootControlloAmmBov._capi_irreg_int_322}" size="11" /></td>
+			</tr>
+			<tr>
+				<td>- Capi - Int. 315:</td>
+				<td><h:inputText value="#{esitoZootBean._esitoZootControlloAmmBov._capi_richiesti_int_315}" size="11" /></td>
+				<td><h:inputText value="#{esitoZootBean._esitoZootControlloAmmBov._capi_irreg_int_315}" size="11" /></td>
+			</tr>
+			<tr>
+				<td>- Capi - Int. 316:</td>
+				<td><h:inputText value="#{esitoZootBean._esitoZootControlloAmmBov._capi_richiesti_int_316}" size="11" /></td>
+				<td><h:inputText value="#{esitoZootBean._esitoZootControlloAmmBov._capi_irreg_int_316}" size="11" /></td>
+			</tr>
+			<tr>
+				<td>- Capi - Int. 318:</td>
+				<td><h:inputText value="#{esitoZootBean._esitoZootControlloAmmBov._capi_richiesti_int_318}" size="11" /></td>
+				<td><h:inputText value="#{esitoZootBean._esitoZootControlloAmmBov._capi_irreg_int_318}" size="11" /></td>
+			</tr>
+			<tr>
+				<td>Eventuali dichiarazioni del produttore o suo rappresentante:</td>
+				<td><h:inputText value="#{esitoZootBean._esitoZootControlloAmmBov._dichiarazioniProduttore}" size="30" /></td>
+			</tr>
+			<tr>
+				<td>Eventuali dichiarazioni del controllore:</td>
+				<td><h:inputText value="#{esitoZootBean._esitoZootControlloAmmBov._dichiarazioniControllore}" size="30" /></td>
+			</tr>
+			<tr>
+				<td>Anomalie a carico produttore:</td>
+				<td>
+					<o:selectOneRadio value="#{esitoZootBean._esitoZootControlloAmmBov._flgAnomalie}">
+						<f:selectItems value="#{esitoZootBean._listRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>	
+		</table>
+		<br/>
+		
+		Note: <h:inputText value="#{esitoZootBean._esitoZootControlloAmmBov._note}" size="50" />
+		
+		<br/><br/>
+		<h:commandButton action="#{esitoZootBean.salvaContrAmmBov}" value="Salva" id="salvaContrBovZoot"/>
+		<h:outputText value="  " escape="false" />
+		<h:commandButton action="#{esitoZootBean.annullaContrAmmBov}" value="Annulla" id="annullaContrBovZoot"/>
+		
+		<o:popupLayer id="popupZootContrBovEditLayer"
+              visible="#{esitoZootBean._messageVisible}"
+              hideOnOuterClick="true"
+              hidingTimeout="5000"
+              styleClass="popupStyle"
+              left="200"
+              top="150">
+		  <h:outputText styleClass="popupMessage" value="#{esitoZootBean._message}"/>
+		</o:popupLayer>
+				
+		
+	
+	</div>
+
+</div>
+    

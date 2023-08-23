@@ -1,0 +1,287 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<div  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:o="http://openfaces.org/"
+      xmlns:t="http://myfaces.apache.org/tomahawk" >
+
+	<div>
+		<b><h:outputText value="#{esitoImpegniBean._titoloPagina}" escape="true" /></b>
+		<br/><br/>
+		<table>
+			<tr>
+				<td>Campagna:</td>
+				<td>
+					<o:dropDownField id="selectCampagnaImpegni"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{esitoImpegniBean._esitoImpegni._campagna}"
+			               listItemStyle="white-space: nowrap;"        
+			               listStyle="height:100px !important;"       
+			               style="width:200px;border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;"
+			               disabled="#{esitoImpegniBean._readOnly}">
+						<o:dropDownItems value="#{esitoImpegniBean._listCampagna}"/>
+						<o:ajax event="change" render="selectInterventoImpegni" listener="#{esitoImpegniBean.settingIntervento}"/>
+						<o:ajax event="change" render="selectSottointerventoImpegni" listener="#{esitoImpegniBean.settingSottoIntervento}"/>
+					</o:dropDownField>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:250">CUAA:</td>
+				<td><h:inputText value="#{esitoImpegniBean._esitoImpegni._cuaa}" size="30" readonly="#{esitoImpegniBean._readOnly}"
+					style="border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;"
+				/></td>
+			</tr>
+			<tr>
+				<td>Domanda:</td>
+				<td><h:inputText id="domandaImpegni" value="#{esitoImpegniBean._esitoImpegni._domanda}" size="30" readonly="#{esitoImpegniBean._readOnly}"
+					style="border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;">
+					<o:ajax event="change" render="domandaImpegni" listener="#{esitoImpegniBean.settingDomanda}"/>		
+					</h:inputText>
+				</td>
+			</tr>
+			<tr>
+				<td>Intervento:</td>
+				<td>
+					<o:dropDownField id="selectInterventoImpegni"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{esitoImpegniBean._esitoImpegni._intervento}"
+			               listItemStyle="white-space: nowrap;"    
+			               listStyle="height:100px !important;"           
+			               style="width:200px;border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;"
+			               disabled="#{esitoImpegniBean._readOnly}">
+						<o:dropDownItems value="#{esitoImpegniBean._listIntervento}"/>
+						<o:ajax event="change" render="selectSottointerventoImpegni" listener="#{esitoImpegniBean.settingSottoInterventoSelectIntervento}"/>
+ 					</o:dropDownField>
+				</td>
+			</tr>
+			<tr>
+				<td>Sub-Intervento:</td>
+				<td>
+					<o:dropDownField id="selectSottointerventoImpegni"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{esitoImpegniBean._esitoImpegni._sottointervento}"
+			               listItemStyle="white-space: nowrap;"    
+			               listStyle="height:100px !important;"           
+			               style="width:200px;border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;"
+			               disabled="#{esitoImpegniBean._readOnly}">
+						<o:dropDownItems value="#{esitoImpegniBean._listSottointervento}"/>
+						<o:ajax event="change" render="selectSottointerventoImpegni" listener="#{esitoImpegniBean.settingDomanda}"/>		
+						
+					</o:dropDownField>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:250">Controllo Estivo:</td>
+				<td>
+					<o:selectOneRadio id="controllo_estivo" value="#{esitoImpegniBean._esitoImpegni._controllo_estivo}" disabled="#{esitoImpegniBean._readOnly}"
+							style="border-style: dashed; border-width: 2px; border-color: #FFC266; background: #FFF5E6;">							
+						<f:selectItems value="#{esitoImpegniBean._listControlloEstivoRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>
+			<tr>
+				<td>Esito OPPAB:</td>
+				<td>
+					<o:dropDownField id="selectEsitoImpegni"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{esitoImpegniBean._esitoImpegni._esito}"
+			               listItemStyle="white-space: nowrap;"      
+			               listStyle="height:100px !important;"         
+			               style="width:200px;">
+						<o:dropDownItems value="#{esitoImpegniBean._listEsito}"/>
+						<o:ajax event="change" render="percRidOPPAB percRidCommissioneRiesame" listener="#{esitoImpegniBean.disablePercRidOPPAB}"/>
+					</o:dropDownField>
+				</td>
+			</tr>
+			<tr>
+				<td>Perc. Rid. OPPAB:</td>
+				<td>
+					<h:inputText id="percRidOPPAB" disabled="#{esitoImpegniBean._disablePercRidOPPAB}" 
+						value="#{esitoImpegniBean._esitoImpegni._percRid}" size="30" />
+				</td>
+			</tr>
+			<tr>
+				<td class="rowSeparator">Stato:</td>
+				<td class="rowSeparator">
+					<o:dropDownField id="selectStatoEsitoImpegni"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{esitoImpegniBean._esitoImpegni._stato}"
+			               listItemStyle="white-space: nowrap;"    
+			               listStyle="height:100px !important;"           
+			               style="width:200px;">
+						<o:dropDownItems value="#{esitoImpegniBean._listStato}"/>
+					</o:dropDownField>
+				</td>
+			</tr>
+			
+			<tr>
+				<td style="width:250">Inadempienza Grave:</td>
+				<td>
+					<o:selectOneRadio id="inademp_grave" value="#{esitoImpegniBean._esitoImpegni._inadempienza_grave}">							
+						<f:selectItems value="#{esitoImpegniBean._listInadempienzaGraveRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:250">Reiterazione:</td>
+				<td>
+					<o:selectOneRadio id="reiterazioneImpegni" value="#{esitoImpegniBean._esitoImpegni._reiterazione}">							
+						<f:selectItems value="#{esitoImpegniBean._listReiterazioneRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:250">Progr. Reiterazione</td>
+				<td>
+					<o:selectOneRadio id="progr_reiterazione" value="#{esitoImpegniBean._esitoImpegni._progrReiterazione}">							
+						<f:selectItems value="#{esitoImpegniBean._listProgrReiterazioneRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>
+			
+			<tr>
+				<td>% Riduzione Carico Bestiame:</td>
+				<td>
+					<h:inputText id="percRidTrasformazioneLatte"
+						value="#{esitoImpegniBean._esitoImpegni._perc_rid_carico_bestiame}" size="30" />
+				</td>
+			</tr>
+			<tr>
+				<td>Esito Trasformazione Latte:</td>
+				<td>
+					<o:dropDownField id="selectEsitoTrasformazioneLatte"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{esitoImpegniBean._esitoImpegni._esito_trasformazione_latte}"
+			               listStyle="height:100px !important;"
+			               listItemStyle="white-space: nowrap;"               
+			               style="width:200px;">
+						<o:dropDownItems value="#{esitoImpegniBean._listEsito}"/>
+					</o:dropDownField>
+				</td>
+			</tr>
+			<tr>
+				<td>Esito premio Trasporto Latte:</td>
+				<td>
+					<o:dropDownField id="selectEsitoPremioTrasporto"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{esitoImpegniBean._esitoImpegni._esitoPremioTrasporto}"
+			               listStyle="height:100px !important;"
+			               listItemStyle="white-space: nowrap;"               
+			               style="width:200px;">
+						<o:dropDownItems value="#{esitoImpegniBean._listEsito}"/>
+						<o:ajax event="change" render="percRidPremioTrasporto" listener="#{esitoImpegniBean.disablePercRidPremioTrasporto}"/>
+					</o:dropDownField>
+				</td>
+			</tr>
+			<tr>
+				<td class="rowSeparator">% Riduzione Premio Trasporto Latte:</td>
+				<td class="rowSeparator">
+					<h:inputText id="percRidPremioTrasporto" disabled="#{esitoImpegniBean._disablePercRidPremioTrasporto}" 
+						value="#{esitoImpegniBean._esitoImpegni._percRidPremioTrasporto}" size="30" />
+				</td>
+			</tr>
+			<tr>
+				<td>Esito Rinuncia Insilato:</td>
+				<td>
+					<o:dropDownField id="selectEsitoRinunciaInsilato"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{esitoImpegniBean._esitoImpegni._esitoRinunciaInsilato}"
+			               listItemStyle="white-space: nowrap;"          
+			               listStyle="height:100px !important;"     
+			               style="width:200px;">
+						<o:dropDownItems value="#{esitoImpegniBean._listEsito}"/>
+						<o:ajax event="change" render="impRidRinunciaInsilato" listener="#{esitoImpegniBean.disableImpRidRinunciaInsilato}"/>
+					</o:dropDownField>
+				</td>
+			</tr>
+			<tr>
+				<td class="rowSeparator">Importo Riduzione Rinuncia Insilato:</td>
+				<td class="rowSeparator">
+					<h:inputText id="impRidRinunciaInsilato"  disabled="#{esitoImpegniBean._disableImportoRidRinunciaInsilato}" 
+						value="#{esitoImpegniBean._esitoImpegni._importoRidRinunciaInsilato}" size="30" />
+				</td>
+			</tr>
+			<tr>
+				<td>Perc. Rid. Commissione Riesame:</td>
+				<td>
+					<h:inputText id="percRidCommissioneRiesame" disabled="#{esitoImpegniBean._disablePercRidOPPAB}" 
+						value="#{esitoImpegniBean._esitoImpegni._percRidCommissRiesame}" size="30" />
+				</td>
+			</tr>
+			<tr>
+				<td>Stato Post Commissione Riesame:</td>
+				<td>
+					<o:dropDownField id="selectStatoPostCommissioneEsitoImpegni"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{esitoImpegniBean._esitoImpegni._statoPostCommissRiesame}"
+			               listStyle="height:100px !important;"
+			               listItemStyle="white-space: nowrap;"               
+			               style="width:200px;">
+						<o:dropDownItems value="#{esitoImpegniBean._listStato}"/>
+					</o:dropDownField>
+				</td>
+			</tr>
+			<tr>
+				<td class="rowSeparator">Data Commissione Riesame:</td>
+				<td class="rowSeparator">
+					<o:dateChooser id="dataCommissioneRiesameImpegni"
+                             pattern="dd/MM/yyyy"
+                             value="#{esitoImpegniBean._esitoImpegni._dataCommissRiesame}"
+                             locale="it_IT"
+                             todayText="Oggi"
+                             noneText="Nessuno"
+                             headerStyle="background: white; color: black;"
+                             daysHeaderStyle="background: #20386b; color: white;"
+                             dayStyle="border: 1px solid white;"
+                             rolloverDayStyle="border: 1px solid #f7a902; background: white; color: black;"
+                             rolloverWeekendDayStyle="border: 1px solid #f7a902; background: white; color: #ff8a00;"
+                             selectedDayStyle="border: 1px solid #20386b; color: #20386b; background: white;"
+                             weekendDayStyle="color: #ff8a00;"
+                             footerStyle="background: white; color: black; border-top: 1px solid #20386b;"
+                             style="width: 200px!important;"
+                             typingAllowed="false"
+                             />
+				</td>
+			</tr>			
+			<tr>
+				<td>Note:</td>
+				<td><h:inputText value="#{esitoImpegniBean._esitoImpegni._note}" size="80" /></td>
+			</tr>
+		</table>
+		<br/>
+			
+	    <br/>
+		<h:commandButton action="#{esitoImpegniBean.salvaEsito}" value="Salva" id="salvaEsitoImpegni"/>
+		<h:outputText value="  " escape="false" />
+		<h:commandButton action="#{esitoImpegniBean.annullaEsito}" value="Annulla" id="annullaEsitoImpegni"/>
+		<o:popupLayer id="popupEsitoImpegniEditLayer"
+              visible="#{esitoImpegniBean._messageVisible}"
+              hideOnOuterClick="true"
+              hidingTimeout="5000"
+              styleClass="popupStyle"
+              left="200"
+              top="150">
+		  <h:outputText styleClass="popupMessage" value="#{esitoImpegniBean._message}"/>
+		</o:popupLayer>
+	</div>
+
+</div>
+    

@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<div  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:o="http://openfaces.org/"
+      xmlns:t="http://myfaces.apache.org/tomahawk" >
+
+	<div>
+		<b><h:outputText value="#{controlloBean._titoloPagina}" escape="true" /></b>
+		<br/><br/>
+		<table>
+			<tr>
+				<td>Campagna:</td>
+				<td><o:dropDownField id="selectCampagnaControllo"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               listItemStyle="white-space: nowrap;"    
+			               listStyle="height:100px !important;"           
+			               style="width:200px;border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;"
+			               value="#{controlloBean._controllo._campagna}"
+			               disabled="#{controlloBean._readOnly}">
+						<o:dropDownItems value="#{controlloBean._listCampagna}"/>
+					</o:dropDownField>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:250">CUAA:</td>
+				<td>
+					<h:inputText value="#{controlloBean._controllo._cuaa}" size="30" readonly="#{controlloBean._readOnly}"			               
+						style="border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;"/>
+				</td>
+			</tr>
+			<tr>
+				<td>Data Inizio Controllo:</td>
+				<td>
+					<o:dateChooser id="dataInizioControllo"
+                             pattern="dd/MM/yyyy"
+                             value="#{controlloBean._controllo._data_inizio_controllo}"
+                             locale="it_IT"
+                             todayText="Oggi"
+                             noneText="Nessuno"
+                             headerStyle="background: white; color: black;"
+                             daysHeaderStyle="background: #20386b; color: white;"
+                             dayStyle="border: 1px solid white;"
+                             rolloverDayStyle="border: 1px solid #f7a902; background: white; color: black;"
+                             rolloverWeekendDayStyle="border: 1px solid #f7a902; background: white; color: #ff8a00;"
+                             selectedDayStyle="border: 1px solid #20386b; color: #20386b; background: white;"
+                             weekendDayStyle="color: #ff8a00;"
+                             footerStyle="background: white; color: black; border-top: 1px solid #20386b;"
+                             style="width: 200px!important;"
+                             typingAllowed="false">
+                		 <o:ajax event="change" render="dataFineControllo" listener="#{controlloBean.aggiornaDataFineControllo}"/>
+                	</o:dateChooser>
+            	</td>
+			</tr>
+			<tr>
+				<td>Data Fine Controllo:</td>
+				<td>
+					<o:dateChooser id="dataFineControllo"
+                             pattern="dd/MM/yyyy"
+                             value="#{controlloBean._controllo._data_fine_controllo}"
+                             locale="it_IT"
+                             todayText="Oggi"
+                             noneText="Nessuno"
+                             headerStyle="background: white; color: black;"
+                             daysHeaderStyle="background: #20386b; color: white;"
+                             dayStyle="border: 1px solid white;"
+                             rolloverDayStyle="border: 1px solid #f7a902; background: white; color: black;"
+                             rolloverWeekendDayStyle="border: 1px solid #f7a902; background: white; color: #ff8a00;"
+                             selectedDayStyle="border: 1px solid #20386b; color: #20386b; background: white;"
+                             weekendDayStyle="color: #ff8a00;"
+                             footerStyle="background: white; color: black; border-top: 1px solid #20386b;"
+                             style="width: 200px!important;"
+                             typingAllowed="false"
+                             />
+            	</td>
+			</tr>
+			<tr>
+				<td>Controllore:</td>
+				<td><h:inputText value="#{controlloBean._controllo._controllore}" size="30" /></td>
+			</tr>
+			<tr>
+				<td>Tipo Controllo:</td>
+				<td><o:dropDownField id="selectTipoControllo"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{controlloBean._controllo._tipo_controllo}"
+			               listItemStyle="white-space: nowrap;"           
+			               listStyle="height:100px !important;"    
+			               style="width:200px;border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;">
+						<o:dropDownItems value="#{controlloBean._listTipoControllo}"/>
+					</o:dropDownField>
+				</td>
+			</tr>
+			<tr>
+				<td>Data Preavviso:</td>
+				<td>
+					<o:dateChooser id="dataPreavviso"
+                             pattern="dd/MM/yyyy"
+                             value="#{controlloBean._controllo._data_preavviso}"
+                             locale="it_IT"
+                             todayText="Oggi"
+                             noneText="Nessuno"
+                             headerStyle="background: white; color: black;"
+                             daysHeaderStyle="background: #20386b; color: white;"
+                             dayStyle="border: 1px solid white;"
+                             rolloverDayStyle="border: 1px solid #f7a902; background: white; color: black;"
+                             rolloverWeekendDayStyle="border: 1px solid #f7a902; background: white; color: #ff8a00;"
+                             selectedDayStyle="border: 1px solid #20386b; color: #20386b; background: white;"
+                             weekendDayStyle="color: #ff8a00;"
+                             footerStyle="background: white; color: black; border-top: 1px solid #20386b;"
+                             style="width: 200px!important;"
+                             typingAllowed="false"
+                             />
+            	</td>
+			</tr>
+			<tr>
+				<td>Tipo Preavviso:</td>
+				<td><o:dropDownField id="selectTipoPreavviso"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{controlloBean._controllo._tipoPreavviso}"
+			               listStyle="height:100px !important;"
+			               listItemStyle="white-space: nowrap;"               
+			               style="width:200px;">
+						<o:dropDownItems value="#{controlloBean._listTipoPreavviso}"/>
+					</o:dropDownField>
+				</td>
+			</tr>
+			<tr>
+				<td>Persona Presente:</td>
+				<td><o:dropDownField id="selectPersonaPresente"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{controlloBean._controllo._personaPresente}"
+			               listItemStyle="white-space: nowrap;"       
+			               listStyle="height:100px !important;"        
+			               style="width:200px;">
+						<o:dropDownItems value="#{controlloBean._listPersonaPresente}"/>
+					</o:dropDownField>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:250">Nome Delegato:</td>
+				<td>
+					<h:inputText value="#{controlloBean._controllo._nomeDelegato}" size="30" />
+				</td>
+			</tr>
+			<tr>
+				<td style="width:250">Numero Documento Delegato:</td>
+				<td>
+					<h:inputText value="#{controlloBean._controllo._numeroDocumento}" size="30" />
+				</td>
+			</tr>
+		</table>
+		<br/>
+			
+	    <br/>
+		<h:commandButton action="#{controlloBean.salvaControllo}" value="Salva" id="salvaControllo"/>
+		<h:outputText value="  " escape="false" />
+		<h:commandButton action="#{controlloBean.annullaControllo}" value="Annulla" id="annullaControllo" />
+		<o:popupLayer id="popupControlloEditLayer"
+              visible="#{controlloBean._messageVisible}"
+              hideOnOuterClick="true"
+              hidingTimeout="5000"
+              styleClass="popupStyle"
+              left="200"
+              top="150">
+		  <h:outputText styleClass="popupMessage" value="#{controlloBean._message}"/>
+		</o:popupLayer>
+	</div>
+
+</div>
+    

@@ -1,0 +1,359 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<div  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:o="http://openfaces.org/"
+      xmlns:t="http://myfaces.apache.org/tomahawk" >
+
+	<div>
+		<b><h:outputText value="Esiti UBA Impegni" escape="true" /></b>
+		<br/><br/>		
+		<o:dataTable id="tableUba" 
+			var="uba" 
+			value ="#{ubaBean.elencoUba}"
+			rowKey="#{uba._cuaa}" 
+			
+			line-height="10px" 
+			horizontalGridLines="1px dotted gray"
+			verticalGridLines="1px dotted gray"
+			noDataRowStyle="color: black; text-align: left; font-size: 14px"
+			font-weight="plain"
+			cellpadding="3px"
+			pageSize="100"
+			styleClass="table" >
+			
+			<!-- per ogni colonna crea un menu per l'ordinamento e la scomparsa delle colonne -->
+			<!-- 
+			<f:facet name="columnMenu">
+		      <o:columnMenu indentStyle="color: yellow">
+		        <o:sortAscendingMenuItem/>
+		        <o:sortDescendingMenuItem/>
+		        <o:hideColumnMenuItem/>
+		        <o:menuSeparator/>
+		        <o:menuItem value="Columns">
+		          <o:columnVisibilityMenu/>
+		        </o:menuItem>
+		        <o:menuSeparator/>
+		        <o:menuItem value="Select Column" onclick="selectColumn(O$('form:fileExcel').getCurrentColumn().index);"/>
+		        <o:menuItem value="Unselect Column" onclick="unselectColumn(O$('form:fileExcel').getCurrentColumn().index);"/>
+		      </o:columnMenu>
+		    </f:facet>
+    		 -->
+    
+			<f:facet name="below">
+	    		<o:dataTablePaginator id="paginator"/>
+	  		</f:facet>
+	  		<f:facet name="noDataMessage">
+    			<h:outputText value="#{searchBean._messageData}" />
+  			</f:facet>
+  			<!-- messaggio se la ricerca in tabella non ritorna risultati -->
+  			<f:facet name="noFilterDataMessage">
+    			<h:outputText value="Nessun dato corrisponde ai parametri di ricerca inseriti" />
+  			</f:facet>
+	  		<o:scrolling horizontal="true"/>
+	  		
+	  		<!-- permette il resizing della colonna -->
+	  		<o:columnResizing resizeHandleWidth="10px" minColWidth="50px"/>
+	  		
+	  		<!-- abilitare selezione singola della riga -->
+	  		<o:singleRowSelection rowData="#{ubaBean._selectedValue}" rowIndex="#{ubaBean._selectedIndex}"/>
+	  		
+	  		<!--  <o:scrolling vertical="true"/>  --> 
+	  		
+			<o:column id="cuaa" styleClass="tableAziendaRiga"  header="CUAA" width="130pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{uba._cuaa}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{uba._cuaa}" />
+			</o:column>
+			
+			<o:column id="campagna" styleClass="tableAziendaRiga"  header="Campagna" width="70pt" 
+					sortingExpression="#{uba._campagna}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{uba._campagna}" />
+			</o:column>
+			
+			<o:column id="domanda" styleClass="tableAziendaRiga"  header="Domanda" width="80pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{uba._domanda}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{uba._domanda}" />
+			</o:column>
+			
+			<o:column id="intervento" styleClass="tableAziendaRiga"  header="Intervento" width="60pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{uba._intervento}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{uba._intervento}" />	
+			</o:column>
+			
+			<o:column id="esito" styleClass="tableAziendaRiga"  header="Esito" width="70pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{uba._esito}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{uba._esito}" />	
+			</o:column>
+			
+			<o:column id="uba_rich" styleClass="tableAziendaRiga"  header="UBA Richiesti" width="70pt"
+					headerStyle="white-space: normal;" 
+					sortingExpression="#{uba._ubaRich}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{uba._ubaRich}" />
+			</o:column>
+			
+			<o:column id="uba_acc" styleClass="tableAziendaRiga"  header="UBA Accertati" width="70pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{uba._ubaAcc}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{uba._ubaAcc}" />	
+			</o:column>
+			
+			<o:column id="uba_diff" styleClass="tableAziendaRiga"  header="UBA Differenza" width="70pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{uba._ubaDiff}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{uba._ubaDiff}" />	
+			</o:column>
+			
+			<o:column id="capi_rich" styleClass="tableAziendaRiga"  header="Capi Richiesti" width="70pt"
+					headerStyle="white-space: normal;" 
+					sortingExpression="#{uba._capiRich}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{uba._capiRich}" />
+			</o:column>
+			
+			<o:column id="capi_acc" styleClass="tableAziendaRiga"  header="Capi Accertati" width="70pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{uba._capiAcc}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{uba._capiAcc}" />	
+			</o:column>			
+			
+			<o:column id="userModifica" styleClass="tableAziendaRiga"  header="Utente Ultima Modifica" width="100pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{uba._userModifica}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{uba._userModifica}" />	
+			</o:column>
+			
+			<o:column id="dataModifica" styleClass="tableAziendaRiga"  header="Data Ultima Modifica" width="70pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{uba._dataModificaStr}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{uba._dataModificaStr}" />	
+			</o:column>
+			
+			<o:column id="note" styleClass="tableAziendaRiga"  header="Note" width="160pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{uba._note}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{uba._note}" />	
+			</o:column>
+
+		</o:dataTable>
+			
+	    <br/>
+		<h:commandButton action="#{ubaBean.aggiungiUba}" value="Aggiungi" id="aggiungiUBA" rendered="#{request.isUserInRole('ROLE_WR_UBA')}"/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_UBA')}"/>
+		<h:commandButton action="#{ubaBean.modificaUba}" value="Modifica" id="modificaUBA" rendered="#{request.isUserInRole('ROLE_WR_UBA')}"/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_UBA')}"/>
+		<h:commandButton action="#{ubaBean.cancellaUba}" value="Cancella" id="cancellaUBA" rendered="#{request.isUserInRole('ROLE_WR_UBA')}">
+			<o:confirmation id="deleteEsitoUbaAmmConfirmation" 
+				message="Cancellare l'esito selezionato?"
+				details="" 
+				okButtonText="Si"
+                cancelButtonText="No"
+				draggable="true"/>
+		</h:commandButton>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_UBA')}"/>
+		<h:commandButton action="#{ubaBean.esportaUba}" value="Esporta Dati" id="esportaUBA"/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_UBA')}"/>
+		<h:commandButton action="#{ubaBean.importaUba}" value="Importa Dati" id="importaUBA" rendered="#{request.isUserInRole('ROLE_WR_UBA')}"/>
+		<o:popupLayer id="popupUbaLayer"
+              visible="#{ubaBean._messageVisible}"
+              hideOnOuterClick="true"
+              hidingTimeout="5000"
+              styleClass="popupStyle"
+              left="200"
+              top="150">
+		  <h:outputText styleClass="popupMessage" value="#{ubaBean._message}"/>
+		</o:popupLayer>
+	</div>	
+	<br /> <br />
+	<div>
+		<b><h:outputText value="Esiti UBA Ammissibilita" escape="true" /></b>
+		<br/><br/>		
+		<o:dataTable id="tableUbaAmm" 
+			var="uba" 
+			value ="#{ubaAmmBean.elencoUba}"
+			rowKey="#{uba._cuaa}" 
+			
+			line-height="10px" 
+			horizontalGridLines="1px dotted gray"
+			verticalGridLines="1px dotted gray"
+			noDataRowStyle="color: black; text-align: left; font-size: 14px"
+			font-weight="plain"
+			cellpadding="3px"
+			pageSize="100"
+			styleClass="table" >
+			
+			<!-- per ogni colonna crea un menu per l'ordinamento e la scomparsa delle colonne -->
+			<!-- 
+			<f:facet name="columnMenu">
+		      <o:columnMenu indentStyle="color: yellow">
+		        <o:sortAscendingMenuItem/>
+		        <o:sortDescendingMenuItem/>
+		        <o:hideColumnMenuItem/>
+		        <o:menuSeparator/>
+		        <o:menuItem value="Columns">
+		          <o:columnVisibilityMenu/>
+		        </o:menuItem>
+		        <o:menuSeparator/>
+		        <o:menuItem value="Select Column" onclick="selectColumn(O$('form:fileExcel').getCurrentColumn().index);"/>
+		        <o:menuItem value="Unselect Column" onclick="unselectColumn(O$('form:fileExcel').getCurrentColumn().index);"/>
+		      </o:columnMenu>
+		    </f:facet>
+    		 -->
+    
+			<f:facet name="below">
+	    		<o:dataTablePaginator id="paginator"/>
+	  		</f:facet>
+	  		<f:facet name="noDataMessage">
+    			<h:outputText value="#{searchBean._messageData}" />
+  			</f:facet>
+  			<!-- messaggio se la ricerca in tabella non ritorna risultati -->
+  			<f:facet name="noFilterDataMessage">
+    			<h:outputText value="Nessun dato corrisponde ai parametri di ricerca inseriti" />
+  			</f:facet>
+	  		<o:scrolling horizontal="true"/>
+	  		
+	  		<!-- permette il resizing della colonna -->
+	  		<o:columnResizing resizeHandleWidth="10px" minColWidth="50px"/>
+	  		
+	  		<!-- abilitare selezione singola della riga -->
+	  		<o:singleRowSelection rowData="#{ubaAmmBean._selectedValue}" rowIndex="#{ubaAmmBean._selectedIndex}"/>
+	  		
+	  		<!--  <o:scrolling vertical="true"/>  --> 
+	  		
+			<o:column id="cuaaUBAAmm" styleClass="tableAziendaRiga"  header="CUAA" width="130pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{uba._cuaa}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{uba._cuaa}" />
+			</o:column>
+			
+			<o:column id="campagnaUBAAmm" styleClass="tableAziendaRiga"  header="Campagna" width="70pt" 
+					sortingExpression="#{uba._campagna}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{uba._campagna}" />
+			</o:column>
+			
+			<o:column id="domandaUBAAmm" styleClass="tableAziendaRiga"  header="Domanda" width="80pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{uba._domanda}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{uba._domanda}" />
+			</o:column>
+			
+			<o:column id="interventoUBAAmm" styleClass="tableAziendaRiga"  header="Intervento" width="60pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{uba._intervento}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{uba._intervento}" />	
+			</o:column>
+			
+			<o:column id="esitoUBAAmm" styleClass="tableAziendaRiga"  header="Esito" width="70pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{uba._esito}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{uba._esito}" />	
+			</o:column>
+
+			<o:column id="statoUBAAmm" styleClass="tableAziendaRiga"  header="Stato" width="70pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{uba._stato}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{uba._stato}" />	
+			</o:column>
+						
+			<o:column id="uba_richUBAAmm" styleClass="tableAziendaRiga"  header="UBA Richiesti" width="70pt"
+					headerStyle="white-space: normal;" 
+					sortingExpression="#{uba._ubaRich}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{uba._ubaRich}" />
+			</o:column>
+			
+			<o:column id="uba_accUBAAmm" styleClass="tableAziendaRiga"  header="UBA Accertati" width="70pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{uba._ubaAcc}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{uba._ubaAcc}" />	
+			</o:column>
+			
+			<o:column id="uba_irregUBAAmm" styleClass="tableAziendaRiga"  header="UBA Irregolari" width="70pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{uba._ubaIrreg}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{uba._ubaIrreg}" />	
+			</o:column>		
+
+			<o:column id="perc_ridUBAAmm" styleClass="tableAziendaRiga"  header="% Riduzione" width="70pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{uba._percRid}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{uba._percRid}" />	
+			</o:column>	
+			
+			<o:column id="userModificaUBAAmm" styleClass="tableAziendaRiga"  header="Utente Ultima Modifica" width="100pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{uba._userModifica}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{uba._userModifica}" />	
+			</o:column>
+			
+			<o:column id="dataModificaUBAAmm" styleClass="tableAziendaRiga"  header="Data Ultima Modifica" width="70pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{uba._dataModificaStr}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{uba._dataModificaStr}" />	
+			</o:column>
+			
+			<o:column id="noteUBAAmm" styleClass="tableAziendaRiga"  header="Note" width="160pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{uba._note}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{uba._note}" />	
+			</o:column>
+
+		</o:dataTable>
+			
+	    <br/>
+		<h:commandButton action="#{ubaAmmBean.aggiungiUba}" value="Aggiungi" id="aggiungiUBAAmm" rendered="#{request.isUserInRole('ROLE_WR_UBA')}"/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_UBA')}"/>
+		<h:commandButton action="#{ubaAmmBean.modificaUba}" value="Modifica" id="modificaUBAAmm" rendered="#{request.isUserInRole('ROLE_WR_UBA')}"/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_UBA')}"/>
+		<h:commandButton action="#{ubaAmmBean.cancellaUba}" value="Cancella" id="cancellaUBAAmm" rendered="#{request.isUserInRole('ROLE_WR_UBA')}">
+			<o:confirmation id="deleteEsitoUbaConfirmation" 
+				message="Cancellare l'esito selezionato?"
+				details="" 
+				okButtonText="Si"
+                cancelButtonText="No"
+				draggable="true"/>
+		</h:commandButton>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_UBA')}"/>
+		<h:commandButton action="#{ubaAmmBean.esportaUba}" value="Esporta Dati" id="esportaUBAAmm"/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_UBA')}"/>
+		<h:commandButton action="#{ubaAmmBean.importaUba}" value="Importa Dati" id="importaUBAAmm" rendered="#{request.isUserInRole('ROLE_WR_UBA')}"/>
+
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_UBA')}"/>
+		<o:popupLayer id="popupUbaLayerAmm"
+              visible="#{ubaAmmBean._messageVisible}"
+              hideOnOuterClick="true"
+              hidingTimeout="5000"
+              styleClass="popupStyle"
+              left="200"
+              top="150">
+		  <h:outputText styleClass="popupMessage" value="#{ubaAmmBean._message}"/>
+		</o:popupLayer>
+	</div>	
+</div>

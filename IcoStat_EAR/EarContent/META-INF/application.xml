@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/application_7.xsd" id="Application_ID" version="7">
+  <display-name>IcoStat_EAR</display-name>
+  <module>
+    <ejb>IcoStat_EJB.jar</ejb>
+  </module>
+  <module>
+    <web>
+      <web-uri>IcoStat_WEB.war</web-uri>
+      <context-root>OPPAB_GESTIONE_ESITI</context-root>
+    </web>
+  </module>
+</application>

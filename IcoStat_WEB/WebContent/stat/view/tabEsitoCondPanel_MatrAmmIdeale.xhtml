@@ -1,0 +1,387 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<div  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:o="http://openfaces.org/"
+      xmlns:t="http://myfaces.apache.org/tomahawk" >
+
+	<div>
+		<b><h:outputText value="Matrice di ammissibilità Ideale" escape="true" /></b>
+		<br/><br/>		
+		<o:dataTable id="tableMatrAmmIdeale" 
+			var="matr" 
+			value ="#{matrAmmIdealeBean._elencoMatrAmmIdeale}"
+			
+			line-height="10px" 
+			horizontalGridLines="1px dotted gray"
+			verticalGridLines="1px dotted gray"
+			noDataRowStyle="color: black; text-align: left; font-size: 14px"
+			font-weight="plain"
+			cellpadding="3px"
+			pageSize="100"
+			styleClass="table" >
+		
+			<f:facet name="below">
+	    		<o:dataTablePaginator id="paginator"/>
+	  		</f:facet>
+	  		<f:facet name="noDataMessage">
+    			<h:outputText value="#{searchBean._messageData}" />
+  			</f:facet>
+  			<!-- messaggio se la ricerca in tabella non ritorna risultati -->
+  			<f:facet name="noFilterDataMessage">
+    			<h:outputText value="Nessun dato corrisponde ai parametri di ricerca inseriti" />
+  			</f:facet>
+	  		<o:scrolling horizontal="true"/>
+	  		
+	  		<!-- permette il resizing della colonna -->
+	  		<o:columnResizing resizeHandleWidth="10px" minColWidth="50px"/>
+	  		
+	  		<!-- abilitare selezione singola della riga -->
+	  		<!--  <o:singleRowSelection rowData="#{capoAllevatoBean._selectedValue}"/> -->
+	  		
+	  		<!--  <o:scrolling vertical="true"/>  --> 
+	  		
+			<o:column id="cuaa" styleClass="tableAziendaRiga"  header="CUAA" width="130pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{matr._cuaa}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._cuaa}" />
+			</o:column>
+			
+			<o:column id="campagna" styleClass="tableAziendaRiga"  header="Campagna" width="70pt" 
+					sortingExpression="#{matr._campagna}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._campagna}" />	
+			</o:column>
+			
+			<o:column id="a1" styleClass="tableAziendaRiga"  header="A1" width="30pt" 
+					sortingExpression="#{matr._a1}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._a1}" />	
+			</o:column>
+			
+			<o:column id="a2" styleClass="tableAziendaRiga"  header="A2" width="30pt" 
+					sortingExpression="#{matr._a2}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._a2}" />	
+			</o:column>
+			
+			<o:column id="a3" styleClass="tableAziendaRiga"  header="A3" width="30pt" 
+					sortingExpression="#{matr._a3}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._a3}" />	
+			</o:column>
+			
+			<o:column id="a4" styleClass="tableAziendaRiga"  header="A4" width="30pt" 
+					sortingExpression="#{matr._a4}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._a4}" />	
+			</o:column>
+			
+			<o:column id="fer" styleClass="tableAziendaRiga"  header="FER" width="30pt" 
+					sortingExpression="#{matr._fer}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._fer}" />	
+			</o:column>
+			
+			<o:column id="a5" styleClass="tableAziendaRiga"  header="A5" width="30pt" 
+					sortingExpression="#{matr._a5}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._a5}" />	
+			</o:column>
+			
+			<o:column id="a6" styleClass="tableAziendaRiga"  header="A6" width="30pt" 
+					sortingExpression="#{matr._a6}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._a6}" />	
+			</o:column>
+			
+			<o:column id="a7" styleClass="tableAziendaRiga"  header="A7" width="30pt" 
+					sortingExpression="#{matr._a7}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._a7}" />	
+			</o:column>
+			
+			<o:column id="a8" styleClass="tableAziendaRiga"  header="A8" width="30pt" 
+					sortingExpression="#{matr._a8}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._a8}" />	
+			</o:column>
+			
+			<o:column id="b9" styleClass="tableAziendaRiga"  header="B9" width="30pt" 
+					sortingExpression="#{matr._b9}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._b9}" />	
+			</o:column>
+			
+			<o:column id="b10" styleClass="tableAziendaRiga"  header="B10" width="30pt" 
+					sortingExpression="#{matr._b10}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._b10}" />	
+			</o:column>
+			
+			<o:column id="b11" styleClass="tableAziendaRiga"  header="B11" width="30pt" 
+					sortingExpression="#{matr._b11}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._b11}" />	
+			</o:column>
+			
+			<o:column id="b12" styleClass="tableAziendaRiga"  header="B12" width="30pt" 
+					sortingExpression="#{matr._b12}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._b12}" />	
+			</o:column>
+			
+			<o:column id="b13" styleClass="tableAziendaRiga"  header="B13" width="30pt" 
+					sortingExpression="#{matr._b13}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._b13}" />	
+			</o:column>
+			
+			<o:column id="b14" styleClass="tableAziendaRiga"  header="B14" width="30pt" 
+					sortingExpression="#{matr._b14}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._b14}" />	
+			</o:column>
+			
+			<o:column id="b15" styleClass="tableAziendaRiga"  header="B15" width="30pt" 
+					sortingExpression="#{matr._b15}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._b15}" />	
+			</o:column>
+			
+			<o:column id="c16" styleClass="tableAziendaRiga"  header="C16" width="30pt" 
+					sortingExpression="#{matr._c16}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._c16}" />	
+			</o:column>
+			
+			<o:column id="c17" styleClass="tableAziendaRiga"  header="C17" width="30pt" 
+					sortingExpression="#{matr._c17}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._c17}" />	
+			</o:column>
+			
+			<o:column id="c18" styleClass="tableAziendaRiga"  header="C18" width="30pt" 
+					sortingExpression="#{matr._c18}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._c18}" />	
+			</o:column>
+			
+			<o:column id="fit" styleClass="tableAziendaRiga"  header="FIT" width="30pt" 
+					sortingExpression="#{matr._fit}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._fit}" />	
+			</o:column>
+			
+			<o:column id="_1_1" styleClass="tableAziendaRiga"  header="1.1" width="30pt" 
+					sortingExpression="#{matr._1_1}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._1_1}" />	
+			</o:column>
+			
+			<o:column id="_1_2" styleClass="tableAziendaRiga"  header="1.2" width="30pt" 
+					sortingExpression="#{matr._1_2}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._1_2}" />	
+			</o:column>
+			
+			<o:column id="_1_3" styleClass="tableAziendaRiga"  header="1.3" width="30pt" 
+					sortingExpression="#{matr._1_3}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._1_3}" />	
+			</o:column>
+			
+			<o:column id="_2_1" styleClass="tableAziendaRiga"  header="2.1" width="30pt" 
+					sortingExpression="#{matr._2_1}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._2_1}" />	
+			</o:column>
+			
+			<o:column id="_2_2" styleClass="tableAziendaRiga"  header="2.2" width="30pt" 
+					sortingExpression="#{matr._2_2}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._2_2}" />	
+			</o:column>
+			
+			<o:column id="_3_1" styleClass="tableAziendaRiga"  header="3.1" width="30pt" 
+					sortingExpression="#{matr._3_1}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._3_1}" />	
+			</o:column>
+			
+			<o:column id="_4_1" styleClass="tableAziendaRiga"  header="4.1" width="30pt" 
+					sortingExpression="#{matr._4_1}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._4_1}" />	
+			</o:column>
+			
+			<o:column id="_4_2" styleClass="tableAziendaRiga"  header="4.2" width="30pt" 
+					sortingExpression="#{matr._4_2}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._4_2}" />	
+			</o:column>
+			
+			<o:column id="_4_3" styleClass="tableAziendaRiga"  header="4.3" width="30pt" 
+					sortingExpression="#{matr._4_3}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._4_3}" />	
+			</o:column>
+			
+			<o:column id="_4_4" styleClass="tableAziendaRiga"  header="4.4" width="30pt" 
+					sortingExpression="#{matr._4_4}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._4_4}" />	
+			</o:column>
+			
+			<o:column id="_4_6" styleClass="tableAziendaRiga"  header="4.6" width="30pt" 
+					sortingExpression="#{matr._4_6}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._4_6}" />	
+			</o:column>
+			
+			<o:column id="_5_1" styleClass="tableAziendaRiga"  header="5.1" width="30pt" 
+					sortingExpression="#{matr._5_1}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._5_1}" />	
+			</o:column>
+			
+			<o:column id="_5_2" styleClass="tableAziendaRiga"  header="5.2" width="30pt" 
+					sortingExpression="#{matr._5_2}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._5_2}" />	
+			</o:column>
+
+			<o:column id="_cgo1" styleClass="tableAziendaRiga"  header="CGO1" width="50pt" 
+					sortingExpression="#{matr._cgo1}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._cgo1}" />	
+			</o:column>
+			
+			<o:column id="_bcaa1" styleClass="tableAziendaRiga"  header="BCAA1" width="50pt" 
+					sortingExpression="#{matr._bcaa1}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._bcaa1}" />	
+			</o:column>
+			
+			<o:column id="_bcaa2" styleClass="tableAziendaRiga"  header="BCAA2" width="50pt" 
+					sortingExpression="#{matr._bcaa2}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._bcaa2}" />	
+			</o:column>
+			
+			<o:column id="_bcaa3" styleClass="tableAziendaRiga"  header="BCAA3" width="50pt" 
+					sortingExpression="#{matr._bcaa3}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._bcaa3}" />	
+			</o:column>
+			
+			<o:column id="_bcaa4" styleClass="tableAziendaRiga"  header="BCAA4" width="50pt" 
+					sortingExpression="#{matr._bcaa4}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._bcaa4}" />	
+			</o:column>
+			
+			<o:column id="_bcaa5" styleClass="tableAziendaRiga"  header="BCAA5" width="50pt" 
+					sortingExpression="#{matr._bcaa5}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._bcaa5}" />	
+			</o:column>
+			
+			<o:column id="_bcaa6" styleClass="tableAziendaRiga"  header="BCAA6" width="50pt" 
+					sortingExpression="#{matr._bcaa6}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._bcaa6}" />	
+			</o:column>
+			
+			<o:column id="_cgo2" styleClass="tableAziendaRiga"  header="CGO2" width="50pt" 
+					sortingExpression="#{matr._cgo2}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._cgo2}" />	
+			</o:column>
+			
+			<o:column id="_cgo3" styleClass="tableAziendaRiga"  header="CGO3" width="50pt" 
+					sortingExpression="#{matr._cgo3}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._cgo3}" />	
+			</o:column>
+			
+			<o:column id="_bcaa7" styleClass="tableAziendaRiga"  header="BCAA7" width="50pt" 
+					sortingExpression="#{matr._bcaa7}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._bcaa7}" />	
+			</o:column>
+			
+			<o:column id="_cgo4" styleClass="tableAziendaRiga"  header="CGO4" width="50pt" 
+					sortingExpression="#{matr._cgo4}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._cgo4}" />	
+			</o:column>
+			
+			<o:column id="_cgo5" styleClass="tableAziendaRiga"  header="CGO5" width="50pt" 
+					sortingExpression="#{matr._cgo5}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._cgo5}" />	
+			</o:column>
+			
+			<o:column id="_cgo6" styleClass="tableAziendaRiga"  header="CGO6" width="50pt" 
+					sortingExpression="#{matr._cgo6}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._cgo6}" />	
+			</o:column>
+			
+			<o:column id="_cgo7" styleClass="tableAziendaRiga"  header="CGO7" width="50pt" 
+					sortingExpression="#{matr._cgo7}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._cgo7}" />	
+			</o:column>
+			
+			<o:column id="_cgo8" styleClass="tableAziendaRiga"  header="CGO8" width="50pt" 
+					sortingExpression="#{matr._cgo8}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._cgo8}" />	
+			</o:column>
+			
+			<o:column id="_cgo9" styleClass="tableAziendaRiga"  header="CGO9" width="50pt" 
+					sortingExpression="#{matr._cgo9}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._cgo9}" />	
+			</o:column>
+			
+			<o:column id="_cgo10" styleClass="tableAziendaRiga"  header="CGO10" width="50pt" 
+					sortingExpression="#{matr._cgo10}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._cgo10}" />	
+			</o:column>
+			
+			<o:column id="_cgo11" styleClass="tableAziendaRiga"  header="CGO11" width="50pt" 
+					sortingExpression="#{matr._cgo11}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._cgo11}" />	
+			</o:column>
+			
+			<o:column id="_cgo12" styleClass="tableAziendaRiga"  header="CGO12" width="50pt" 
+					sortingExpression="#{matr._cgo12}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._cgo12}" />	
+			</o:column>
+			
+			<o:column id="_cgo13" styleClass="tableAziendaRiga"  header="CGO13" width="50pt" 
+					sortingExpression="#{matr._cgo13}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._cgo13}" />	
+			</o:column>
+			
+			<o:column id="_bcaa8" styleClass="tableAziendaRiga"  header="BCAA8" width="50pt" 
+					sortingExpression="#{matr._bcaa8}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{matr._bcaa8}" />	
+			</o:column>
+			
+		</o:dataTable>
+			
+	    <br/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_COND')}"/>	
+		<h:commandButton action="#{matrAmmIdealeBean.esportaMatr}" value="Esporta Dati" id="esportaMatr"/>
+	</div>		
+</div>

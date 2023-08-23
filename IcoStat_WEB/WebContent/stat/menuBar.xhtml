@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<div xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:o="http://openfaces.org/"
+      xmlns:form="http://www.springframework.org/tags/form"
+      xmlns:c="http://java.sun.com/jsp/jstl/core" 
+       >
+    <script type="text/javascript">
+		function submitform()
+		{
+		    document.getElementById('logout-form').submit();
+		}
+	</script>
+	
+	<h:form id="logoutFormAdmin" rendered="#{view.viewId=='/stat/admin.xhtml'}">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+		<table width="100%">
+		<tr>
+			<td style="margin-left:0%;">
+				<h:commandButton action="admin.xhtml" value="Amministrazione" 
+					rendered="#{(request.isUserInRole('ROLE_ADMIN_USER') or request.isUserInRole('ROLE_ADMIN_DESCRIPTION')) and view.viewId=='/stat/index.xhtml'}" 
+					id="buttonAdmin"/>
+				<h:commandButton action="index.xhtml" value="Indietro" rendered="#{view.viewId=='/stat/admin.xhtml'}"/>
+			</td>
+			<td style="width:70%;"><h2 style="text-align:center;">Gestione Esiti Controlli - Amministrazione</h2></td>
+			<td style="width:15%;"><h:outputLabel value="UTENTE: #{loginBean.username}"/></td>
+			<td style="margin-right:0%;width:3%;">
+				<h:outputLink value="#{request.contextPath}/logout" style="text-align:right;" id="logout">Logout</h:outputLink>
+				<!-- <a href="javascript:submitform()" style="text-align:right;">Logout</a> -->
+			</td>
+		</tr>
+		</table>
+	</h:form>
+	
+	<h:form id="logoutForm" rendered="#{view.viewId=='/stat/index.xhtml' or view.viewId=='/stat/uploadForm.xhtml'}">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>	
+		<table width="100%">
+		<tr>
+			<td style="margin-left:0%;">
+				<h:commandButton action="admin.xhtml" value="Amministrazione" 
+					rendered="#{(request.isUserInRole('ROLE_ADMIN_USER') or request.isUserInRole('ROLE_ADMIN_DESCRIPTION')) and view.viewId=='/stat/index.xhtml'}" 
+					id="buttonAdmin"/>
+				<h:commandButton action="index.xhtml" value="Indietro" rendered="#{view.viewId=='/stat/admin.xhtml'}"/>
+			</td>
+			<td style="width:55%;"><h2 style="text-align:center;">Gestione Esiti Controlli</h2></td>
+			<td style="width:15%;"><h:outputLabel value="UTENTE: #{loginBean.username}"/></td>
+			<td style="margin-right:0%;width:3%;">
+				<h:outputLink value="#{request.contextPath}/logout" style="text-align:right;" id="logout">Logout</h:outputLink>
+				<!-- <a href="javascript:submitform()" style="text-align:right;">Logout</a> -->
+			</td>
+		</tr>
+		</table>
+	</h:form>
+	
+	<h:form id="logout-form" action="#{request.contextPath}/logout" method="post">
+	    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+	</h:form>
+	
+</div>
+    

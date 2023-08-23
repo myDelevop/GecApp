@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:o="http://openfaces.org/"
+      xmlns:t="http://myfaces.apache.org/tomahawk" >
+      
+	<h:head>
+		<title>Gestione Esiti Controlli</title>
+		<link rel="stylesheet" href="../css/commonStyles.css" type="text/css" />
+		<link rel="stylesheet" href="../css/tabbedpane.css" type="text/css" />
+	</h:head>
+
+	<h:body>
+		<div id="mainPageStyle">
+		   	<!-- HEADER -->
+	        <div id="headerStyle">
+	        	<ui:insert name="pageHeader">
+	        		<ui:include src="../stat/header.xhtml"/>
+	        		<ui:include src="../stat/menuBar.xhtml"/> 
+	        	</ui:insert>
+			</div>
+			<br/>
+		
+			<!-- CORPO DELLA PAGINA -->		
+	        <div id="bodyPageStyle" style="margin-left:50px; margin-right:50px;"> 	
+	        	<b><h:outputText value="#{uploadBean._titoloPagina}" escape="true" style="font-size:20px;"/></b>
+	        	<br/><br/>
+	        	
+	        	<ui:insert name="pageBody">
+	        		<ui:include src="../stat/view/uploadPanel.xhtml"/> 	        		
+	        		<ui:include src="../stat/view/uploadLogArea.xhtml" />  
+	        	</ui:insert>
+	        	
+	        </div>
+		</div>
+	</h:body>
+</html>
+
+    

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<f:view>
+	<h:head>
+	  <title>Gestione Esiti Controlli</title>
+	  <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
+	</h:head>
+	<body>
+		<h:form
+			rendered = "#{layoutBean._enableLogin}"
+			id="loginForm"
+			prependId="false">
+			<h:graphicImage url="#{layoutBean._pathImage}" styleClass="headerFooterImages"></h:graphicImage>
+			<div align="center">
+			<h1>Gestione Esiti Controlli</h1>
+			<br/>
+			<label for="j_username"><h:outputText value="Username:" /><br />
+			</label>
+			<h:inputText
+				id="j_username"
+				required="true">
+			</h:inputText>
+
+			<br />
+			<br />
+			<label for="j_password"><h:outputText value="Password:" /><br />
+			</label>
+			<h:inputSecret
+				id="j_password"
+				required="true">
+			</h:inputSecret>
+
+			<br />
+			<br />
+<!-- 			<label for="_spring_security_remember_me"> <h:outputText
+				value="Remember me" /> </label>
+			<h:selectBooleanCheckbox id="_spring_security_remember_me" /> -->
+			<br /><br />
+			<h:commandButton
+				type="submit"
+				id="login"
+				action="#{loginBean.doLogin}"
+				value="Login" />
+			</div>
+			<h:message for="loginForm"></h:message>
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+		</h:form>
+ 		<div style="display:#{layoutBean._enableLogin ? 'none' : 'block'}; width:1443px; margin:0 auto;">
+			<h:graphicImage url="#{layoutBean._pathImage}" styleClass="headerFooterImages" />
+			<div style="width:300px; margin:0 auto;">
+				<h:graphicImage url="/images/maintenance.png" style="width:300px; margin:0 auto;"/>
+				<b>Applicazione in aggiornamento. Si prega di riprovare più tardi.</b>
+			</div>
+		</div>
+		</body>
+	</f:view>
+</html>

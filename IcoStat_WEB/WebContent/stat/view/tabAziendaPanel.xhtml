@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<div  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:o="http://openfaces.org/"
+      xmlns:t="http://myfaces.apache.org/tomahawk" >
+
+	<div>
+		<b><h:outputText value="Anagrafica azienda" escape="true" /></b>
+		<br/><br/>	
+		<o:dataTable id="tableAzienda" 
+			var="azienda" 
+			value ="#{aziendaBean.elencoAziende}"
+			rowKey="#{azienda._cuaa}" 
+			sortColumnId="cuaa"
+            sortAscending="true"
+			line-height="10px" 
+			horizontalGridLines="1px dotted gray"
+			verticalGridLines="1px dotted gray"
+			noDataRowStyle="color: black; text-align: left; font-size: 14px"
+			font-weight="plain"
+			cellpadding="3px"
+			pageSize="100"
+			styleClass="table" >
+			
+			<f:facet name="below">
+	    		<o:dataTablePaginator id="paginator"/>
+	  		</f:facet>
+	  		<f:facet name="noDataMessage">
+    			<h:outputText value="#{searchBean._messageData}" />
+  			</f:facet>
+  			<!-- messaggio se la ricerca in tabella non ritorna risultati -->
+  			<f:facet name="noFilterDataMessage">
+    			<h:outputText value="Nessun dato corrisponde ai parametri di ricerca inseriti" />
+  			</f:facet>
+	  		<o:scrolling horizontal="true"/>
+	  		
+	  		<!-- permette il resizing della colonna -->
+	  		<o:columnResizing resizeHandleWidth="10px" minColWidth="50px"/>
+	  		
+	  		<!-- abilitare selezione singola della riga -->
+	  		<o:singleRowSelection rowData="#{aziendaBean._selectedValue}"/>
+	  		
+	  		<!--  <o:scrolling vertical="true"/>  --> 
+			<o:column id="cuaa" styleClass="tableAziendaRiga"  header="CUAA" width="130pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{azienda._cuaa}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{azienda._cuaa}" />
+			</o:column>
+			
+			<o:column id="ragioneSociale" styleClass="tableAziendaRiga"  header="Ragione Sociale" width="450pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{azienda._ragioneSociale}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{azienda._ragioneSociale}" />	
+			</o:column>
+			
+			<o:column id="provincia" styleClass="tableAziendaRiga"  header="Provincia" width="100pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{azienda._provincia}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{azienda._provincia}" />	
+			</o:column>
+			
+			<o:column id="localita" styleClass="tableAziendaRiga"  header="Localita" width="100pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{azienda._localita}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{azienda._localita}" />	
+			</o:column>
+			
+			<o:column id="sorgente" styleClass="tableAziendaRiga"  header="Sorgente" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{azienda._sorgente}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{azienda._sorgente}" />	
+			</o:column>
+						
+			<o:column id="indirizzo" styleClass="tableAziendaRiga"  header="Indirizzo" width="240pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{azienda._indirizzo}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{azienda._indirizzo}" />	
+			</o:column>
+
+			<o:column id="cap" styleClass="tableAziendaRiga"  header="Cap" width="60pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{azienda._cap}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{azienda._cap}" />	
+			</o:column>
+			
+			<o:column id="pec" styleClass="tableAziendaRiga"  header="Pec" width="110pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{azienda._pec}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{azienda._pec}" />	
+			</o:column>
+		</o:dataTable>
+			
+	    <br/>
+		<h:commandButton action="#{aziendaBean.esportaAzienda}" value="Esporta Dati" id="esportaAzienda"/>
+		<o:popupLayer id="popupAziendaLayer"
+              visible="#{aziendaBean._messageVisible}"
+              hideOnOuterClick="true"
+              hidingTimeout="5000"
+              styleClass="popupStyle"
+              left="200"
+              top="150">
+		  <h:outputText styleClass="popupMessage" value="#{aziendaBean._message}"/>
+		</o:popupLayer>
+	</div>
+
+</div>
+    

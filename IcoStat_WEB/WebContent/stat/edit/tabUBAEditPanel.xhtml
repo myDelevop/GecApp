@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<div  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:o="http://openfaces.org/"
+      xmlns:t="http://myfaces.apache.org/tomahawk" >
+
+	<div>
+		<b><h:outputText value="#{ubaBean._titoloPagina}" escape="true" /></b>
+		<br/><br/>
+		<table>
+			<tr>
+				<td>Campagna:</td>
+				<td>
+					<o:dropDownField id="selectCampagnaUBA"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{ubaBean._uba._campagna}"
+			               listItemStyle="white-space: nowrap;"  
+			               listStyle="height:100px !important;"             
+			               style="width:200px;border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;"
+			               disabled="#{ubaBean._readOnly}">
+						<o:dropDownItems value="#{ubaBean._listCampagna}"/>
+						<o:ajax event="change" render="intervento_id" listener="#{ubaBean.settingIntervento}"/>
+					</o:dropDownField></td>
+			</tr>
+			<tr>
+				<td style="width:250">CUAA:</td>
+				<td><h:inputText value="#{ubaBean._uba._cuaa}" size="30" readonly="#{ubaBean._readOnly}"
+				 style="border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;"
+				/></td>
+			</tr>
+			<tr>
+				<td>Domanda:</td>
+				<td><h:inputText value="#{ubaBean._uba._domanda}" size="30" readonly="#{ubaBean._readOnly}"
+				style="border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;"/></td>
+			</tr>
+			<tr>
+				<td>Intervento:</td>
+				<td><h:inputText value="#{ubaBean._uba._intervento}" size="30" readonly="true" id="intervento_id"
+				style="border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;"/></td>
+			</tr>
+			<tr>
+				<td>Esito:</td>
+				<td>
+					<o:dropDownField id="selectEsitoUBA"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{ubaBean._uba._esito}"
+			               listItemStyle="white-space: nowrap;" 
+			               listStyle="height:100px !important;"              
+			               style="width:200px;">
+						<o:dropDownItems value="#{ubaBean._listEsito}"/>
+					</o:dropDownField>
+				</td>
+			</tr>
+			<tr>
+				<td>UBA Richiesti:</td>
+				<td>
+					<h:inputText value="#{ubaBean._uba._ubaRich}" size="30">
+						<o:ajax event="change" render="uba_diff_edit" listener="#{ubaBean.calcolaDifferenza}"/>
+					</h:inputText>
+				</td>
+			</tr>
+			<tr>
+				<td>UBA Accertati:</td>
+				<td>
+					<h:inputText value="#{ubaBean._uba._ubaAcc}" size="30">
+						<o:ajax event="change" render="uba_diff_edit" listener="#{ubaBean.calcolaDifferenza}"/>
+					</h:inputText>
+				</td>
+			</tr>
+			<tr>
+				<td>Differenza:</td>
+				<td><h:inputText id="uba_diff_edit" value="#{ubaBean._uba._ubaDiff}" size="30" /></td>
+			</tr>
+			<tr>
+				<td>Capi Richiesti:</td>
+				<td><h:inputText value="#{ubaBean._uba._capiRich}" size="30" /></td>
+			</tr>
+			<tr>
+				<td>Capi Accertati:</td>
+				<td><h:inputText value="#{ubaBean._uba._capiAcc}" size="30" /></td>
+			</tr>
+			<tr>
+				<td>Note:</td>
+				<td><h:inputText value="#{ubaBean._uba._note}" size="80" /></td>
+			</tr>
+		</table>
+		<br/>
+		<h:commandButton action="#{ubaBean.salvaUba}" value="Salva" id="salvaUBA"/>
+		<h:outputText value="  " escape="false" />
+		<h:commandButton action="#{ubaBean.annullaUba}" value="Annulla" id="annullaUBA" />
+		<o:popupLayer id="popupUbaEditLayer"
+              visible="#{ubaBean._messageVisible}"
+              hideOnOuterClick="true"
+              hidingTimeout="5000"
+              styleClass="popupStyle"
+              left="200"
+              top="150">
+		  <h:outputText styleClass="popupMessage" value="#{ubaBean._message}"/>
+		</o:popupLayer>
+	</div>
+</div>
+    

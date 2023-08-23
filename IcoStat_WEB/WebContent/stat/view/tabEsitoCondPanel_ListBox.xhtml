@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<div  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:o="http://openfaces.org/"
+      xmlns:t="http://myfaces.apache.org/tomahawk" >
+
+    <table>
+   		<tr>
+   			<td>Selezionare i dati da visualizzare:</td>
+   			<td>
+   				<o:dropDownField id="selectDatiDaVisualizzare"
+		               suggestionMode="custom"
+		               autoComplete="true"
+		               customValueAllowed="false"
+		               value="#{esitoCondBean._datiDaVisualizzare}"
+		               listItemStyle="white-space: nowrap;"               
+		               style="width:280px;">
+					<o:dropDownItems value="#{esitoCondBean._listDatiDaVisualizzare}"/>
+				</o:dropDownField>
+   			</td>
+   			<td>
+   				<h:outputText value="  " escape="false" />
+   				<h:commandButton action="#{esitoCondBean.visualizzaDati}" value="Visualizza Dati"/>
+   			</td>
+   		</tr>
+    </table>		
+    <br/>
+</div>

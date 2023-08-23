@@ -1,0 +1,337 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<div  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:o="http://openfaces.org/"
+      xmlns:t="http://myfaces.apache.org/tomahawk" >
+      
+
+	<div>
+		<b><h:outputText value="Campione per domanda" escape="true" /></b>
+		<br/><br/>		
+		<o:dataTable id="tableCampione" 
+			var="campione" 
+			value ="#{campioneBean.elencoCampione}"
+			
+			line-height="10px" 
+			horizontalGridLines="1px dotted gray"
+			verticalGridLines="1px dotted gray"
+			noDataRowStyle="color: black; text-align: left; font-size: 14px"
+			font-weight="plain"
+			cellpadding="3px"
+			pageSize="100"
+			styleClass="table" >
+			
+			<f:facet name="below">
+	    		<o:dataTablePaginator id="paginator"/>
+	  		</f:facet>
+	  		<f:facet name="noDataMessage">
+    			<h:outputText value="#{searchBean._messageData}" />
+  			</f:facet>
+  			<!-- messaggio se la ricerca in tabella non ritorna risultati -->
+  			<f:facet name="noFilterDataMessage">
+    			<h:outputText value="Nessun dato corrisponde ai parametri di ricerca inseriti" />
+  			</f:facet>
+	  		<o:scrolling horizontal="true"/>
+	  		
+	  		<!-- permette il resizing della colonna -->
+	  		<o:columnResizing resizeHandleWidth="10px" minColWidth="50px"/>
+	  		
+  			<!-- abilitare selezione singola della riga -->
+  			<o:singleRowSelection rowData="#{campioneBean._selectedValue}" rowIndex="#{campioneBean._selectedValueIndex}" />
+	  		
+	  		<!--  <o:scrolling vertical="true"/>  --> 
+			<o:column id="cuaa" styleClass="tableAziendaRiga"  header="CUAA" width="130pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{campione._cuaa}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{campione._cuaa}" />
+			</o:column>
+			
+			<o:column id="campagna" styleClass="tableAziendaRiga"  header="Campagna" width="70pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{campione._campagna}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{campione._campagna}" />	
+			</o:column>
+			
+			<o:column id="domanda" styleClass="tableAziendaRiga"  header="Domanda" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{campione._domanda}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{campione._domanda}" />	
+			</o:column>
+						
+			<o:column id="categoria_camp" styleClass="tableAziendaRiga"  header="Categoria Campione" width="120pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{campione._categoria}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{campione._categoria}" />	
+			</o:column>
+			
+			<o:column id="tipo_camp" styleClass="tableAziendaRiga"  header="Tipo Campione" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{campione._tipo}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{campione._tipo}" />
+			</o:column>
+			
+			<o:column id="data_camp" styleClass="tableAziendaRiga"  header="Data Campione" width="70pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{campione._dataCampioneStr}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{campione._dataCampioneStr}" />	
+			</o:column>
+						
+			<o:column id="camp_cond_dominio" styleClass="tableAziendaRiga"  header="Dominio Campione Cond." width="130pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{campione._dominioCampCond}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{campione._dominioCampCond}" />
+			</o:column>
+			
+			<o:column id="stato_domanda_oppab" styleClass="tableAziendaRiga"  header="Stato Domanda OPPAB" width="110pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{campione._statoDomandaOPPAB}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{campione._statoDomandaOPPAB}" />	
+			</o:column>
+			
+			<o:column id="origine_campione" styleClass="tableAziendaRiga"  header="Origine Campione" width="90pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{campione._origineCampione}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{campione._origineCampione}" />
+			</o:column>
+			
+			<o:column id="bovini_campione" styleClass="tableAziendaRiga"  header="Bovini" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{campione._bovini}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{campione._bovini}" />
+			</o:column>
+			
+			<o:column id="ovicaprini_campione" styleClass="tableAziendaRiga"  header="Ovicaprini" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{campione._ovicaprini}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{campione._ovicaprini}" />
+			</o:column>
+			
+			<o:column id="user_mod_campione" styleClass="tableAziendaRiga"  header="Utente Modifica" width="100pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{campione._userModifica}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{campione._userModifica}" />
+			</o:column>
+			
+			<o:column id="data_mod_campione" styleClass="tableAziendaRiga"  header="Data Modifica" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{campione._dataModificaStr}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{campione._dataModificaStr}" />
+			</o:column>
+			
+			<o:column id="note_campione" styleClass="tableAziendaRiga"  header="Note" width="140pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{campione._note}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{campione._note}" />
+			</o:column>
+			
+		</o:dataTable>
+			
+	    <br/>
+		<h:commandButton action="#{campioneBean.aggiungiCampione}" value="Aggiungi" id="aggiungiCampione" rendered="#{request.isUserInRole('ROLE_WR_CAMP')}"/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_CAMP')}"/>
+		<h:commandButton action="#{campioneBean.modificaCampione}" value="Modifica" id="modificaCampione" rendered="#{request.isUserInRole('ROLE_WR_CAMP')}"/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_CAMP')}"/>
+		<h:commandButton action="#{campioneBean.cancellaCampione}" value="Cancella" id="cancellaCampione" rendered="#{request.isUserInRole('ROLE_WR_CAMP')}">
+			<o:confirmation id="deleteCampioneConfirmation" 
+				message="Cancellare il campione selezionato?"
+				details="" 
+				okButtonText="Si"
+                cancelButtonText="No"
+				draggable="true"/>
+		</h:commandButton>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_CAMP')}"/>
+		<h:commandButton action="#{campioneBean.esportaCampione}" value="Esporta Dati" id="esportaCampione"/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_CAMP')}"/>
+		<h:commandButton action="#{campioneBean.importaCampione}" value="Importa Dati" id="importaCampione" rendered="#{request.isUserInRole('ROLE_WR_CAMP')}"/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_CAMP')}"/>
+		<o:popupLayer id="popupCampioneLayer"
+              visible="#{campioneBean._messageVisible}"
+              hideOnOuterClick="true"
+              hidingTimeout="5000"
+              styleClass="popupStyle"
+              left="200"
+              top="150">
+		  <h:outputText styleClass="popupMessage" value="#{campioneBean._message}"/>
+		</o:popupLayer>
+	</div>
+	<br/><br/>
+	<div>
+		<b><h:outputText value="Dati generici del controllo per azienda" escape="true" /></b>
+		<br/><br/>		
+		<o:dataTable id="tableControllo" 
+			var="controllo" 
+			value ="#{controlloBean.elencoControllo}"
+			rowKey="#{controllo._cuaa}" 
+			
+			line-height="10px" 
+			horizontalGridLines="1px dotted gray"
+			verticalGridLines="1px dotted gray"
+			noDataRowStyle="color: black; text-align: left; font-size: 14px"
+			font-weight="plain"
+			cellpadding="3px"
+			pageSize="100"
+			styleClass="table" >
+			
+			<!-- per ogni colonna crea un menu per l'ordinamento e la scomparsa delle colonne -->
+			<!-- 
+			<f:facet name="columnMenu">
+		      <o:columnMenu indentStyle="color: yellow">
+		        <o:sortAscendingMenuItem/>
+		        <o:sortDescendingMenuItem/>
+		        <o:hideColumnMenuItem/>
+		        <o:menuSeparator/>
+		        <o:menuItem value="Columns">
+		          <o:columnVisibilityMenu/>
+		        </o:menuItem>
+		        <o:menuSeparator/>
+		        <o:menuItem value="Select Column" onclick="selectColumn(O$('form:fileExcel').getCurrentColumn().index);"/>
+		        <o:menuItem value="Unselect Column" onclick="unselectColumn(O$('form:fileExcel').getCurrentColumn().index);"/>
+		      </o:columnMenu>
+		    </f:facet>
+    		 -->
+    
+			<f:facet name="below">
+	    		<o:dataTablePaginator id="paginator"/>
+	  		</f:facet>
+	  		<f:facet name="noDataMessage">
+    			<h:outputText value="#{searchBean._messageData}" />
+  			</f:facet>
+  			<!-- messaggio se la ricerca in tabella non ritorna risultati -->
+  			<f:facet name="noFilterDataMessage">
+    			<h:outputText value="Nessun dato corrisponde ai parametri di ricerca inseriti" />
+  			</f:facet>
+	  		<o:scrolling horizontal="true"/>
+	  		
+	  		<!-- permette il resizing della colonna -->
+	  		<o:columnResizing resizeHandleWidth="10px" minColWidth="50px"/>
+	  		
+  			<!-- abilitare selezione singola della riga -->
+  			<o:singleRowSelection rowData="#{controlloBean._selectedValue}"/>
+	  		
+	  		<!--  <o:scrolling vertical="true"/>  --> 
+			<o:column id="cuaaControllo" styleClass="tableAziendaRiga"  header="CUAA" width="130pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{controllo._cuaa}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{controllo._cuaa}" />
+			</o:column>
+			
+			<o:column id="campagnaControllo" styleClass="tableAziendaRiga"  header="Campagna" width="70pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{controllo._campagna}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{controllo._campagna}" />
+			</o:column>
+			
+			<o:column id="dataInizioControllo" styleClass="tableAziendaRiga"  header="Data Inizio Controllo" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{controllo._data_inizio_controlloStr}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{controllo._data_inizio_controlloStr}" />
+			</o:column>
+			
+			<o:column id="dataFineControllo" styleClass="tableAziendaRiga"  header="Data Fine Controllo" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{controllo._data_fine_controlloStr}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{controllo._data_fine_controlloStr}" />
+			</o:column>
+			
+			<o:column id="controlloreControllo" styleClass="tableAziendaRiga"  header="Controllore" width="140pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{controllo._controllore}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{controllo._controllore}" />
+			</o:column>
+			
+			<o:column id="tipoControllo" styleClass="tableAziendaRiga"  header="Tipo Controllo" width="180pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{controllo._tipo_controllo}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{controllo._tipo_controllo}" />	
+			</o:column>
+			
+			<o:column id="dataPreavvisoControllo" styleClass="tableAziendaRiga"  header="Data Preavviso" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{controllo._data_preavvisoStr}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{controllo._data_preavvisoStr}" />
+			</o:column>
+			
+			<o:column id="tipoPreavvisoControllo" styleClass="tableAziendaRiga"  header="Tipo Preavviso" width="90pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{controllo._tipoPreavviso}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{controllo._tipoPreavviso}" />	
+			</o:column>
+			
+			<o:column id="personaPresenteControllo" styleClass="tableAziendaRiga"  header="Persona Presente" width="100pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{controllo._personaPresente}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{controllo._personaPresente}" />
+			</o:column>
+			
+			<o:column id="nomeDelegatoControllo" styleClass="tableAziendaRiga"  header="Nome Delegato" width="130pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{controllo._nomeDelegato}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{controllo._nomeDelegato}" />	
+			</o:column>
+			
+			<o:column id="numeroDocumentoDelegatoControllo" styleClass="tableAziendaRiga"  header="Numero Documento Delegato" width="100pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{controllo._numeroDocumento}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{controllo._numeroDocumento}" />
+			</o:column>
+			
+		</o:dataTable>
+			
+	    <br/>
+		<h:commandButton action="#{controlloBean.aggiungiControllo}" value="Aggiungi" id="aggiungiControllo" rendered="#{request.isUserInRole('ROLE_WR_CAMP')}"/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_CAMP')}"/>
+		<h:commandButton action="#{controlloBean.modificaControllo}" value="Modifica" id="modificaControllo" rendered="#{request.isUserInRole('ROLE_WR_CAMP')}"/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_CAMP')}"/>
+		<h:commandButton action="#{controlloBean.cancellaControllo}" value="Cancella" id="cancellaControllo" rendered="#{request.isUserInRole('ROLE_WR_CAMP')}">
+			<o:confirmation id="deleteControlloConfirmation" 
+				message="Cancellare il controllo selezionato?"
+				details="" 
+				okButtonText="Si"
+                cancelButtonText="No"
+				draggable="true"/>
+		</h:commandButton>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_CAMP')}"/>
+		<h:commandButton action="#{controlloBean.esportaControllo}" value="Esporta Dati" id="esportaControllo" />
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_CAMP')}"/>
+		<h:commandButton action="#{controlloBean.importaControllo}" value="Importa Dati" id="importaControllo" rendered="#{request.isUserInRole('ROLE_WR_CAMP')}"/>
+		<o:popupLayer id="popupControlloLayer"
+              visible="#{controlloBean._messageVisible}"
+              hideOnOuterClick="true"
+              hidingTimeout="5000"
+              styleClass="popupStyle"
+              left="200"
+              top="150">
+		  <h:outputText styleClass="popupMessage" value="#{controlloBean._message}"/>
+		</o:popupLayer>
+	</div>
+	
+	
+	
+</div>
+    

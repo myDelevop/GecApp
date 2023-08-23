@@ -1,0 +1,19 @@
+<!-- Generate a java class with the current svn revision number -->
+
+<project>
+    <echo>Generate build info class...</echo>
+    <tstamp>
+        <format property="TODAY" pattern="EEE, d-MMMM-yyyy HH:mm:ss z" locale="ENGLISH, GERMANY"/>
+      </tstamp>
+    <echo>Virtual PVT Cell Revision: ${svn.revision}</echo>
+    <echo>Time stamp ${TODAY}</echo>
+    <echo>Write build info to file ${basedir}\BuildInfo.java</echo>
+    <!-- the source code of the java class -->
+    <echo file="${basedir}\..\it\bz\prov\esiti\util\BuildInfo.java">
+		package it.bz.prov.esiti.util;
+		public class BuildInfo {
+		    public static final String revisionNumber="${svn.revision}";
+		    public static final String timeStamp="${TODAY}";
+		}
+    </echo>
+</project>

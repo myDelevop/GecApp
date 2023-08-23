@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:o="http://openfaces.org/" >
+  	
+	<h:form>
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+		<br/><br/>	
+		<b>
+			<h:outputText value="Esito complessivo operazione: " escape="false" />
+			<h:outputText value="#{uploadBean._esitoComplessivo}" escape="false" style="#{uploadBean._styleEsitoComplessivo}"/>
+		</b>
+		<br/><br/>	
+		<b><h:outputText value="Log dell'esecuzione" escape="true" /></b>
+		<br/>
+		<h:panelGroup  id="logDiv" styleClass="logTable">
+			<o:dataTable id="logUpload" var="log" value="#{uploadBean._logList}"
+					style="border: 0px;"                         
+					bodySectionStyle="padding-top: 3px; padding-bottom: 3px;">
+					
+				<o:column bodyStyle="padding: 5px 5px 5px 5px;">
+		  			<h:outputText value="#{log}" escape="false" style="color: #484848; display: block;"/>
+		    	</o:column>
+		  </o:dataTable>
+		</h:panelGroup>
+		<br/>
+		<h:commandButton value="Pagina Precedente" action="#{uploadBean.goBack}"/>
+		<h:outputText value="  " escape="false"/>	
+		<h:commandButton value="Esporta Log" action="#{uploadBean.esportaLog}"/>
+	</h:form>	
+</html>

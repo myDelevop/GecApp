@@ -1,0 +1,285 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<div xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:f="http://java.sun.com/jsf/core"
+     xmlns:o="http://openfaces.org/"
+     xmlns:ui="http://java.sun.com/jsf/facelets">
+     
+		<h:form id="selectionAnagrafica" enctype="multipart/form-data">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+      	<p>Selezionare l'anagrafica da modificare:</p>
+      	<table>
+      		<tr>
+      			<td>
+      				<o:dropDownField id="selectAnagrafica"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{anagraficheBean.anagrafica}"
+			               listItemStyle="white-space: nowrap;"               
+			               style="width:280px;">
+						<o:dropDownItems value="#{anagraficheBean.listAnagrafiche}"/>
+					</o:dropDownField>
+      			</td>
+      			<td>
+      				<h:outputText value="  " escape="false" />
+      				<h:commandButton action="#{anagraficheBean.visualizzaValori}" value="Visualizza"/>
+      			</td>
+      		</tr>
+      	</table>
+		
+		
+		<br/>
+		<p>Lista dei valori:</p>
+		<br/>
+		<o:dataTable id="tableAnagrafica" 
+				var="valoreAnagrafica" 
+				value ="#{anagraficheBean.listValori}"
+				line-height="10px" 
+				horizontalGridLines="1px dotted gray"
+				verticalGridLines="1px dotted gray"
+				noDataRowStyle="color: black; text-align: left; font-size: 14px"
+				font-weight="plain"
+				cellpadding="3px"
+				pageSize="100"
+				styleClass="table"
+				rendered="#{anagraficheBean._isSelectedAttiCond == 'false'}"
+				 >
+				
+			<!-- per ogni colonna crea un menu per l'ordinamento e la scomparsa delle colonne -->
+			<!-- 
+			<f:facet name="columnMenu">
+		      <o:columnMenu indentStyle="color: yellow">
+		        <o:sortAscendingMenuItem/>
+		        <o:sortDescendingMenuItem/>
+		        <o:hideColumnMenuItem/>
+		        <o:menuSeparator/>
+		        <o:menuItem value="Columns">
+		          <o:columnVisibilityMenu/>
+		        </o:menuItem>
+		        <o:menuSeparator/>
+		        <o:menuItem value="Select Column" onclick="selectColumn(O$('form:fileExcel').getCurrentColumn().index);"/>
+		        <o:menuItem value="Unselect Column" onclick="unselectColumn(O$('form:fileExcel').getCurrentColumn().index);"/>
+		      </o:columnMenu>
+		    </f:facet>
+    		 -->
+    
+			<f:facet name="below">
+	    		<o:dataTablePaginator id="paginator"/>
+	  		</f:facet>
+	  		<f:facet name="noDataMessage">
+    			<h:outputText value="Nessun dato caricato" />
+  			</f:facet>
+	  		<o:scrolling horizontal="true"/>
+	  		
+	  		<!-- permette il resizing della colonna -->
+	  		<o:columnResizing resizeHandleWidth="10px" minColWidth="50px"/>
+	  		
+	  		<!-- abilitare selezione singola della riga -->
+	  		<o:singleRowSelection rowData="#{anagraficheBean._selectedValue}"/>
+	  		
+			<o:column id="valore" styleClass="tableAziendaRiga"  header="Valore" width="700pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{valoreAnagrafica._valore}"
+            		sortingComparator="caseInsensitiveText">
+            	
+				<h:outputText value="#{valoreAnagrafica._valore}" 
+					rendered="#{anagraficheBean._action=='visualizza' or (anagraficheBean._action=='modifica' and 
+					anagraficheBean._selectedValue._valore!=valoreAnagrafica._valore) or 
+					(anagraficheBean._action=='aggiungi' and valoreAnagrafica._valore!='')}"/>
+					
+				<h:inputText value="#{valoreAnagrafica._valore}" size="150"
+					rendered="#{(anagraficheBean._action=='modifica' and 
+					anagraficheBean._selectedValue._valore==valoreAnagrafica._valore) or 
+					(anagraficheBean._action=='aggiungi' and 
+					anagraficheBean._selectedValue._valore==valoreAnagrafica._valore)}" />	
+			</o:column>
+			
+			<o:column id="campagnaInizioVal" styleClass="tableAziendaRiga"  header="Capagna di Inizio validità" width="120pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{valoreAnagrafica._campagnaInizioVal}"
+            		sortingComparator="caseInsensitiveText">
+            	
+				<h:outputText value="#{valoreAnagrafica._campagnaInizioVal}" 
+					rendered="#{anagraficheBean._action=='visualizza' or (anagraficheBean._action=='modifica' and 
+					anagraficheBean._selectedValue._valore!=valoreAnagrafica._valore) or 
+					(anagraficheBean._action=='aggiungi' and valoreAnagrafica._valore!='')}"/>
+				<o:dropDownField id="selectCampagnainizioValAnagr"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{valoreAnagrafica._campagnaInizioVal}"
+			               listItemStyle="white-space: nowrap;"               
+			               style="width:90px;"
+			               rendered="#{(anagraficheBean._action=='modifica' and 
+										anagraficheBean._selectedValue._valore==valoreAnagrafica._valore) or 
+										(anagraficheBean._action=='aggiungi' and 
+										anagraficheBean._selectedValue._valore==valoreAnagrafica._valore)}"  >
+						<o:dropDownItems value="#{anagraficheBean._listCampagna}"/>
+					</o:dropDownField>
+			</o:column>
+		</o:dataTable>
+		
+		<!-- tabella per la visualizzazione dell'anagrafica dei codici di condizionalità -->
+		<o:dataTable id="tableCodiciAttiCond" 
+				var="atto" 
+				value ="#{anagraficheBean._listAtto}"
+				line-height="10px" 
+				horizontalGridLines="1px dotted gray"
+				verticalGridLines="1px dotted gray"
+				noDataRowStyle="color: black; text-align: left; font-size: 14px"
+				font-weight="plain"
+				cellpadding="3px"
+				pageSize="100"
+				styleClass="table"
+				rendered="#{anagraficheBean._isSelectedAttiCond == 'true'}"
+				 >
+	
+			<f:facet name="below">
+	    		<o:dataTablePaginator id="paginator"/>
+	  		</f:facet>
+	  		<f:facet name="noDataMessage">
+    			<h:outputText value="Nessun dato caricato" />
+  			</f:facet>
+	  		<o:scrolling horizontal="true"/>
+	  		
+	  		<!-- permette il resizing della colonna -->
+	  		<o:columnResizing resizeHandleWidth="10px" minColWidth="50px"/>
+	  		
+	  		<!-- abilitare selezione singola della riga -->
+	  		<o:singleRowSelection rowData="#{anagraficheBean._selectedValueAtto}"/>
+	  		
+	  		<!--  <o:scrolling vertical="true"/>  --> 
+			<o:column id="codiceCondizionalita" styleClass="tableAziendaRiga"  header="Codice Condizionalità" width="90pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{atto._codCond}"
+            		sortingComparator="caseInsensitiveText">
+            	
+				<h:outputText value="#{atto._codCond}" 
+					rendered="#{anagraficheBean._action=='visualizza' or (anagraficheBean._action=='modifica' and 
+					anagraficheBean._selectedValueAtto._attoCond!= atto._attoCond) or 
+					(anagraficheBean._action=='aggiungi' and atto._attoCond!='')}"/>
+				<h:inputText value="#{atto._codCond}" size="10"
+					rendered="#{(anagraficheBean._action=='modifica' and 
+					anagraficheBean._selectedValueAtto._attoCond==atto._attoCond) or 
+					(anagraficheBean._action=='aggiungi' and 
+					anagraficheBean._selectedValueAtto._attoCond==atto._attoCond)}" />
+			</o:column>
+			
+			<o:column id="attoCondizionalita" styleClass="tableAziendaRiga"  header="Atto Condizionalità" width="90pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{atto._attoCond}"
+            		sortingComparator="caseInsensitiveText">
+            	
+				<h:outputText value="#{atto._attoCond}" 
+					rendered="#{anagraficheBean._action=='visualizza' or (anagraficheBean._action=='modifica' and 
+					anagraficheBean._selectedValueAtto._attoCond!=atto._attoCond) or 
+					(anagraficheBean._action=='aggiungi' and atto._attoCond!='')}"/>
+				<h:inputText value="#{atto._attoCond}" size="10"
+					rendered="#{(anagraficheBean._action=='modifica' and 
+					anagraficheBean._selectedValueAtto._attoCond==atto._attoCond) or 
+					(anagraficheBean._action=='aggiungi' and 
+					anagraficheBean._selectedValueAtto._attoCond==atto._attoCond)}" />	
+			</o:column>
+			
+			<o:column id="attoCondizionalitaDescr" styleClass="tableAziendaRiga"  
+					header="Descrizione Atto Condizionalità" 
+					width="500pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{atto._attoDescr}"
+            		sortingComparator="caseInsensitiveText">
+            	
+				<h:outputText value="#{atto._attoDescr}" 
+					rendered="#{anagraficheBean._action=='visualizza' or (anagraficheBean._action=='modifica' and 
+					anagraficheBean._selectedValueAtto._attoDescr!=atto._attoDescr) or 
+					(anagraficheBean._action=='aggiungi' and atto._attoDescr!='')}"/>
+				<h:inputText value="#{atto._attoCond}" size="105"
+					rendered="#{(anagraficheBean._action=='modifica' and 
+					anagraficheBean._selectedValueAtto._attoDescr==atto._attoDescr) or 
+					(anagraficheBean._action=='aggiungi' and 
+					anagraficheBean._selectedValueAtto._attoDescr==atto._attoDescr)}" />	
+			</o:column>
+			
+			<o:column id="campagnaInizio" styleClass="tableAziendaRiga"  
+					header="Campagna Inizio" 
+					width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{atto._campagnaInizio}"
+            		sortingComparator="caseInsensitiveText">
+            	
+				<h:outputText value="#{atto._campagnaInizio}" 
+					rendered="#{anagraficheBean._action=='visualizza' or (anagraficheBean._action=='modifica' and 
+					anagraficheBean._selectedValueAtto._attoDescr!=atto._attoDescr) or 
+					(anagraficheBean._action=='aggiungi' and atto._attoDescr!='')}"/>
+				<h:inputText value="#{atto._campagnaInizio}" size="80"
+					rendered="#{(anagraficheBean._action=='modifica' and 
+					anagraficheBean._selectedValueAtto._attoDescr==atto._attoDescr) or 
+					(anagraficheBean._action=='aggiungi' and 
+					anagraficheBean._selectedValueAtto._attoDescr==atto._attoDescr)}" />	
+			</o:column>
+			
+			<o:column id="campagnaFine" styleClass="tableAziendaRiga"  
+					header="Campagna Fine" 
+					width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{atto._campagnaFine}"
+            		sortingComparator="caseInsensitiveText">
+            	
+				<h:outputText value="#{atto._campagnaFine}" 
+					rendered="#{anagraficheBean._action=='visualizza' or (anagraficheBean._action=='modifica' and 
+					anagraficheBean._selectedValueAtto._attoDescr!=atto._attoDescr) or 
+					(anagraficheBean._action=='aggiungi' and atto._attoDescr!='')}"/>
+				<h:inputText value="#{atto._campagnaFine}" size="80"
+					rendered="#{(anagraficheBean._action=='modifica' and 
+					anagraficheBean._selectedValueAtto._attoDescr==atto._attoDescr) or 
+					(anagraficheBean._action=='aggiungi' and 
+					anagraficheBean._selectedValueAtto._attoDescr==atto._attoDescr)}" />	
+			</o:column>
+			
+			<o:column id="flgValida" styleClass="tableAziendaRiga"  
+					header="Flag Valida" 
+					width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{atto._flg_valida}"
+            		sortingComparator="caseInsensitiveText">
+            	
+				<h:outputText value="#{atto._flg_valida}" 
+					rendered="#{anagraficheBean._action=='visualizza' or (anagraficheBean._action=='modifica' and 
+					anagraficheBean._selectedValueAtto._attoDescr!=atto._attoDescr) or 
+					(anagraficheBean._action=='aggiungi' and atto._attoDescr!='')}"/>
+				<h:inputText value="#{atto._flg_valida}" size="80"
+					rendered="#{(anagraficheBean._action=='modifica' and 
+					anagraficheBean._selectedValueAtto._attoDescr==atto._attoDescr) or 
+					(anagraficheBean._action=='aggiungi' and 
+					anagraficheBean._selectedValueAtto._attoDescr==atto._attoDescr)}" />	
+			</o:column>
+			
+		</o:dataTable>
+		
+		<br/>
+		<h:commandButton action="#{anagraficheBean.aggiungiValore}" value="Aggiungi" id="aggiungi" rendered="#{anagraficheBean._aggiungiVisible == 'true'}" />
+		<h:outputText value="  " escape="false" />
+		<h:commandButton action="#{anagraficheBean.modificaValore}" value="Modifica" id="modifica" rendered="#{anagraficheBean._modificaVisible == 'true'}" />
+		<h:outputText value="  " escape="false" />
+		<h:commandButton action="#{anagraficheBean.cancellaValore}" value="Cancella" id="cancella" rendered="#{anagraficheBean._cancellaVisible == 'true'}" >
+			<o:confirmation id="deleteAnagraficaConfirmation" 
+				message="Cancellare la riga selezionata selezionata?"
+				details="" 
+				okButtonText="Si"
+                cancelButtonText="No"
+				draggable="true"/>
+		</h:commandButton>
+		<h:outputText value="  " escape="false" />
+		<h:commandButton action="#{anagraficheBean.salva}" value="Salva" id="salva" rendered="#{anagraficheBean._salvaVisible == 'true'}" />
+		<h:outputText value="  " escape="false" />
+		<h:commandButton action="#{anagraficheBean.annulla}" value="Annulla" id="annulla" rendered="#{anagraficheBean._annullaVisible == 'true'}" />
+		<o:popupLayer id="popupAnagraficheLayer"
+              visible="#{anagraficheBean._messageVisible}"
+              hideOnOuterClick="true"
+              hidingTimeout="5000"
+              styleClass="popupStyle"
+              left="300"
+              top="300">
+		  <h:outputText styleClass="popupMessage" value="#{anagraficheBean._message}"/>
+		</o:popupLayer>
+		</h:form>
+</div>

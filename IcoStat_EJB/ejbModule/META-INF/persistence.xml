@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+		http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0">
+	
+	<!-- <persistence-unit name="jpa_definition" transaction-type="RESOURCE_LOCAL"> -->
+	<persistence-unit name="jpa_definition" transaction-type = "JTA">
+	<provider>org.hibernate.ejb.HibernatePersistence</provider>  
+		<!-- <jta-data-source>java:jboss/datasources/OPPAB_GESTIONE_ESITI_DS_DEV</jta-data-source> -->
+		<!-- <jta-data-source>java:jboss/datasources/OPPAB_GESTIONE_ESITI_DS_DEMO</jta-data-source> -->
+		<!-- <jta-data-source>java:jboss/datasources/OPPAB_GESTIONE_ESITI_DS_PROD</jta-data-source> -->
+		<jta-data-source>java:jboss/datasources/EsitoControlliDS</jta-data-source>
+		<class>it.bz.prov.esiti.entity.EsitoImpegni</class>
+		<class>it.bz.prov.esiti.entity.EsitoImpegniExtra</class>
+		<class>it.bz.prov.esiti.entity.EsitoImpegniRMFITFER</class>
+		<class>it.bz.prov.esiti.entity.EsitoImpegniRMFITFERExtra</class>
+		<class>it.bz.prov.esiti.entity.Campione</class>
+		<class>it.bz.prov.esiti.entity.TutelaAcque</class>
+		<class>it.bz.prov.esiti.entity.EsitoSuperfici</class>
+		<class>it.bz.prov.esiti.entity.EsitoCondizionalita</class>
+		<class>it.bz.prov.esiti.entity.EsitoCondizionalitaAtto</class>
+		<class>it.bz.prov.esiti.entity.Uba</class>
+		<class>it.bz.prov.esiti.entity.UBAAmmissibilita</class>
+		<class>it.bz.prov.esiti.entity.ValoreAnagrafica</class>
+		<class>it.bz.prov.esiti.entity.Azienda</class>
+		<class>it.bz.prov.esiti.entity.Domanda</class>
+		<class>it.bz.prov.esiti.entity.Sottointervento</class>
+		<class>it.bz.prov.esiti.entity.Controllo</class>
+		<class>it.bz.prov.esiti.entity.AttoCondizionalita</class>
+		<class>it.bz.prov.esiti.entity.Utente</class>
+		<class>it.bz.prov.esiti.entity.MatrAmmIdeale</class>		
+		<class>it.bz.prov.esiti.entity.CampioneAggr</class>		
+		<class>it.bz.prov.esiti.entity.EsitoZootecniaStato</class>
+		<class>it.bz.prov.esiti.entity.EsitoZootecniaEsitoAmmBov</class>
+		<class>it.bz.prov.esiti.entity.EsitoZootecniaEsitoAmmOvi</class>
+		<class>it.bz.prov.esiti.entity.EsitoZootecniaControlloAmmBov</class>
+		<class>it.bz.prov.esiti.entity.EsitoZootecniaControlloAmmOvi</class>
+		<class>it.bz.prov.esiti.entity.EsitoZootecniaControlloCond</class>
+		<class>it.bz.prov.esiti.entity.EsitoArt68</class>
+		<class>it.bz.prov.esiti.entity.Settings</class>
+		
+		<properties>
+			<property name= "hibernate.dialect" value = "it.bz.prov.esiti.util.OracleCustomDialect"/>
+			<property name = "hibernate.show_sql" value = "false" />
+			<property name= "hibernate.transaction.jta.platform" value = "JBossAS" />
+		</properties>
+	</persistence-unit>
+</persistence>

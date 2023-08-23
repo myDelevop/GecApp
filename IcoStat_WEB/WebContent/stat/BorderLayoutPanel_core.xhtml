@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<div xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:f="http://java.sun.com/jsf/core"
+     xmlns:o="http://openfaces.org/"
+     xmlns:ui="http://java.sun.com/jsf/facelets">
+
+  <div id="Demo">
+  
+	<h:form id="GestioneEsiti" accept-charset="utf-8">
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    <o:borderLayoutPanel id="borderLayoutPanel" style="width: 100%; border: 0px none; height: 1350px;">
+     
+      <o:sidePanel alignment="left" size="23%" resizable="false" splitterStyle="border: 0px none" 
+      			collapsible="false" style="width: 100%; border-right:0px none;">
+      		<f:facet name="caption">
+      		Ricerca
+      		</f:facet>
+        	<ui:insert name="searchPane">
+	        	<ui:include src="../stat/searchPanel.xhtml"/>
+	    	</ui:insert>
+      </o:sidePanel>
+      
+      <o:sidePanel alignment="right" size="77%" resizable="false" splitterStyle="border: 0px none" 
+      			collapsible="false" style="width: 100%;border:0px none;">
+        	<ui:insert name="pageBody">
+        		 <ui:include src="../stat/Panel.xhtml"/>   
+	    	</ui:insert>
+      </o:sidePanel>
+    </o:borderLayoutPanel>
+    </h:form>
+  </div>
+</div>

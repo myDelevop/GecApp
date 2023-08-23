@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<div  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:o="http://openfaces.org/"
+      xmlns:t="http://myfaces.apache.org/tomahawk" >
+
+	<div>
+		<b><h:outputText value="#{esitoCondBean._titoloPagina}" escape="true" /></b>
+		<br/><br/>
+		<table>
+			<tr>
+				<td>Campagna:</td>
+				<td><o:dropDownField id="selectCampagnaCond"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{esitoCondBean._esito._campagna}"
+			               listItemStyle="white-space: nowrap;"      
+			               listStyle="height:100px !important;"         
+			               style="width:200px;border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;"
+			               disabled="#{esitoCondBean._readOnly}">
+						<o:dropDownItems value="#{esitoCondBean._listCampagna}"/>
+						<o:ajax event="change" render="dataControllo" listener="#{esitoCondBean.aggiornaDati}"/>
+					</o:dropDownField></td>
+			</tr>
+			<tr>
+				<td style="width:250">CUAA:</td>
+				<td>
+					<h:inputText value="#{esitoCondBean._esito._cuaa}" size="30" readonly="#{esitoCondBean._readOnly}"			               
+						style="border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;">
+						<o:ajax event="change" render="dataControllo" listener="#{esitoCondBean.aggiornaDati}"/>
+					</h:inputText>
+				</td>
+			</tr>	
+			<tr>
+				<td style="width:250">Data Controllo:</td>
+				<td>
+					<o:dateChooser id="dataControllo"
+                             pattern="dd/MM/yyyy"
+                             value="#{esitoCondBean._esito._dataControllo}"
+                             locale="it_IT"
+                             todayText="Oggi"
+                             noneText="Nessuno"
+                             headerStyle="background: white; color: black;"
+                             daysHeaderStyle="background: #20386b; color: white;"
+                             dayStyle="border: 1px solid white;"
+                             rolloverDayStyle="border: 1px solid #f7a902; background: white; color: black;"
+                             rolloverWeekendDayStyle="border: 1px solid #f7a902; background: white; color: #ff8a00;"
+                             selectedDayStyle="border: 1px solid #20386b; color: #20386b; background: white;"
+                             weekendDayStyle="color: #ff8a00;"
+                             footerStyle="background: white; color: black; border-top: 1px solid #20386b;"
+                             style="width: 200px!important;"
+                             typingAllowed="false"
+                             />
+
+            	</td>
+			</tr>
+			<tr>
+				<td style="width:250">Esito Finale:</td>
+				<td><o:dropDownField id="selectEsitoFinaleCond"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{esitoCondBean._esito._esitoFinale}"
+			               listStyle="height:100px !important;"
+			               listItemStyle="white-space: nowrap;"               
+			               style="width:200px;">
+						<o:dropDownItems value="#{esitoCondBean._listEsito}"/>
+					</o:dropDownField></td>
+			</tr>
+			<tr>
+				<td>Perc. Rid. PSR:</td>
+				<td><h:inputText value="#{esitoCondBean._esito._ridPercPSR}" size="30">
+					<o:ajax event="keypress" render="inputPercRidDU" listener="#{esitoCondBean.aggiornaPercRidDU}"/> 
+				</h:inputText>
+				</td>
+			</tr>
+			<tr>
+				<td>Perc. Rid. DU:</td>
+				<td><h:inputText id="inputPercRidDU" value="#{esitoCondBean._esito._ridPercDU}" size="30" /></td>
+			</tr>
+			<tr>
+				<td>Stato:</td>
+				<td><o:dropDownField id="selectStatoCond"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{esitoCondBean._esito._stato}"
+			               listStyle="height:100px !important;"
+			               listItemStyle="white-space: nowrap;"               
+			               style="width:200px;">
+						<o:dropDownItems value="#{esitoCondBean._listStato}"/>
+					</o:dropDownField></td>
+			</tr>
+			<tr>
+				<td>Numero Decreto:</td>
+				<td><h:inputText value="#{esitoCondBean._esito._numero_decreto}" size="50" /></td>
+			</tr>
+			<tr>
+				<td>Data Decreto:</td>
+				<td>
+					<o:dateChooser id="dataDecreto"
+                             pattern="dd/MM/yyyy"
+                             value="#{esitoCondBean._esito._data_decreto}"
+                             locale="it_IT"
+                             todayText="Oggi"
+                             noneText="Nessuna Data"
+                             headerStyle="background: white; color: black;"
+                             daysHeaderStyle="background: #20386b; color: white;"
+                             dayStyle="border: 1px solid white;"
+                             rolloverDayStyle="border: 1px solid #f7a902; background: white; color: black;"
+                             rolloverWeekendDayStyle="border: 1px solid #f7a902; background: white; color: #ff8a00;"
+                             selectedDayStyle="border: 1px solid #20386b; color: #20386b; background: white;"
+                             weekendDayStyle="color: #ff8a00;"
+                             footerStyle="background: white; color: black; border-top: 1px solid #20386b;"
+                             style="width: 200px!important;"
+                             typingAllowed="false"
+                             />
+				</td>
+			</tr>
+			<tr>
+				<td>Note Decreto:</td>
+				<td><h:inputText value="#{esitoCondBean._esito._note_decreto}" size="80" /></td>
+			</tr>
+			<tr>
+				<td>Note:</td>
+				<td><h:inputText value="#{esitoCondBean._esito._note}" size="80" /></td>
+			</tr>
+		</table>
+		<br/>
+			
+	    
+	    <div style="display:#{esitoCondBean._showMessageDataControllo}">
+			ATTENZIONE: Data Controllo reperita dal Controllo. Bisogna salvare per rendere le modifiche permanenti.
+		</div>
+		<br/>
+		<br/>
+		<h:commandButton action="#{esitoCondBean.salvaEsito}" value="Salva" id="salvaEsitoCond"/>
+		<h:outputText value="  " escape="false" />
+		<h:commandButton action="#{esitoCondBean.annullaEsito}" value="Annulla" id="annullaEsitoCond"/>
+		<o:popupLayer id="popupEsitoCondEditLayer"
+              visible="#{esitoCondBean._messageVisible}"
+              hideOnOuterClick="true"
+              hidingTimeout="5000"
+              styleClass="popupStyle"
+              left="200"
+              top="150">
+		  <h:outputText styleClass="popupMessage" value="#{esitoCondBean._message}"/>
+		</o:popupLayer>
+	</div>
+
+</div>
+    

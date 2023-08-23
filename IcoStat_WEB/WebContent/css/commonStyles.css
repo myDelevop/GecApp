@@ -1,0 +1,167 @@
+/*
+ * Gestione degli stili 
+ * @author: Barbara Pettazzoni
+ */
+
+#mainPageStyle{
+	width: 100%;
+	align: center;
+	margin-left: 0%;
+}
+
+.headerFooterImages{
+	width:100%;
+	height: 70%;
+}
+
+/****************************************
+ * 			MENU BAR
+ *****************************************/
+
+.buttonAdmin {
+	margin-right: 55%;
+}
+
+.titoloApplMenuBar {
+	font-size: 14pt;
+	font-weight: bold;
+	margin-right: 30%;
+}
+
+/****************************************
+ * 			PANNELLO DI RICERCA
+ *****************************************/
+
+.searchInputText {
+	width:150px;
+}
+
+.ui-corner-all {
+	border-radius: 0px 0px 0px 0px !important;
+	border-color: gray;	
+}
+
+.ui-autocomplete {
+	width: 155px;
+	font-size: 13px;
+}
+
+.ui-inputfield.ui-state-focus {
+	box-shadow: none !important;
+}
+
+.ui-datalist .ui-datalist-content {
+        border:0 none
+}
+
+.ui-datalist ul {
+    padding: 0px 10px 0 20px;
+    margin: 5px 0;
+}
+
+.value {
+    font-weight: bold;
+}
+
+.ui-autocomplete-itemtip {
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+}
+    
+/****************************************
+ * 			TABELLA
+ *****************************************/
+ 
+.tableAzienda .tableEsitoImpegni {
+	border: 1px solid #f6f7f8;
+	border-bottom-color: #e0e0e0;
+	font-size: 12px;	
+}
+
+.tableAziendaRiga {
+	text-align: left;
+}
+
+.rowSeparator {
+	padding-bottom:1em;
+}
+
+
+/****************************************
+ * 			TAB DOMANDA
+ *****************************************/
+
+.tableDomanda {
+	border: 1px solid #f6f7f8;
+	border-bottom-color: #e0e0e0;
+	font-size: 12px;	
+}
+
+.tableDomandaRiga {
+	text-align: left;
+}
+
+/****************************************
+ * 			TAB IMPEGNI
+ *****************************************/
+
+ .tableImpegni {
+	border: 1px solid #f6f7f8;
+	border-bottom-color: #e0e0e0;
+	font-size: 12px;	
+}
+
+.tableImpegniRiga {
+	text-align: left;
+}
+
+
+/****************************************
+ * 			TABELLA
+ *****************************************/
+
+ .table {
+	border: 1px solid #f6f7f8;
+	border-bottom-color: #e0e0e0;
+	font-size: 12px;	
+}
+
+/****************************************
+ * 			POPUP LAYER - MESSAGGI
+ *****************************************/
+ 
+ .popupMessage 
+ {
+	color: #d46400;
+	padding: 3em; 
+	font-size: 20px;
+ }
+
+ .popupStyle 
+ {
+ 	background: #fff;
+ 	text-align: center;
+ 	white-space: nowrap;
+ }
+ 
+ .ui-messages .ui-messages-warn {
+    background-color: #ffe399;
+    border: 0 none;
+    color: #212121;
+}
+
+/****************************************
+ * 			TABELLA DI LOG
+ *****************************************/
+ 
+.logTable 
+{
+	padding: 10px 10px 10px 10px;
+	margin-top: 15px;
+	height: 150px;
+	overflow: auto;
+	border: 1px solid #a4a4a4;
+	background: transparent;
+	display: block;
+}

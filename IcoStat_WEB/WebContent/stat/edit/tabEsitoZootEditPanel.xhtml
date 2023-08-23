@@ -1,0 +1,224 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<div  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:o="http://openfaces.org/"
+      xmlns:t="http://myfaces.apache.org/tomahawk" >
+
+	<div>
+		<b><h:outputText value="#{esitoZootBean._titoloPagina}" escape="true" /></b>
+		<br/><br/>
+		<h:outputText value="Dati Azienda" escape="true" style="text-decoration:underline"/>
+		<br/><br/>
+		<table>
+			<tr>
+				<td style="width:150px">CUAA:</td>
+				<td>
+					<h:inputText value="#{esitoZootBean._esitoZootStato._cuaa}" size="30" readonly="#{esitoZootBean._readOnly}"
+					style="border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;">
+						<o:ajax event="change" render="domanda_id" listener="#{esitoZootBean.findDomanda}"/>
+					</h:inputText>
+				</td>
+			</tr>
+			<tr>
+				<td>Campagna:</td>
+				<td>
+					<o:dropDownField id="selectCampagnaZoot"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               listStyle="height:100px !important;"
+			               value="#{esitoZootBean._esitoZootStato._campagna}"
+			               listItemStyle="white-space: nowrap;"               
+			               style="width:200px;border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;"
+			               disabled="#{esitoZootBean._action_principale=='modifica'}">
+						<o:dropDownItems value="#{esitoZootBean._listCampagna}"/>
+						<o:ajax event="change" render="domanda_id" listener="#{esitoZootBean.findDomanda}"/>
+					</o:dropDownField>
+				</td>
+			</tr>			
+			<tr>
+				<td>Domanda:</td>
+				<td>
+					<h:inputText value="#{esitoZootBean._esitoZootStato._domanda}" size="30" id="domanda_id" 
+						readonly="#{esitoZootBean._readOnly}"
+						style="border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;"/>
+				</td>
+			</tr>	
+			<tr>
+				<td>Stato compilazione:</td>
+				<td>
+					<o:dropDownField id="selectStatoCompilazione"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               listStyle="height:100px !important;"
+			               customValueAllowed="false"
+			               value="#{esitoZootBean._esitoZootStato._statoCompilazione}"
+			               listItemStyle="white-space: nowrap;"               
+			               style="width:200px;">
+						<o:dropDownItems value="#{esitoZootBean._listStatoEsito}"/>
+					</o:dropDownField>
+				</td>
+			</tr>	
+			<tr>
+				<td>
+					<h:commandButton action="#{esitoZootBean.salvaEsito}" value="Salva" id="salvaZoot"/>
+				</td>
+				<td></td>
+			</tr>				
+		</table>
+		
+		<o:popupLayer id="popupEsitoZootEditLayer"
+              visible="#{esitoZootBean._messageVisible}"
+              hideOnOuterClick="true"
+              hidingTimeout="5000"
+              styleClass="popupStyle"
+              left="200"
+              top="150">
+		  <h:outputText styleClass="popupMessage" value="#{esitoZootBean._message}"/>
+		</o:popupLayer>		
+		
+		<br/>
+		<table>
+			<tr>
+				<td style="width:350px">
+					<h:outputText value="Documentazione del Controllo: " escape="true" style="text-decoration:underline"/>
+					<h:outputText value="#{esitoZootBean._esitoZootStato._documentazioneControllo}" escape="true" 
+					style="color: #{esitoZootBean._esitoZootStato._documentazioneControllo == 'COMPILATO' ? 'green' : 'red'}"/>
+				</td>
+				<td>
+					<h:commandButton action="#{esitoZootBean.editDatiControllo}" value="Compila / Modifica" id="compilaDatiControllo"/>
+				</td>
+				
+			</tr>
+		</table>
+				
+		<br/>
+		<h:outputText value="Ammissibilita' Zootecnia Bovini" escape="true" style="text-decoration:underline"/>
+		<br/><br/>
+		<table>
+			<tr>
+				<td style="width:150px">- Controllo</td>
+				<td style="width:200px">
+					Stato:
+					<h:outputText value="#{esitoZootBean._esitoZootStato._contrAmmBovini}" escape="true" 
+					style="color: #{esitoZootBean._esitoZootStato._contrAmmBovini == 'COMPILATO' ? 'green' : 'red'}"/>
+				</td>
+				<td>
+					<h:commandButton action="#{esitoZootBean.editControlloAmmBov}" value="Compila / Modifica" id="compilaContrZootAmmBov"/>
+					<h:outputText value="  " escape="false"/>
+					<h:commandButton action="#{esitoZootBean.cancellaControlloAmmBov}" value="Cancella" id="cancellaContrZootAmmBov"
+						disabled="#{esitoZootBean._esitoZootStato._contrAmmBovini == 'NON COMPILATO'}">
+						<o:confirmation id="deleteContrZootAmmBovConfirmation" 
+							message="Cancellare i dati relativi al controllo ammissibilità bovini"
+							details="" 
+							okButtonText="Si"
+			                cancelButtonText="No"
+							draggable="true"/>
+					</h:commandButton>
+				</td>
+			</tr>
+			<tr>
+				<td>- Esito - Sanzione</td>				
+				<td>
+					Stato:
+					<h:outputText value="#{esitoZootBean._esitoZootStato._esitoAmmBovini}" escape="true" 
+					style="color: #{esitoZootBean._esitoZootStato._esitoAmmBovini == 'COMPILATO' ? 'green' : 'red'}"/>
+				</td>
+				<td>
+					<h:commandButton action="#{esitoZootBean.editEsitoAmmBov}" value="Compila / Modifica" id="compilaEsitoZootAmmBov"/>
+					<h:outputText value="  " escape="false"/>	
+					<h:commandButton action="#{esitoZootBean.cancellaEsitoAmmBov}" value="Cancella" id="cancellaEsitoZootAmmBov"
+						disabled="#{esitoZootBean._esitoZootStato._esitoAmmBovini =='NON COMPILATO'}">
+						<o:confirmation id="deleteEsitoZootAmmBovConfirmation" 
+							message="Cancellare i dati relativi all'esito ammissibilità bovini"
+							details="" 
+							okButtonText="Si"
+			                cancelButtonText="No"
+							draggable="true"/>
+					</h:commandButton>
+				</td>
+			</tr>						
+		</table>	
+		
+		<br/><br/>
+		<h:outputText value="Ammissibilita' Zootecnia Ovicaprini" escape="true" style="text-decoration:underline"/>
+		<br/><br/>
+		<table>
+			<tr>
+				<td style="width:150px">- Controllo</td>
+				<td style="width:200px">
+					Stato:
+					<h:outputText value="#{esitoZootBean._esitoZootStato._contrAmmOvicaprini}" escape="true" 
+					style="color: #{esitoZootBean._esitoZootStato._contrAmmOvicaprini == 'COMPILATO' ? 'green' : 'red'}"/>
+				</td>
+				<td>
+					<h:commandButton action="#{esitoZootBean.editControlloAmmOvi}" value="Compila / Modifica" id="compilaContrZootAmmOvi"/>
+					<h:outputText value="  " escape="false"/>	
+					<h:commandButton action="#{esitoZootBean.cancellaControlloAmmOvi}" value="Cancella" id="cancellaContrZootAmmOvi"
+						disabled="#{esitoZootBean._esitoZootStato._contrAmmOvicaprini =='NON COMPILATO'}">
+						<o:confirmation id="deleteContrZootAmmOviConfirmation" 
+							message="Cancellare i dati relativi al controllo ammissibilità ovicaprini?"
+							details="" 
+							okButtonText="Si"
+			                cancelButtonText="No"
+							draggable="true"/>
+					</h:commandButton>
+				</td>
+			</tr>
+			<tr>
+				<td>- Esito - Sanzione</td>				
+				<td>
+					Stato:
+					<h:outputText value="#{esitoZootBean._esitoZootStato._esitoAmmOvicaprini}" escape="true" 
+					style="color: #{esitoZootBean._esitoZootStato._esitoAmmOvicaprini == 'COMPILATO' ? 'green' : 'red'}"/>
+				</td>
+				<td>
+					<h:commandButton action="#{esitoZootBean.editEsitoAmmOvi}" value="Compila / Modifica" id="compilaEsitoZootAmmOvi"/>
+					<h:outputText value="  " escape="false"/>	
+					<h:commandButton action="#{esitoZootBean.cancellaEsitoAmmOvi}" value="Cancella" id="cancellaEsitoZootAmmOvi"
+						disabled="#{esitoZootBean._esitoZootStato._esitoAmmOvicaprini =='NON COMPILATO'}">
+						<o:confirmation id="deleteEsitoZootAmmOviConfirmation" 
+							message="Cancellare i dati relativi all'esito ammissibilità ovicaprini?"
+							details="" 
+							okButtonText="Si"
+			                cancelButtonText="No"
+							draggable="true"/>
+					</h:commandButton>
+				</td>
+			</tr>						
+		</table>		
+		
+		<br/><br/>
+		<h:outputText value="Condizionalita' Zootecnia" escape="true" style="text-decoration:underline"/>
+		<br/><br/>
+		<table>
+			<tr>
+				<td style="width:150px">- Controllo</td>
+				<td style="width:200px">
+					Stato:
+					<h:outputText value="#{esitoZootBean._esitoZootStato._contrCond}" escape="true" 
+					style="color: #{esitoZootBean._esitoZootStato._contrCond == 'COMPILATO' ? 'green' : 'red'}"/>
+				</td>
+				<td>
+					<h:commandButton action="#{esitoZootBean.editControlloCond}" value="Compila / Modifica" id="compilaContrZootCond"/>
+					<h:outputText value="  " escape="false"/>	
+					<h:commandButton action="#{esitoZootBean.cancellaControlloCond}" value="Cancella" id="cancellaContrZootCond"
+						disabled="#{esitoZootBean._esitoZootStato._contrCond =='NON COMPILATO'}">
+						<o:confirmation id="deleteContrZootCondConfirmation" 
+							message="Cancellare i dati relativi al controllo condizionalità?"
+							details="" 
+							okButtonText="Si"
+			                cancelButtonText="No"
+							draggable="true"/>
+					</h:commandButton>
+				</td>
+			</tr>						
+		</table>
+		<br/><br/>
+		<h:commandButton action="#{esitoZootBean.annullaEsito}" value="Indietro" id="annullaEditZoot"/>
+	
+	</div>
+
+</div>
+    

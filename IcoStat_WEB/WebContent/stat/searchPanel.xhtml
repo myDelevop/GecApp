@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<div xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:o="http://openfaces.org/"
+      xmlns:t="http://myfaces.apache.org/tomahawk"
+	  xmlns:primeF="http://primefaces.org/ui">
+	<div><br/>
+	
+		<table>
+		<tr>
+				<td>CUAA:</td>
+				<td>
+         		<primeF:autoComplete id="searchCUAA" value="#{searchBean.cuaa}" 
+         			completeMethod="#{searchBean.getCuaaValues}"  
+         			minQueryLength="3" 
+         			queryDelay="500"
+         			cache="true" >
+         			    <primeF:ajax event="itemSelect" listener="#{searchBean.setCUAAFromValues}" />
+         		</primeF:autoComplete>
+				</td>
+			</tr>
+		<tr>
+				<td>Ragione Sociale:</td>
+				<td>
+         			<primeF:autoComplete id="searchRagSoc" value="#{searchBean.ragioneSociale}" 
+         			completeMethod="#{searchBean.getRagioneSocialeValues}"  
+         			minQueryLength="3" 
+         			queryDelay="500"
+         			cache="true" 
+         			style="width:155px;" >
+         			    <primeF:ajax event="itemSelect" listener="#{searchBean.setRagioneSocialeFromValues}" />
+         			</primeF:autoComplete>
+				</td>
+			</tr>
+			<tr>
+				<td>Domanda:</td>
+				<td><o:inputText id="searchDomanda" styleClass="searchInputText" value="#{searchBean.numeroDomanda}" /></td>
+			</tr>
+			<tr>
+				<td>Misura:</td>
+				<td>
+					<o:dropDownField id="searchMisura"
+                          suggestionMode="custom"
+                          autoComplete="true"
+                          customValueAllowed="false"
+                          value="#{searchBean.misura}"
+                          listItemStyle="white-space: nowrap;"
+                          style="width:155px;">
+           				<o:dropDownItems value="#{searchBean.misuraValues}"/>
+         				</o:dropDownField>
+				</td>
+			</tr>
+			<tr>
+				<td>Campagna:</td>
+				<td>
+					<o:dropDownField id="searchCampagna"
+                          suggestionMode="custom"
+                          autoComplete="true"
+                          customValueAllowed="false"
+                          value="#{searchBean.campagna}"
+                          listItemStyle="white-space: nowrap;"
+                          style="width:155px;">
+           				<o:dropDownItems value="#{searchBean.campagnaValues}"/>
+         				</o:dropDownField>
+         				<!-- <o:inputText id="searchCampagna" styleClass="searchInputText" value="#{searchBean.campagna}" />  -->
+         			</td>
+			</tr>
+			<tr>
+				<td>Campione:</td>
+				<td>
+					<!-- <o:inputText id="searchCampione" styleClass="inputText" value="#{searchBean.campione}" /> -->
+					<o:dropDownField id="searchCampione"
+                          suggestionMode="custom"
+                          autoComplete="true"
+                          customValueAllowed="false"
+                          value="#{searchBean.campione}"
+                          listItemStyle="white-space: nowrap;"
+                          style="width:155px;">
+           				<o:dropDownItems value="#{searchBean.campioneValues}"/>
+         				</o:dropDownField>
+				</td>
+			</tr>
+			<tr>
+				<td>Segnalazione:</td>
+				<td>
+					<o:dropDownField id="searchSegnalazione"
+                          suggestionMode="custom"
+                          autoComplete="true"
+                          customValueAllowed="false"
+                          value="#{searchBean.segnalazione}"
+                          listItemStyle="white-space: nowrap;"
+                          style="width:155px;">
+           				<o:dropDownItems value="#{searchBean.segnalazioneValues}"/>
+         				</o:dropDownField>
+				</td>
+			</tr>
+   		</table>
+       	<br/>
+	<h:commandButton action="#{searchBean.doSearch}"  value="Cerca" id="cerca"></h:commandButton>
+	<h:outputText value="  " escape="false" />
+	<h:commandButton action="#{searchBean.viewAll}"  value="Annulla" id="annulla"></h:commandButton>
+	</div>
+</div>
+    

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<f:view>
+	<h:head>
+	  <title>Gestione Esiti Controlli</title>
+	  <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
+	</h:head>
+	<body>
+			<h:graphicImage url="#{layoutBean._pathImage}" styleClass="headerFooterImages"></h:graphicImage>
+			<center><h1>Gestione Esiti Controlli</h1></center>
+			<br/>
+			<br/>  	
+			<center>
+			   	<h3>Errore durante l'autenticazione al Portale</h3>
+			   	<p>Credenziali di accesso non corrette o livello di autorizzazione insufficiente</p>
+			   	<h:outputLink value="login.xhtml" id="Indietro">Torna alla pagina di login</h:outputLink>
+		   	</center>
+			
+		</body>
+	</f:view>
+</html>

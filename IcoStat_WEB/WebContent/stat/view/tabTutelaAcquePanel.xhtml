@@ -1,0 +1,299 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<div  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:o="http://openfaces.org/"
+      xmlns:t="http://myfaces.apache.org/tomahawk" >
+
+	<div>
+		<b><h:outputText value="Esiti Tutela Acque" escape="true" /></b>
+		<br/><br/>			
+		<o:dataTable id="tableTutelaAcque" 
+			var="tutelaAcque" 
+			value ="#{tutelaAcqueBean.elencoTutelaAcque}"
+			
+			line-height="10px" 
+			horizontalGridLines="1px dotted gray"
+			verticalGridLines="1px dotted gray"
+			noDataRowStyle="color: black; text-align: left; font-size: 14px"
+			font-weight="plain"
+			cellpadding="3px"
+			pageSize="100"
+			styleClass="table" >
+			
+			<!-- per ogni colonna crea un menu per l'ordinamento e la scomparsa delle colonne -->
+			<!-- 
+			<f:facet name="columnMenu">
+		      <o:columnMenu indentStyle="color: yellow">
+		        <o:sortAscendingMenuItem/>
+		        <o:sortDescendingMenuItem/>
+		        <o:hideColumnMenuItem/>
+		        <o:menuSeparator/>
+		        <o:menuItem value="Columns">
+		          <o:columnVisibilityMenu/>
+		        </o:menuItem>
+		        <o:menuSeparator/>
+		        <o:menuItem value="Select Column" onclick="selectColumn(O$('form:fileExcel').getCurrentColumn().index);"/>
+		        <o:menuItem value="Unselect Column" onclick="unselectColumn(O$('form:fileExcel').getCurrentColumn().index);"/>
+		      </o:columnMenu>
+		    </f:facet>
+    		 -->
+    
+			<f:facet name="below">
+	    		<o:dataTablePaginator id="paginator"/>
+	  		</f:facet>
+	  		<f:facet name="noDataMessage">
+    			<h:outputText value="#{searchBean._messageData}" />
+  			</f:facet>
+  			<!-- messaggio se la ricerca in tabella non ritorna risultati -->
+  			<f:facet name="noFilterDataMessage">
+    			<h:outputText value="Nessun dato corrisponde ai parametri di ricerca inseriti" />
+  			</f:facet>
+	  		<o:scrolling horizontal="true"/>
+	  		
+	  		<!-- permette il resizing della colonna -->
+	  		<o:columnResizing resizeHandleWidth="10px" minColWidth="50px"/>
+	  		
+	  		<!-- abilitare selezione singola della riga -->
+	  		<o:singleRowSelection rowData="#{tutelaAcqueBean._selectedValue}"/>
+	  		
+	  		<!--  <o:scrolling vertical="true"/>  --> 
+			<o:column id="cuaa" styleClass="tableAziendaRiga"  header="CUAA" width="130pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{tutelaAcque._cuaa}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{tutelaAcque._cuaa}" />
+			</o:column>
+			
+			<o:column id="campagna" styleClass="tableAziendaRiga"  header="Campagna" width="70pt"
+					headerStyle="white-space: normal;"  
+					sortingExpression="#{tutelaAcque._campagna}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{tutelaAcque._campagna}" />	
+			</o:column>
+			
+			<!--  colonna eliminata su richiesta di Michaela - 27 gennaio 2016
+			<o:column id="condizionalita" styleClass="tableAziendaRiga"  header="Condizionalità" width="90pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{tutelaAcque._condizionalita}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{tutelaAcque._condizionalita}" />	
+			</o:column>
+			-->
+			
+			<!--  colonna eliminata su richiesta di Michaela - 27 gennaio 2016
+			<o:column id="altitudine_azienda" styleClass="tableAziendaRiga"  header="Altitudine Azienda" width="60pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{tutelaAcque._altitudine_azienda}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{tutelaAcque._altitudine_azienda}" />	
+			</o:column>
+			-->
+			
+			<o:column id="punti_altitudine" styleClass="tableAziendaRiga"  header="Punti di Altitudine" width="60pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{tutelaAcque._punti_altitudine}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{tutelaAcque._punti_altitudine}" />	
+			</o:column>
+			
+			<o:column id="uba_accertate" styleClass="tableAziendaRiga"  header="UBA Accertate TA" width="60pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{tutelaAcque._uba_acc}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{tutelaAcque._uba_acc}" />	
+			</o:column>
+			
+			<o:column id="uba_accertate_psr" styleClass="tableAziendaRiga"  header="UBA Accertate PSR" width="60pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{tutelaAcque._uba_acc_psr}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{tutelaAcque._uba_acc_psr}" />	
+			</o:column>
+			
+			<!--  colonna eliminata su richiesta di Michaela - 27 gennaio 2016
+			<o:column id="carico_bestiame_max_ta" styleClass="tableAziendaRiga"  header="Carico Bestiame Massimo TA" width="70pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{tutelaAcque._carico_bestiame_max_ta}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{tutelaAcque._carico_bestiame_max_ta}" />	
+			</o:column>
+			-->
+			
+			<o:column id="carico_alpeggio_psr" styleClass="tableAziendaRiga"  header="Carico Alpeggio PSR" width="60pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{tutelaAcque._carico_alpeggio_psr}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{tutelaAcque._carico_alpeggio_psr}" />	
+			</o:column>
+			
+			<o:column id="carico_bestiame_attuale_TA" styleClass="tableAziendaRiga"  header="Carico Bestiame Attuale TA" width="70pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{tutelaAcque._carico_bestiame_attuale_ta}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{tutelaAcque._carico_bestiame_attuale_ta}" />	
+			</o:column>
+			
+			<o:column id="carico_bestiame_attuale_PSR" styleClass="tableAziendaRiga"  header="Carico Bestiame Attuale PSR" width="70pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{tutelaAcque._carico_bestiame_attuale_psr}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{tutelaAcque._carico_bestiame_attuale_psr}" />
+			</o:column>
+			
+			<!--  colonna eliminata su richiesta di Michaela - 27 gennaio 2016
+			<o:column id="uba_eccessive_TA" styleClass="tableAziendaRiga"  header="UBA Eccessive TA" width="60pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{tutelaAcque._uba_eccessive_ta}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{tutelaAcque._uba_eccessive_ta}" />	
+			</o:column>
+			-->
+			<!--  colonna eliminata su richiesta di Michaela - 27 gennaio 2016
+			<o:column id="tolleranza_car_best_min_psr" styleClass="tableAziendaRiga"  header="Tolleranza Carico Bestiame Minima PSR" width="70pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{tutelaAcque._tolleranza_car_best_min_psr}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{tutelaAcque._tolleranza_car_best_min_psr}" />	
+			</o:column>
+			-->
+			
+			<o:column id="tolleranza_car_best_max_ta" styleClass="tableAziendaRiga"  header="Tolleranza Carico Bestiame Massima TA" width="70pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{tutelaAcque._tolleranza_car_best_max_ta}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{tutelaAcque._tolleranza_car_best_max_ta}" />	
+			</o:column>
+			
+			<o:column id="tolleranza_car_best_max_psr" styleClass="tableAziendaRiga"  header="Tolleranza Carico Bestiame Massima PSR" width="70pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{tutelaAcque._tolleranza_car_best_max_psr}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{tutelaAcque._tolleranza_car_best_max_psr}" />	
+			</o:column>
+			
+			<o:column id="avg_ann_carico_bestiame" styleClass="tableAziendaRiga"  header="Media Annuale Carico Bestiame" width="70pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{tutelaAcque._avg_ann_carico_best}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{tutelaAcque._avg_ann_carico_best}" />	
+			</o:column>
+			
+			<o:column id="capacita_stoccaggi" styleClass="tableAziendaRiga"  header="Capacità Stoccaggi" width="60pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{tutelaAcque._capacita_stoccaggi}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{tutelaAcque._capacita_stoccaggi}" />	
+			</o:column>
+			
+			<o:column id="stoccaggi_tenuti_in_funzione" styleClass="tableAziendaRiga"  header="Stoccaggi tenuti in funzione" width="70pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{tutelaAcque._stoccaggi_tenuti_in_funzione}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{tutelaAcque._stoccaggi_tenuti_in_funzione}" />	
+			</o:column>
+			
+			<o:column id="esito_stoccaggi" styleClass="tableAziendaRiga"  header="Esito stoccaggi" width="70pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{tutelaAcque._esito_stoccaggi}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{tutelaAcque._esito_stoccaggi}" />	
+			</o:column>
+			
+			<o:column id="dichiarazioni_presenti" styleClass="tableAziendaRiga"  header="Dichiarazioni presenti" width="90pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{tutelaAcque._dichiarazioni_presenti}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{tutelaAcque._dichiarazioni_presenti}" />	
+			</o:column>
+			
+			<o:column id="esito_carico_bestiame_ta" styleClass="tableAziendaRiga"  header="Esito carico bestiame TA" width="70pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{tutelaAcque._esito_carico_bestiame_ta}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{tutelaAcque._esito_carico_bestiame_ta}" />	
+			</o:column>
+			
+			<o:column id="esito_carico_bestiame_psr" styleClass="tableAziendaRiga"  header="Esito carico bestiame PSR" width="70pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{tutelaAcque._esito_carico_bestiame_psr}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{tutelaAcque._esito_carico_bestiame_psr}" />	
+			</o:column>
+			
+			<o:column id="stato" styleClass="tableAziendaRiga"  header="Stato" width="100pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{tutelaAcque._stato}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{tutelaAcque._stato}" />	
+			</o:column>
+			
+			<!--  colonna eliminata su richiesta di Michaela - 27 gennaio 2016
+			<o:column id="secondoControlloStoccaggio" styleClass="tableAziendaRiga"  header="Secondo controllo stoccaggio" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{tutelaAcque._secondo_contr_stoccaggio}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{tutelaAcque._secondo_contr_stoccaggio}" />	
+			</o:column>
+			-->
+			<!--  colonna eliminata su richiesta di Michaela - 27 gennaio 2016
+			<o:column id="dataSecondoContrStoccaggio" styleClass="tableAziendaRiga"  header="Data secondo controllo stoccaggio" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{tutelaAcque._data_secondo_contr_stoccaggioStr}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{tutelaAcque._data_secondo_contr_stoccaggioStr}" />	
+			</o:column>
+			-->
+			
+			<o:column id="userModifica" styleClass="tableAziendaRiga"  header="User ultima modifica" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{tutelaAcque._user_modifica}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{tutelaAcque._user_modifica}" />	
+			</o:column>
+			
+			<o:column id="dataModifica" styleClass="tableAziendaRiga"  header="Data ultima modifica" width="100pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{tutelaAcque._data_modificaStr}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{tutelaAcque._data_modificaStr}" />	
+			</o:column>
+			
+			<o:column id="note" styleClass="tableAziendaRiga"  header="Note" width="150pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{tutelaAcque._note}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{tutelaAcque._note}" />
+			</o:column>
+
+		</o:dataTable>
+			
+	    <br/>
+		<h:commandButton action="#{tutelaAcqueBean.aggiungiTutelaAcque}" value="Aggiungi" id="aggiungiTutelaAcque" rendered="#{request.isUserInRole('ROLE_WR_ACQUE')}"/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_ACQUE')}"/>
+		<h:commandButton action="#{tutelaAcqueBean.modificaTutelaAcque}" value="Modifica" id="modificaTutelaAcque" rendered="#{request.isUserInRole('ROLE_WR_ACQUE')}"/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_ACQUE')}"/>
+		<h:commandButton action="#{tutelaAcqueBean.cancellaTutelaAcque}" value="Cancella" id="cancellaTutelaAcque" rendered="#{request.isUserInRole('ROLE_WR_ACQUE')}">
+			<o:confirmation id="deleteTutelaAcqueConfirmation" 
+				message="Cancellare la riga selezionata?"
+				details="" 
+				okButtonText="Si"
+                cancelButtonText="No"
+				draggable="true"/>
+		</h:commandButton>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_ACQUE')}"/>
+		<h:commandButton action="#{tutelaAcqueBean.esportaTutelaAcque}" value="Esporta Dati" id="esportaTutelaAcque"/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_ACQUE')}"/>
+		<h:commandButton action="#{tutelaAcqueBean.importaTutelaAcque}" value="Importa dati" id="importaTutelaAcque" rendered="#{request.isUserInRole('ROLE_WR_ACQUE')}"/>
+		<o:popupLayer id="popupTutelaAcqueLayer"
+              visible="#{tutelaAcqueBean._messageVisible}"
+              hideOnOuterClick="true"
+              hidingTimeout="5000"
+              styleClass="popupStyle"
+              left="200"
+              top="150">
+		  <h:outputText styleClass="popupMessage" value="#{tutelaAcqueBean._message}"/>
+		</o:popupLayer>
+	</div>
+</div>
+    

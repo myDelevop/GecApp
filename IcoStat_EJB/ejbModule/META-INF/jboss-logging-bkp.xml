@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+
+<!-- ===================================================================== -->
+<!-- -->
+<!-- Logging System Configuration -->
+<!-- -->
+<!-- ===================================================================== -->
+
+<logging xmlns="urn:jboss:logging:6.0" context="OPPAB_GESTIONE_ESITI">
+	<define-context name="OPPAB_GESTIONE_ESITI" />
+
+	<!-- ================================= -->
+	<!-- Preserve messages in a local file -->
+	<!-- ================================= -->
+
+	<!-- A time/date based rolling handler -->
+
+	<size-rotating-file-handler file-name="${jboss.server.log.dir}/OPPAB_GESTIONE_ESITI.log"
+		name="OPPAB_GESTIONE_ESITI" autoflush="true" append="true" rotate-size="1024k"
+		max-backup-index="5">
+
+		<error-manager>
+			<only-once />
+		</error-manager>
+
+		<formatter>
+			<!-- To revert back to simple stack traces without JAR versions, change 
+				"%E" to "%e" below. -->
+			<!-- Uncomment this to get the class name in the log as well as the category 
+				<pattern-formatter pattern="%d %-5p [%c] %C{1} (%t) %s%E%n"/> -->
+			<!-- Uncomment this to log without the class name in the log -->
+			<pattern-formatter pattern="%d %-5p [%c] (%t) %s%E%n" />
+		</formatter>
+	</size-rotating-file-handler>
+
+
+	<!-- Limit the org.apache category to INFO as its DEBUG is verbose -->
+	<logger category="org.apache">
+		<level name="DEBUG" />
+	</logger>
+
+	<!-- Limit the jacorb category to WARN as its INFO is verbose -->
+	<logger category="jacorb">
+		<level name="WARN" />
+	</logger>
+
+	<!-- Limit JSF to INFO as its FINE is verbose -->
+	<logger category="javax.enterprise.resource.webcontainer.jsf">
+		<level name="INFO" />
+	</logger>
+
+	<!-- Limit the org.jgroups category to WARN as its INFO is verbose -->
+	<logger category="org.jgroups">
+		<level name="WARN" />
+	</logger>
+
+	<!-- Limit the org.quartz category to INFO as its DEBUG is verbose -->
+	<logger category="org.quartz">
+		<level name="INFO" />
+	</logger>
+
+	<!-- Limit the com.sun category to INFO as its FINE is verbose -->
+	<logger category="com.sun">
+		<level name="INFO" />
+	</logger>
+
+	<!-- Limit the sun category to INFO as its FINE is verbose -->
+	<logger category="sun">
+		<level name="INFO" />
+	</logger>
+
+	<!-- Limit the javax.xml.bind category to INFO as its FINE is verbose -->
+	<logger category="javax.xml.bind">
+		<level name="INFO" />
+	</logger>
+
+	<!-- Limit the springframework category to WARN -->
+	<logger category="org.springframework">
+		<level name="WARN" />
+	</logger>
+
+	<!-- Test -->
+	<!-- <logger category="it.bz"> <level name="DEBUG" /> </logger> -->
+
+	<!-- Limit Arjuna transaction manager -->
+	<logger category="com.arjuna.ats">
+		<level name="INFO" />
+	</logger>
+
+	<!-- Limit Hibernate <logger category="org.hibernate"> <level name="INFO" 
+		/> </logger> -->
+
+	<!-- Limit Ajax4jsf <logger category="org.ajax4jsf"> <level name="INFO" 
+		/> </logger> -->
+
+	<!-- Limit JNP <logger category="org.jnp"> <level name="INFO" /> </logger> -->
+
+
+	<!-- Limit the JSR77 categories -->
+	<logger category="org.jboss.management">
+		<level name="INFO" />
+	</logger>
+
+	<!-- Limit the verbose facelets compiler -->
+	<!-- Also suppress error with legacy facelets (JBAS-7600) -->
+	<logger category="facelets.compiler">
+		<level name="WARN" />
+		<filter>
+			<not>
+				<match pattern="Error\sLoading\sLibrary.*jsf-libs/jsf-impl" />
+			</not>
+		</filter>
+	</logger>
+
+	<logger category="org.jboss.serial">
+		<level name="INFO" />
+	</logger>
+
+
+
+	<!-- Reduce org.mc4j stuff in the logs -->
+	<logger category="org.mc4j">
+		<level name="WARN" />
+	</logger>
+
+
+	<logger category="org.rhq.plugins.jbossas5.ApplicationServerComponent">
+		<level name="FATAL" />
+	</logger>
+
+	<!-- ======================= -->
+	<!-- Setup the Root category -->
+	<!-- ======================= -->
+
+	<root-logger>
+		<!-- Set the root logger priority via a system property, with a default 
+			value. -->
+		<level name="${jboss.server.log.threshold:INFO}" />
+		<handlers>
+			<handler-ref name="OPPAB_GESTIONE_ESITI" />
+		</handlers>
+	</root-logger>
+
+</logging>

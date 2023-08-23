@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<b:beans
+	xmlns:b="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd">
+
+	<global-method-security secured-annotations="enabled" />
+	
+	<http use-expressions="true">
+		<access-denied-handler error-page="/login.xhtml"/>
+		<intercept-url
+			pattern="/stat/**"
+			access="hasAnyRole('ROLE_SUPERVISOR','ROLE_USER','ROLE_TELLER')" />
+		<intercept-url
+			pattern="/logout"
+			access="true" />
+		<intercept-url
+			pattern="/login.xhtml"
+			access="hasRole('ROLE_ANONYMOUS')"
+			/>
+		<intercept-url
+			pattern="/**"
+			access="hasAnyRole('ROLE_SUPERVISOR','ROLE_USER','ROLE_TELLER','ROLE_ANONYMOUS')"
+			/>
+
+		<form-login
+			username-parameter="j_username" 
+			password-parameter="j_password"
+			login-processing-url="/j_spring_security_check"
+			login-page="/login.xhtml"
+			default-target-url="/stat/index.xhtml"
+			authentication-failure-url="/loginError.xhtml?error" />
+		<logout
+			logout-url="/logout"
+			invalidate-session="true"
+			delete-cookies="JSESSIONID,SPRING_SECURITY_REMEMBER_ME_COOKIE"
+			logout-success-url="/login.xhtml?logout" />
+			
+		<anonymous granted-authority="ROLE_ANONYMOUS"/>
+		<csrf disabled="true"/>
+<!-- 		<remember-me
+			remember-me-parameter="_spring_security_remember_me"
+			key="xd67yHpAs"
+		/> -->
+	</http>
+	
+	<b:bean id="authenticationManager" class="org.springframework.security.authentication.ProviderManager">
+		<b:constructor-arg>
+			<b:list>
+                <b:ref bean="ldapAuthenticationProvider"/>
+            </b:list>
+		</b:constructor-arg> 
+    </b:bean>
+    
+    <!-- Bean di configurazione del file .properties, che contiene i dati di connessione a ldap e ricerca utente -->
+    
+<!--     <b:bean id="propertyConfigurator" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <b:property name="ignoreResourceNotFound" value="false"/>
+        <b:property name="systemPropertiesMode" value="2"/>
+        <b:property name="locations">
+            <b:list>
+                <b:value>classpath:stat.properties</b:value>
+            </b:list>
+        </b:property>
+    </b:bean> -->
+    
+    <!-- Inizio custom ldap ICO -->
+    
+    <!-- Bean di connessione a ldap (in caso di autenticazione anonima, userDn e password sono facoltativi) -->
+	
+	<b:bean id="settingsBean" class = "it.bz.prov.esiti.beans.SettingsUIBean" />
+	 
+	<b:bean id="ldapServerURL" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+	   <b:property name="targetObject" ref="settingsBean"/>
+	   <b:property name="targetMethod" value="get_ldapServerUrl"/>
+ 	</b:bean>
+ 	<b:bean id="ldapSearchScope" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+	   <b:property name="targetObject" ref="settingsBean"/>
+	   <b:property name="targetMethod" value="get_ldapSearchScope"/>
+ 	</b:bean> 
+ 	<b:bean id="ldapFilter" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+	   <b:property name="targetObject" ref="settingsBean"/>
+	   <b:property name="targetMethod" value="get_ldapFilter"/>
+ 	</b:bean>        
+    <b:bean id="ldapContextSource" class="org.springframework.security.ldap.DefaultSpringSecurityContextSource">
+		<b:constructor-arg ref="ldapServerURL">	
+		</b:constructor-arg> 
+    </b:bean>
+    
+    <!-- Bean di ricerca utente -->
+    
+    <b:bean id="userSearch" class="it.bz.prov.esiti.authentication.OppabLdapFilterUserSearch">
+    	<b:constructor-arg index="0" ref="ldapSearchScope">
+     	</b:constructor-arg>
+     	<b:constructor-arg index="1" ref="ldapFilter">
+     	</b:constructor-arg>
+     	<b:constructor-arg index="2">
+       		<b:ref bean="ldapContextSource" />
+     	</b:constructor-arg>            
+     	<b:property name="searchSubtree">
+       		<b:value>true</b:value>
+     	</b:property>            
+   	</b:bean>
+   	
+
+	<!--  Bean di ricerca ruoli (attenzione! i parametri di ricerca ruoli non sono significativi) -->
+	
+	<authentication-manager>
+		<authentication-provider ref="ldapAuthenticationProvider"/>
+	</authentication-manager>
+ 
+	<b:bean id="ldapAuthenticationProvider" class="it.bz.prov.esiti.authentication.OppabLdapAuthenticationProvider">
+    	<b:constructor-arg>
+       		<b:bean class="org.springframework.security.ldap.authentication.BindAuthenticator">
+          		<b:constructor-arg><b:ref bean="ldapContextSource"/></b:constructor-arg>
+          	<b:property name="userSearch" ref="userSearch"/>
+       	</b:bean>
+     	</b:constructor-arg>
+     	<b:constructor-arg>
+       		<b:bean class="it.bz.prov.esiti.authorization.OppabLdapAuthoritiesPopulator">
+          		<b:constructor-arg index="0"><b:ref bean="ldapContextSource"/></b:constructor-arg>
+          		<b:constructor-arg index="1"><b:value>o=jobs,ou=People</b:value></b:constructor-arg>
+          		<b:property name="groupRoleAttribute"><b:value>sn</b:value></b:property>
+          		<b:property name="groupSearchFilter"><b:value>uid={0}</b:value></b:property>
+          		<b:property name="searchSubtree"><b:value>false</b:value></b:property>            
+       		</b:bean>
+     	</b:constructor-arg>
+   	</b:bean>
+    
+   	<!--  Fine custom ldap ICO -->
+</b:beans>

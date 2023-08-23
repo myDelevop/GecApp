@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#loginError.xhtml" PATH="/loginError.xhtml"
+  SHAPE="32,273,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#loginError.xhtml:0" NAME="item"
+   PATH="/loginError.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="Indietro::#login.xhtml" NAME="output"
+    PATH="/login.xhtml" TARGET="rules:#login.xhtml" TITLE="Indietro" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#stat#uploadForm.xhtml"
+  PATH="/stat/uploadForm.xhtml" SHAPE="560,120,50,41" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#stat#uploadForm.xhtml:0" NAME="item"
+   PATH="/stat/uploadForm.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="Importa Dati::#stat#index.xhtml"
+    NAME="output" PATH="/stat/index.xhtml"
+    TARGET="rules:#stat#index.xhtml" TITLE="Importa Dati" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#login.xhtml" PATH="/login.xhtml"
+  SHAPE="240,289,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#stat#index.xhtml" PATH="/stat/index.xhtml"
+  SHAPE="32,161,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#stat#index.xhtml:0" NAME="item"
+   PATH="/stat/index.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="Amministrazione::#stat#admin.xhtml"
+    NAME="output" PATH="/stat/admin.xhtml"
+    TARGET="rules:#stat#admin.xhtml" TITLE="Amministrazione" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+  <PROCESS-ITEM ID="rules:#stat#index.xhtml:1" NAME="item1"
+   PATH="/stat/index.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="Importa Dati::#stat#uploadForm.xhtml"
+    NAME="output" PATH="/stat/uploadForm.xhtml"
+    TARGET="rules:#stat#uploadForm.xhtml" TITLE="Importa Dati" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#stat#admin.xhtml" PATH="/stat/admin.xhtml"
+  SHAPE="272,145,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#stat#admin.xhtml:0" NAME="item"
+   PATH="/stat/admin.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="Indietro::#stat#index.xhtml" NAME="output"
+    PATH="/stat/index.xhtml" TARGET="rules:#stat#index.xhtml"
+    TITLE="Indietro" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+  <PROCESS-ITEM ID="rules:#stat#admin.xhtml:1" NAME="item1"
+   PATH="/stat/admin.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="Info Applicazione::#stat#version.xhtml"
+    NAME="output" PATH="/stat/version.xhtml"
+    TARGET="rules:#stat#version.xhtml" TITLE="Info Applicazione" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#stat#version.xhtml"
+  PATH="/stat/version.xhtml" SHAPE="480,273,0,0" model-entity="JSFProcessGroup"/>
+</PROCESS>

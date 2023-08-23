@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:o="http://openfaces.org/">
+<h:head>
+  <title>Gestione Esiti Controlli</title>
+</h:head>
+
+<h:body>	        
+	<h:outputText value="Versione deploy: #{infoAppBean._timestampRelease}" escape="true" />
+	<br/>
+	<h:outputText value="Hostname: #{layoutBean._hostname}" escape="true" />
+<!-- 	<br/>
+	<h:outputText value="Percorso log: #{layoutBean._pathLogGES}" escape="true" />
+	<br/>
+	<h:outputLink value="#{layoutBean._pathLogGES}">Log GES</h:outputLink>
+	<br/>
+	<h:outputLink value="#{layoutBean._pathLogServer}">Log Server</h:outputLink>
+	<br/>
+	<h:outputText value="Enable Login: #{layoutBean._enableLogin}" escape="true" />
+	<br/> -->
+	
+</h:body>
+</html>

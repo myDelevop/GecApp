@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<div  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:o="http://openfaces.org/"
+      xmlns:t="http://myfaces.apache.org/tomahawk" >
+
+	<div>
+		<b><h:outputText value="#{esitoArt68Bean._titoloPagina}" escape="true" /></b>
+		<br/><br/>
+		<table>
+			<tr>
+				<td>Campagna:</td>
+				<td>
+					<o:dropDownField id="selectCampagnaArt68"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{esitoArt68Bean._esitoArt68._campagna}"
+			               listStyle="height:100px !important;"
+			               listItemStyle="white-space: nowrap;"               
+			               style="width:200px;"
+			               disabled="#{esitoArt68Bean._readOnly}">
+						<o:dropDownItems value="#{esitoArt68Bean._listCampagna}"/>
+					<o:ajax event="change" render="domandaArt68" 
+							listener="#{esitoArt68Bean.findDomanda}"/>
+					</o:dropDownField>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:250">CUAA:</td>
+				<td><h:inputText value="#{esitoArt68Bean._esitoArt68._cuaa}" size="30" readonly="#{esitoArt68Bean._readOnly}">
+				<o:ajax event="change" render="domandaArt68 selectCampagnaArt68" 
+							listener="#{esitoArt68Bean.findDomanda}"/>
+				</h:inputText>
+				
+				</td>
+			</tr>
+			<tr>
+				<td>Domanda:</td>
+				<td><h:inputText id="domandaArt68" value="#{esitoArt68Bean._esitoArt68._domanda}" size="30" readonly="true"/></td>
+			</tr>
+			<tr>
+				<td>Intervento:</td>
+				<td>
+					<o:dropDownField id="selectInterventoArt68"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{esitoArt68Bean._esitoArt68._intervento}"
+			               listItemStyle="white-space: nowrap;"        
+			               listStyle="height:100px !important;"       
+			               style="width:200px;"
+			               disabled="#{esitoArt68Bean._readOnly}">
+						<o:dropDownItems value="#{esitoArt68Bean._listIntervento}"/>
+					</o:dropDownField>
+				</td>
+			</tr>
+			<tr>
+				<td>Esito OPPAB:</td>
+				<td>
+					<o:dropDownField id="selectEsitoArt68"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               listStyle="height:100px !important;"
+			               value="#{esitoArt68Bean._esitoArt68._esito}"
+			               listItemStyle="white-space: nowrap;"               
+			               style="width:200px;">
+						<o:dropDownItems value="#{esitoArt68Bean._listEsito}"/>
+						<o:ajax event="change" render="percRidOPPAB percRidCommissioneRiesame" 
+							listener="#{esitoArt68Bean.disablePercRidOPPAB}"/>
+					</o:dropDownField>
+				</td>
+			</tr>
+			<tr>
+				<td>Imp. Riduzione:</td>
+				<td><h:inputText id="impRiduzArt68" value="#{esitoArt68Bean._esitoArt68._impRiduz}" size="30"/></td>
+			</tr>
+			<tr>
+				<td>Data Ispezione:</td>
+				<td>
+					<o:dateChooser id="dataIspezione"
+                             pattern="dd/MM/yyyy"
+                             value="#{esitoArt68Bean._esitoArt68._dataIspezione}"
+                             locale="it_IT"
+                             todayText="Oggi"
+                             noneText="Nessuno"
+                             headerStyle="background: white; color: black;"
+                             daysHeaderStyle="background: #20386b; color: white;"
+                             dayStyle="border: 1px solid white;"
+                             rolloverDayStyle="border: 1px solid #f7a902; background: white; color: black;"
+                             rolloverWeekendDayStyle="border: 1px solid #f7a902; background: white; color: #ff8a00;"
+                             selectedDayStyle="border: 1px solid #20386b; color: #20386b; background: white;"
+                             weekendDayStyle="color: #ff8a00;"
+                             footerStyle="background: white; color: black; border-top: 1px solid #20386b;"
+                             style="width: 200px!important;"
+                             typingAllowed="false"
+                             />
+				</td>
+			</tr>
+			<tr>
+				<td>Stato:</td>
+				<td>
+					<o:dropDownField id="selectStatoEsitoArt68"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{esitoArt68Bean._esitoArt68._stato}"
+			               listItemStyle="white-space: nowrap;"       
+			               listStyle="height:100px !important;"        
+			               style="width:200px;">
+						<o:dropDownItems value="#{esitoArt68Bean._listStato}"/>
+					</o:dropDownField>
+				</td>
+			</tr>	
+			<tr>
+				<td>Note:</td>
+				<td><h:inputText value="#{esitoArt68Bean._esitoArt68._note}" size="80" /></td>
+			</tr>
+		</table>
+		<br/>
+			
+	    <br/>
+		<h:commandButton action="#{esitoArt68Bean.salvaEsito}" value="Salva" id="salvaEsitoArt68"/>
+		<h:outputText value="  " escape="false" />
+		<h:commandButton action="#{esitoArt68Bean.annullaEsito}" value="Annulla" id="annullaEsitoArt68"/>
+		<o:popupLayer id="popupEsitoArt68EditLayer"
+              visible="#{esitoArt68Bean._messageVisible}"
+              hideOnOuterClick="true"
+              hidingTimeout="5000"
+              styleClass="popupStyle"
+              left="200"
+              top="150">
+		  <h:outputText styleClass="popupMessage" value="#{esitoArt68Bean._message}"/>
+		</o:popupLayer>
+	</div>
+
+</div>
+    

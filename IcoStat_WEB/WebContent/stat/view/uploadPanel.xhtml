@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:o="http://openfaces.org/"
+      xmlns:t="http://myfaces.apache.org/tomahawk" >
+ 
+	<h:form id="uploadForm" enctype="multipart/form-data">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+		<h:outputLabel for="file" value="Seleziona il file Excel: "/>
+		<!-- <t:inputFileUpload id="file" value="#{uploadBean._uploadedFile}" required="true" size="80" storage="file"/> -->
+		<h:inputFile id="file" value="#{uploadBean._uploadedFile}" required="true" size="80" />		
+		<h:outputText value="  " escape="false" />
+		<h:commandButton value="Carica" action="#{uploadBean.executeUpload}"/>
+	</h:form>
+	
+</html>
+    

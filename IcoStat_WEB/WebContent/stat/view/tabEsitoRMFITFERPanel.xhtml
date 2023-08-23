@@ -1,0 +1,533 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<div  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:o="http://openfaces.org/"
+      xmlns:t="http://myfaces.apache.org/tomahawk" >
+
+	<div>	
+		<b><h:outputText value="RM-FIT e FER: Esito requisiti minimi per fertilizzanti e fitofarmaci" escape="true" /></b>
+		<br/><br/>	
+		<o:dataTable id="tableEsitoImpegniRMFITFER" 
+			var="esitoImpegniRMFITFER" 
+			value ="#{esitoImpegniRMFITFERBean.elencoEsitoImpegni}"
+						
+			line-height="10px" 
+			horizontalGridLines="1px dotted gray"
+			verticalGridLines="1px dotted gray"
+			noDataRowStyle="color: black; text-align: left; font-size: 14px"
+			font-weight="plain"
+			cellpadding="3px"
+			pageSize="100"
+			styleClass="table" >
+			    
+			<f:facet name="below">
+	    		<o:dataTablePaginator id="paginator"/>
+	  		</f:facet>
+	  		<f:facet name="noDataMessage">
+    			<h:outputText value="#{searchBean._messageData}" />
+  			</f:facet>
+  			<!-- messaggio se la ricerca in tabella non ritorna risultati -->
+  			<f:facet name="noFilterDataMessage">
+    			<h:outputText value="Nessun dato corrisponde ai parametri di ricerca inseriti" />
+  			</f:facet>
+	  		<o:scrolling horizontal="true"/>
+	  		
+	  		<!-- permette il resizing della colonna -->
+	  		<o:columnResizing resizeHandleWidth="10px" minColWidth="50px"/>
+	  		
+	  		<!-- abilitare selezione singola della riga -->
+	  		<o:singleRowSelection rowData="#{esitoImpegniRMFITFERBean._selectedValue}" rowIndex="#{esitoImpegniRMFITFERBean._selectedValueIndex}" />
+	  		
+	  		<!--  <o:scrolling vertical="true"/>  --> 
+			<o:column id="cuaa_rmfitfer" styleClass="tableAziendaRiga"  header="CUAA" width="130pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFER._cuaa}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFER._cuaa}" />
+			</o:column>
+			
+			<o:column id="campagna_rmfitfer" styleClass="tableAziendaRiga"  header="Campagna" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFER._campagna}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFER._campagna}" />	
+			</o:column>
+			
+			<o:column id="domanda_rmfitfer" styleClass="tableAziendaRiga"  header="Domanda" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFER._domanda}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFER._domanda}" />	
+			</o:column>
+			
+			<o:column id="misura_rmfitfet" styleClass="tableAziendaRiga"  header="Misura" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFER._misura}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFER._misura}" />	
+			</o:column>
+			
+					
+			<o:column id="stato_rmfitfer" styleClass="tableAziendaRiga"  header="Stato" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFER._stato}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFER._stato}" />	
+			</o:column>
+			
+			<o:column id="esito_rmfitfer" styleClass="tableAziendaRiga"  header="Esito OPPAB" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFER._esito_oppab}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFER._esito_oppab}" />	
+			</o:column>
+			
+			<o:column id="percRidFIT_rmfitfer" styleClass="tableAziendaRiga"  header="% Riduzione FIT" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFER._percRidFIT}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFER._percRidFIT}" />
+			</o:column>
+			
+			<o:column id="percRidFER_rmfitfer" styleClass="tableAziendaRiga"  header="% Riduzione FER" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFER._percRidFER}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFER._percRidFER}" />
+			</o:column>
+			
+			<o:column id="percRidTotOPPAB_rmfitfer" styleClass="tableAziendaRiga"  header="% Riduzione totale OPPAB" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFER._percTotOPPAB}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFER._percTotOPPAB}" />
+			</o:column>
+			
+			<o:column id="percRidCommRiesame_rmfitfer" styleClass="tableAziendaRiga"  header="% Riduzione Commissione Riesame" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFER._percCommissRiesame}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFER._percCommissRiesame}" />
+			</o:column>
+			
+			<o:column id="statoPostCommRiesame_rmfitfer" styleClass="tableAziendaRiga"  header="Stato post Commissione Riesame" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFER._statoPostCommissRiesame}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFER._statoPostCommissRiesame}" />
+			</o:column>
+			
+			<o:column id="dataCommRiesame_rmfitfer" styleClass="tableAziendaRiga"  header="Data Commissione Riesame" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFER._dataCommissRiesameStr}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFER._dataCommissRiesameStr}" />
+			</o:column>
+			
+			<o:column id="dataControllo_rmfitfer" styleClass="tableAziendaRiga"  header="Data del controllo" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFER._data_contrStr}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFER._data_contrStr}" />
+			</o:column>
+			
+			<o:column id="esclusione_rmfitfer" styleClass="tableAziendaRiga"  header="Esclusione" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFER._esclusione}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFER._esclusione}" />
+			</o:column>
+			
+			<o:column id="PrgAccEsclusione_rmfitfer" styleClass="tableAziendaRiga"  header="Progressivo Accertamento Esclusione" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFER._progr_accert_esclusione}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFER._progr_accert_esclusione}" />
+			</o:column>
+			
+			<o:column id="esclusioneNote_rmfitfer" styleClass="tableAziendaRiga"  header="Note Esclusione" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFER._esclusione_note}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFER._esclusione_note}" />
+			</o:column>
+			
+			<o:column id="Reiterazione_rmfitfer" styleClass="tableAziendaRiga"  header="Reiterazione" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFER._reiterazione}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFER._reiterazione}" />
+			</o:column>
+			
+			<o:column id="PrgAccReit_rmfitfer" styleClass="tableAziendaRiga"  header="Progressivo Accertamento Reiterazione" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFER._progr_accert_reiteraz}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFER._progr_accert_reiteraz}" />
+			</o:column>
+			
+			<o:column id="Portata_rmfitfer" styleClass="tableAziendaRiga"  header="Portata" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFER._portata}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFER._portata}" />
+			</o:column>
+			
+			<o:column id="PortataNote_rmfitfer" styleClass="tableAziendaRiga"  header="Note Portata" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFER._portata_note}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFER._portata_note}" />
+			</o:column>
+			
+			<o:column id="Gravita_rmfitfer" styleClass="tableAziendaRiga"  header="Gravita" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFER._gravita}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFER._gravita}" />
+			</o:column>
+			
+			<o:column id="GravitaNote_rmfitfer" styleClass="tableAziendaRiga"  header="Note Gravita" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFER._gravita_note}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFER._gravita_note}" />
+			</o:column>
+			
+			<o:column id="Durata_rmfitfer" styleClass="tableAziendaRiga"  header="Durata" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFER._durata}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFER._durata}" />
+			</o:column>
+			
+			<o:column id="DurataNote_rmfitfer" styleClass="tableAziendaRiga"  header="Note Durata" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFER._durata_note}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFER._durata_note}" />
+			</o:column>
+			
+			<o:column id="userModifica_rmfitfer" styleClass="tableAziendaRiga"  header="User Ultima Modifica" width="100pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFER._userModifica}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFER._userModifica}" />
+			</o:column>
+			
+			<o:column id="dataModifica_rmfitfer" styleClass="tableAziendaRiga"  header="Data Ultima Modifica" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFER._dataModificaStr}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFER._dataModificaStr}" />
+			</o:column>	
+			
+			<o:column id="note_rmfitfer" styleClass="tableAziendaRiga"  header="Note" width="150pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFER._note}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFER._note}" />
+			</o:column>	
+			
+		</o:dataTable>
+			
+	    <br/>
+		<h:commandButton action="#{esitoImpegniRMFITFERBean.aggiungiEsito}" value="Aggiungi" id="aggiungiEsitoImpegni_rmfitfer" rendered="#{request.isUserInRole('ROLE_WR_RMFITFER')}"/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_RMFITFER')}"/>
+		<h:commandButton action="#{esitoImpegniRMFITFERBean.modificaEsito}" value="Modifica" id="modificaEsitoImpegni_rmfitfer" rendered="#{request.isUserInRole('ROLE_WR_RMFITFER')}"/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_RMFITFER')}"/>
+		<h:commandButton action="#{esitoImpegniRMFITFERBean.cancellaEsito}" value="Cancella" id="cancellaEsitoImpegni_rmfitfer" rendered="#{request.isUserInRole('ROLE_WR_RMFITFER')}">
+			<o:confirmation id="deleteEsitoImpegniConfirmation_rmfitfer" 
+				message="Cancellare l'esito selezionato?"
+				details="" 
+				okButtonText="Si"
+                cancelButtonText="No"
+				draggable="true"/>
+		</h:commandButton>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_RMFITFER')}"/>
+		<h:commandButton action="#{esitoImpegniRMFITFERBean.esportaEsito}" value="Esporta Dati" id="esportaEsitoImpegni_rmfitfer"/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_RMFITFER')}"/>
+		<h:commandButton action="#{esitoImpegniRMFITFERBean.importaEsito}" value="Importa Dati" id="importaEsitoImpegni_rmfitfer" rendered="#{request.isUserInRole('ROLE_WR_RMFITFER')}"/>
+		<o:popupLayer id="popupEsitoImpegniLayer_rmfitfer"
+              visible="#{esitoImpegniRMFITFERBean._messageVisible}"
+              hideOnOuterClick="true"
+              hidingTimeout="5000"
+              styleClass="popupStyle"
+              left="200"
+              top="150">
+		  <h:outputText styleClass="popupMessage" value="#{esitoImpegniRMFITFERBean._message}"/>
+		</o:popupLayer>
+	</div>
+	<br/><br/>
+	<div>	
+		<b><h:outputText value="RM-FIT e FER Extracampione: Esito requisiti minimi per fertilizzanti e fitofarmaci" escape="true" /></b>
+		<br/><br/>	
+		<o:dataTable id="tableEsitoImpegniRMFITFERExtra" 
+			var="esitoImpegniRMFITFERExtra" 
+			value ="#{esitoImpegniRMFITFERExtraBean.elencoEsitoImpegni}"
+						
+			line-height="10px" 
+			horizontalGridLines="1px dotted gray"
+			verticalGridLines="1px dotted gray"
+			noDataRowStyle="color: black; text-align: left; font-size: 14px"
+			font-weight="plain"
+			cellpadding="3px"
+			pageSize="100"
+			styleClass="table" >
+			    
+			<f:facet name="below">
+	    		<o:dataTablePaginator id="paginator"/>
+	  		</f:facet>
+	  		<f:facet name="noDataMessage">
+    			<h:outputText value="#{searchBean._messageData}" />
+  			</f:facet>
+  			<!-- messaggio se la ricerca in tabella non ritorna risultati -->
+  			<f:facet name="noFilterDataMessage">
+    			<h:outputText value="Nessun dato corrisponde ai parametri di ricerca inseriti" />
+  			</f:facet>
+	  		<o:scrolling horizontal="true"/>
+	  		
+	  		<!-- permette il resizing della colonna -->
+	  		<o:columnResizing resizeHandleWidth="10px" minColWidth="50px"/>
+	  		
+	  		<!-- abilitare selezione singola della riga -->
+	  		<o:singleRowSelection rowData="#{esitoImpegniRMFITFERExtraBean._selectedValue}" rowIndex="#{esitoImpegniRMFITFERExtraBean._selectedValueIndex}" />
+	  		
+	  		<!--  <o:scrolling vertical="true"/>  --> 
+			<o:column id="cuaa_rmfitferextra" styleClass="tableAziendaRiga"  header="CUAA" width="130pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFERExtra._cuaa}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFERExtra._cuaa}" />
+			</o:column>
+			
+			<o:column id="campagna_rmfitferextra" styleClass="tableAziendaRiga"  header="Campagna" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFERExtra._campagna}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFERExtra._campagna}" />	
+			</o:column>
+			
+			<o:column id="domanda_rmfitferextra" styleClass="tableAziendaRiga"  header="Domanda" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFERExtra._domanda}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFERExtra._domanda}" />	
+			</o:column>
+			
+			<o:column id="misura_rmfitfetextra" styleClass="tableAziendaRiga"  header="Misura" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFERExtra._misura}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFERExtra._misura}" />	
+			</o:column>
+								
+			<o:column id="stato_rmfitferextra" styleClass="tableAziendaRiga"  header="Stato" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFERExtra._stato}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFERExtra._stato}" />	
+			</o:column>
+			
+			<o:column id="esito_rmfitferextra" styleClass="tableAziendaRiga"  header="Esito OPPAB" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFERExtra._esito_oppab}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFERExtra._esito_oppab}" />	
+			</o:column>
+			
+			<o:column id="percRidFIT_rmfitferextra" styleClass="tableAziendaRiga"  header="% Riduzione FIT" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFERExtra._percRidFIT}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFERExtra._percRidFIT}" />
+			</o:column>
+			
+			<o:column id="percRidFER_rmfitferextra" styleClass="tableAziendaRiga"  header="% Riduzione FER" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFERExtra._percRidFER}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFERExtra._percRidFER}" />
+			</o:column>
+			
+			<o:column id="percRidTotOPPAB_rmfitferextra" styleClass="tableAziendaRiga"  header="% Riduzione totale OPPAB" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFERExtra._percTotOPPAB}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFERExtra._percTotOPPAB}" />
+			</o:column>
+			
+			<o:column id="dataControllo_rmfitferextra" styleClass="tableAziendaRiga"  header="Data del controllo" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFERExtra._data_contrStr}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFERExtra._data_contrStr}" />
+			</o:column>
+			
+			<o:column id="esclusione_rmfitferextra" styleClass="tableAziendaRiga"  header="Esclusione" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFERExtra._esclusione}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFERExtra._esclusione}" />
+			</o:column>
+			
+			<ui:remove>
+				<o:column id="PrgAccEsclusione_rmfitferextra" styleClass="tableAziendaRiga"  header="Progressivo Accertamento Esclusione" width="80pt" 
+						headerStyle="white-space: normal;"
+						sortingExpression="#{esitoImpegniRMFITFERExtra._progr_accert_esclusione}"
+	            		sortingComparator="caseInsensitiveText">
+					<h:outputText value="#{esitoImpegniRMFITFERExtra._progr_accert_esclusione}" />
+				</o:column>
+			</ui:remove>
+			
+			<o:column id="esclusioneNote_rmfitferextra" styleClass="tableAziendaRiga"  header="Note Esclusione" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFERExtra._esclusione_note}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFERExtra._esclusione_note}" />
+			</o:column>
+			
+			<o:column id="Reiterazione_rmfitferextra" styleClass="tableAziendaRiga"  header="Reiterazione" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFERExtra._reiterazione}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFERExtra._reiterazione}" />
+			</o:column>
+			
+			<o:column id="PrgAccReit_rmfitferextra" styleClass="tableAziendaRiga"  header="Progressivo Accertamento Reiterazione" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFERExtra._progr_accert_reiteraz}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFERExtra._progr_accert_reiteraz}" />
+			</o:column>
+			
+			<o:column id="InadempGrave_rmfitferextra" styleClass="tableAziendaRiga"  header="Inadempienza Grave" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFERExtra._inadempienza_grave}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFERExtra._inadempienza_grave}" />
+			</o:column>
+			
+			<o:column id="Portata_rmfitferextra" styleClass="tableAziendaRiga"  header="Portata" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFERExtra._portata}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFERExtra._portata}" />
+			</o:column>
+			
+			<o:column id="PortataNote_rmfitferextra" styleClass="tableAziendaRiga"  header="Note Portata" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFERExtra._portata_note}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFERExtra._portata_note}" />
+			</o:column>
+			
+			<o:column id="Gravita_rmfitferextra" styleClass="tableAziendaRiga"  header="Gravita" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFERExtra._gravita}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFERExtra._gravita}" />
+			</o:column>
+			
+			<o:column id="GravitaNote_rmfitferextra" styleClass="tableAziendaRiga"  header="Note Gravita" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFERExtra._gravita_note}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFERExtra._gravita_note}" />
+			</o:column>
+			
+			<o:column id="Durata_rmfitferextra" styleClass="tableAziendaRiga"  header="Durata" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFERExtra._durata}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFERExtra._durata}" />
+			</o:column>
+			
+			<o:column id="DurataNote_rmfitferextra" styleClass="tableAziendaRiga"  header="Note Durata" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFERExtra._durata_note}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFERExtra._durata_note}" />
+			</o:column>
+			
+			<o:column id="Segnalazione_rmfitferextra" styleClass="tableAziendaRiga"  header="Segnalazione" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFERExtra._segnalazione}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFERExtra._segnalazione}" />
+			</o:column>
+			
+			<o:column id="Approvazione_rmfitferextra" styleClass="tableAziendaRiga"  header="Approvazione" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFERExtra._approvazione}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFERExtra._approvazione}" />
+			</o:column>
+
+			<o:column id="numeroDecreto_rmfitferextra" styleClass="tableAziendaRiga"  header="Numero Decreto" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFERExtra._numero_decreto}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFERExtra._numero_decreto}" />
+			</o:column>
+			
+			<o:column id="dataDecreto_rmfitferextra" styleClass="tableAziendaRiga"  header="Data Decreto" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFERExtra._data_decretoString}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFERExtra._data_decretoString}" />
+			</o:column>
+			
+			<o:column id="userModifica_rmfitferextra" styleClass="tableAziendaRiga"  header="User Ultima Modifica" width="100pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFERExtra._userModifica}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFERExtra._userModifica}" />
+			</o:column>
+			
+			<o:column id="dataModifica_rmfitferextra" styleClass="tableAziendaRiga"  header="Data Ultima Modifica" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFERExtra._dataModificaStr}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFERExtra._dataModificaStr}" />
+			</o:column>	
+			
+			<o:column id="note_rmfitferextra" styleClass="tableAziendaRiga"  header="Note" width="150pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoImpegniRMFITFERExtra._note}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoImpegniRMFITFERExtra._note}" />
+			</o:column>	
+			
+		</o:dataTable>
+			
+	    <br/>
+		<h:commandButton action="#{esitoImpegniRMFITFERExtraBean.aggiungiEsito}" value="Aggiungi" id="aggiungiEsitoImpegni_rmfitferextra" rendered="#{request.isUserInRole('ROLE_WR_RMFITFER')}"/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_RMFITFER')}"/>
+		<h:commandButton action="#{esitoImpegniRMFITFERExtraBean.modificaEsito}" value="Modifica" id="modificaEsitoImpegni_rmfitferextra" rendered="#{request.isUserInRole('ROLE_WR_RMFITFER')}"/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_RMFITFER')}"/>
+		<h:commandButton action="#{esitoImpegniRMFITFERExtraBean.cancellaEsito}" value="Cancella" id="cancellaEsitoImpegni_rmfitferextra" rendered="#{request.isUserInRole('ROLE_WR_RMFITFER')}">
+			<o:confirmation id="deleteEsitoImpegniConfirmation_rmfitferextra" 
+				message="Cancellare l'esito selezionato?"
+				details="" 
+				okButtonText="Si"
+                cancelButtonText="No"
+				draggable="true"/>
+		</h:commandButton>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_RMFITFER')}"/>
+		<h:commandButton action="#{esitoImpegniRMFITFERExtraBean.esportaEsito}" value="Esporta Dati" id="esportaEsitoImpegni_rmfitferExtra"/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_RMFITFER')}"/>
+		<h:commandButton action="#{esitoImpegniRMFITFERExtraBean.importaEsito}" value="Importa Dati" id="importaEsitoImpegni_rmfitferExtra" rendered="#{request.isUserInRole('ROLE_WR_RMFITFER')}"/>
+		<o:popupLayer id="popupEsitoImpegniLayer_rmfitferextra"
+              visible="#{esitoImpegniRMFITFERExtraBean._messageVisible}"
+              hideOnOuterClick="true"
+              hidingTimeout="5000"
+              styleClass="popupStyle"
+              left="200"
+              top="150">
+		  <h:outputText styleClass="popupMessage" value="#{esitoImpegniRMFITFERExtraBean._message}"/>
+		</o:popupLayer>
+	</div>
+</div>
+    

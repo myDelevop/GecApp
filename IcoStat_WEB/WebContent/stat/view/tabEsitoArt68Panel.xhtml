@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<div xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:o="http://openfaces.org/"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+
+	<div>
+		<b><h:outputText value="Esiti Art. 68" escape="true" /></b>
+		<br/><br/>	
+		<o:dataTable id="tableEsitoArt68" var="esitoArt68"
+			value="#{esitoArt68Bean.elencoEsitoArt68}"
+			rowKey="#{esitoArt68._cuaa}" line-height="10px"
+			horizontalGridLines="1px dotted gray"
+			verticalGridLines="1px dotted gray"
+			noDataRowStyle="color: black; text-align: left; font-size: 14px"
+			font-weight="plain" cellpadding="3px" pageSize="100"
+			styleClass="table">
+
+			<f:facet name="below">
+				<o:dataTablePaginator id="paginator" />
+			</f:facet>
+			<f:facet name="noDataMessage">
+				<h:outputText value="#{searchBean._messageData}" />
+			</f:facet>
+			<!-- messaggio se la ricerca in tabella non ritorna risultati -->
+			<f:facet name="noFilterDataMessage">
+				<h:outputText
+					value="Nessun dato corrisponde ai parametri di ricerca inseriti" />
+			</f:facet>
+			<o:scrolling horizontal="true" />
+
+			<!-- permette il resizing della colonna -->
+			<o:columnResizing resizeHandleWidth="10px" minColWidth="50px" />
+
+			<!-- abilitare selezione singola della riga -->
+			<o:singleRowSelection rowData="#{esitoArt68Bean._selectedValue}"
+				rowIndex="#{esitoArt68Bean._selectedValueIndex}" />
+
+			<!--  <o:scrolling vertical="true"/>  -->
+			<o:column id="cuaa" styleClass="tableAziendaRiga" header="CUAA"
+				width="130pt" headerStyle="white-space: normal;"
+				sortingExpression="#{esitoArt68._cuaa}"
+				sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoArt68._cuaa}" />
+			</o:column>
+
+			<o:column id="campagna" styleClass="tableAziendaRiga"
+				header="Campagna" width="80pt" headerStyle="white-space: normal;"
+				sortingExpression="#{esitoArt68._campagna}"
+				sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoArt68._campagna}" />
+			</o:column>
+
+			<o:column id="domanda" styleClass="tableAziendaRiga" header="Domanda"
+				width="80pt" headerStyle="white-space: normal;"
+				sortingExpression="#{esitoArt68._domanda}"
+				sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoArt68._domanda}" />
+			</o:column>
+
+			<o:column id="intervento" styleClass="tableAziendaRiga"
+				header="Intervento" width="80pt" headerStyle="white-space: normal;"
+				sortingExpression="#{esitoArt68._intervento}"
+				sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoArt68._intervento}" />
+			</o:column>
+
+			<o:column id="stato" styleClass="tableAziendaRiga" header="Stato"
+				width="80pt" headerStyle="white-space: normal;"
+				sortingExpression="#{esitoArt68._stato}"
+				sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoArt68._stato}" />
+			</o:column>
+
+			<o:column id="esito" styleClass="tableAziendaRiga"
+				header="Esito OPPAB" width="80pt" headerStyle="white-space: normal;"
+				sortingExpression="#{esitoArt68._esito}"
+				sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoArt68._esito}" />
+			</o:column>
+
+			<o:column id="impRiduz" styleClass="tableAziendaRiga"
+				header="Importo Riduzione" width="80pt"
+				headerStyle="white-space: normal;"
+				sortingExpression="#{esitoArt68._impRiduz}"
+				sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoArt68._impRiduz}" />
+			</o:column>
+
+			<o:column id="dataIspezione" styleClass="tableAziendaRiga"
+				header="Data Ispezione" width="80pt"
+				headerStyle="white-space: normal;"
+				sortingExpression="#{esitoArt68._dataIspezioneStr}"
+				sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoArt68._dataIspezioneStr}" />
+			</o:column>
+
+			<o:column id="userModifica" styleClass="tableAziendaRiga"
+				header="User Ultima Modifica" width="100pt"
+				headerStyle="white-space: normal;"
+				sortingExpression="#{esitoArt68._userModifica}"
+				sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoArt68._userModifica}" />
+			</o:column>
+
+			<o:column id="dataModifica" styleClass="tableAziendaRiga"
+				header="Data Ultima Modifica" width="80pt"
+				headerStyle="white-space: normal;"
+				sortingExpression="#{esitoArt68._dataModificaStr}"
+				sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoArt68._dataModificaStr}" />
+			</o:column>
+
+			<o:column id="noteArt68" styleClass="tableAziendaRiga"
+				header="Note" width="150pt" headerStyle="white-space: normal;"
+				sortingExpression="#{esitoArt68._note}"
+				sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoArt68._note}" />
+			</o:column>
+
+		</o:dataTable>
+
+		<br />
+		<h:commandButton action="#{esitoArt68Bean.aggiungiEsito}" value="Aggiungi" id="aggiungiEsitoArt68" rendered="#{request.isUserInRole('ROLE_WR_IMP')}"/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_ZOOT')}"/>
+		<h:commandButton action="#{esitoArt68Bean.modificaEsito}" value="Modifica" id="modificaEsitoArt68" rendered="#{request.isUserInRole('ROLE_WR_IMP')}"/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_ZOOT')}"/>
+		<h:commandButton action="#{esitoArt68Bean.cancellaEsito}" value="Cancella" id="cancellaEsitoArt68" rendered="#{request.isUserInRole('ROLE_WR_IMP')}">
+			<o:confirmation id="deleteEsitoArt68Confirmation" 
+				message="Cancellare l'esito selezionato?"
+				details="" 
+				okButtonText="Si"
+	               cancelButtonText="No"
+				draggable="true"/>
+		</h:commandButton>
+			
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_ZOOT')}"/>
+		<h:commandButton action="#{esitoArt68Bean.esportaEsito}" value="Esporta Dati" id="esportaEsitoArt68"/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_ZOOT')}"/>
+		<h:commandButton action="#{esitoArt68Bean.importaEsito}" value="Importa Dati" id="importaEsitoArt68" 
+			rendered="#{request.isUserInRole('ROLE_WR_ZOOT')}"/>
+	
+		<o:popupLayer id="popupEsitoArt68Layer"
+	             visible="#{esitoArt68Bean._messageVisible}"
+	             hideOnOuterClick="true"
+	             hidingTimeout="5000"
+	             styleClass="popupStyle"
+	             left="200"
+	             top="150">
+		  <h:outputText styleClass="popupMessage" value="#{esitoArt68Bean._message}"/>
+		</o:popupLayer>
+		
+	</div>
+
+</div>
+

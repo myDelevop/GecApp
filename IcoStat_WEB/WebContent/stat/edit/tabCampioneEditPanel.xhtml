@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<div  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:o="http://openfaces.org/"
+      xmlns:t="http://myfaces.apache.org/tomahawk" >
+
+	<div>
+		<b><h:outputText value="#{campioneBean._titoloPagina}" escape="true" /></b>
+		<br/><br/>
+		<table>
+			<tr>
+				<td>Campagna:</td>
+				<td><o:dropDownField id="selectCampagnaCampione"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{campioneBean._campione._campagna}"
+			               listItemStyle="white-space: nowrap;"          
+			               listStyle="height:400px !important;"     
+			               style="width:200px;border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;"
+			               disabled="#{campioneBean._readOnly}">
+						<o:dropDownItems value="#{campioneBean._listCampagna}"/>
+						<o:ajax event="change" listener="#{campioneBean.selezioneDomande}" render="selectDomandaCampione" />
+					</o:dropDownField>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:250">CUAA:</td>
+				<td>
+					<h:inputText value="#{campioneBean._campione._cuaa}" size="30" readonly="#{campioneBean._readOnly}"
+						style="border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;">
+						<o:ajax event="change" listener="#{campioneBean.selezioneDomande}" render="selectDomandaCampione" />
+					</h:inputText>
+				</td>
+			</tr>
+			<tr>
+				<td>Categoria:</td>
+				<td>
+					<o:dropDownField id="selectCategoriaCamp"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{campioneBean._campione._categoria}"
+			               listItemStyle="white-space: nowrap;"
+			               listStyle="height:100px !important;"        
+			               style="width:200px;border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;"
+			               disabled="#{campioneBean._readOnly}">
+						<o:dropDownItems value="#{campioneBean._listCategoriaCampione}"/>
+						<o:ajax event="change" listener="#{campioneBean.selezioneCategoria}"
+								render="selectStatoDomandaOPPABCamp selectOrigineCampione selectCampBovini selectCampOvicaprini selectDomandaCampione selectCampCondDominio selectTipoCamp" />
+					</o:dropDownField>
+				</td>
+			</tr>
+			<tr>
+				<td class="rowSeparator">Domanda:</td>
+				<td class="rowSeparator">
+					<o:dropDownField id="selectDomandaCampione"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{campioneBean._campione._domanda}"
+			               listItemStyle="white-space: nowrap;"
+			               listStyle="height:100px !important;"            
+			               style="width:200px;border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;"
+			               disabled="#{campioneBean._disableDomanda}">
+						<o:dropDownItems value="#{campioneBean._listDomande}"/>
+					</o:dropDownField></td>
+			</tr>
+			<tr>
+				<td>Tipo Campione:</td>
+				<td><o:dropDownField id="selectTipoCamp"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{campioneBean._campione._tipo}"
+			               listStyle="height:100px !important;"
+			               listItemStyle="white-space: nowrap;"               
+			               style="width:200px;border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;">
+						<o:dropDownItems value="#{campioneBean._listTipoCampione}"/>
+					</o:dropDownField>
+				</td>
+			</tr>
+			<tr>
+				<td>Data Campione:</td>
+				<td>
+					<o:dateChooser id="dataCampImp"
+                             pattern="dd/MM/yyyy"
+                             value="#{campioneBean._campione._dataCampione}"
+                             locale="it_IT"
+                             todayText="Oggi"
+                             noneText="Nessuno"
+                             headerStyle="background: white; color: black;"
+                             daysHeaderStyle="background: #20386b; color: white;"
+                             dayStyle="border: 1px solid white;"
+                             rolloverDayStyle="border: 1px solid #f7a902; background: white; color: black;"
+                             rolloverWeekendDayStyle="border: 1px solid #f7a902; background: white; color: #ff8a00;"
+                             selectedDayStyle="border: 1px solid #20386b; color: #20386b; background: white;"
+                             weekendDayStyle="color: #ff8a00;"
+                             footerStyle="background: white; color: black; border-top: 1px solid #20386b;"
+			                 style="width:200px;border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;"
+                             typingAllowed="false"
+                             />
+            	</td>
+			</tr>
+			<tr>
+				<td>Stato Domanda OPPAB:</td>
+				<td>
+					<o:dropDownField id="selectStatoDomandaOPPABCamp"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{campioneBean._campione._statoDomandaOPPAB}"
+			               listStyle="height:100px !important;"
+			               listItemStyle="white-space: nowrap;"               
+			               style="width:200px;border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;">
+						<o:dropDownItems value="#{campioneBean._listStatoDomandaOPPAB}"/>
+					</o:dropDownField>
+				</td>
+			</tr>
+			<tr>
+				<td class="rowSeparator">Origine Campione:</td>
+				<td class="rowSeparator">
+					<o:dropDownField id="selectOrigineCampione"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{campioneBean._campione._origineCampione}"
+			               listStyle="height:100px !important;"
+			               listItemStyle="white-space: nowrap;"               
+			               style="width:200px;border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;">
+						<o:dropDownItems value="#{campioneBean._listOrigineCampione}"/>
+						<o:ajax event="change" listener="#{campioneBean.selezioneOrigineCampione}"
+								render="selectCampCondDominio" />
+					</o:dropDownField>
+				</td>
+			</tr>
+			<tr>
+				<td>Dominio Campione Condizionalità:</td>
+				<td>
+					<o:dropDownField id="selectCampCondDominio"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{campioneBean._campione._dominioCampCond}"
+			               listStyle="width:950px;height:75px !important; min-height:75px;max-height:75px;"
+			               listItemStyle="white-space: nowrap;"               
+			               style="width:200px;"
+			               disabled="#{campioneBean._disableDominioCond}">
+						<o:dropDownItems value="#{campioneBean._listDominioCond}"/>
+						<o:ajax event="change" render="selectCampCondDominio" listener="#{campioneBean.refreshDominioCond}"/>	
+					</o:dropDownField>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:250">Bovini:</td>
+				<td><o:dropDownField id="selectCampBovini"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{campioneBean._campione._bovini}"
+			               listStyle="height:100px !important;"
+			               listItemStyle="white-space: nowrap;"               
+			               style="width:200px;"
+			               disabled="#{campioneBean._disableBoviniOvicaprini}">
+						<o:dropDownItems value="#{campioneBean._listBovini}"/>
+					</o:dropDownField></td>
+			</tr>
+			<tr>
+				<td style="width:250">Ovicaprini:</td>
+				<td><o:dropDownField id="selectCampOvicaprini"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{campioneBean._campione._ovicaprini}"
+			               listStyle="height:100px !important;"
+			               listItemStyle="white-space: nowrap;"               
+			               style="width:200px;"
+			               disabled="#{campioneBean._disableBoviniOvicaprini}">
+						<o:dropDownItems value="#{campioneBean._listOvicaprini}"/>
+					</o:dropDownField></td>
+			</tr>
+			<tr>
+				<td style="width:250">Note:</td>
+				<td><h:inputText value="#{campioneBean._campione._note}" size="100" /></td>
+			</tr>
+		
+		</table>
+		<br/>
+			
+	    <br/>
+		<h:commandButton action="#{campioneBean.salvaCampione}" value="Salva" id="salvaCampione"/>
+		<h:outputText value="  " escape="false" />
+		<h:commandButton action="#{campioneBean.annullaCampione}" value="Annulla" id="annullaCampione"/>
+		<o:popupLayer id="popupCampioneEditLayer"
+              visible="#{campioneBean._messageVisible}"
+              hideOnOuterClick="true"
+              hidingTimeout="5000"
+              styleClass="popupStyle"
+              left="200"
+              top="150">
+		  <h:outputText styleClass="popupMessage" value="#{campioneBean._message}"/>
+		</o:popupLayer>
+	</div>
+
+</div>
+    

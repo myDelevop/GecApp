@@ -1,0 +1,192 @@
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<div xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:o="http://openfaces.org/"
+	xmlns:ui="http://java.sun.com/jsf/facelets" id="tabbedPanel"
+	class="emptyDescription">
+
+	<!-- start content -->
+	<o:tabbedPane loadingMode="server" rendered="true" style="width: 100%;"
+		containerStyle="background: #f9f9f9 url(../images/tabbedPane/back_container.gif) repeat-x bottom; border-bottom: 0px; padding: 20px 20px 20px 20px; text-align: justify; width: 100%; height: 100%;"
+		tabStyle="color: #444c50; background: url(../images/tabbedPane/back_inactivetab.gif) repeat-x bottom; text-align: center; vertical-align: middle; height: 25px; width: 90px;"
+		selectedTabStyle="font-weight: bold; background: #f9f9f9;"
+		frontBorderStyle="1px solid #99acb7"
+		backBorderStyle="1px solid #a4a9ab"
+		selectedIndex="#{TPBean.selectedIndex}"
+		selectionChangeListener="#{TPBean.processSelectionChange}">
+
+		<o:subPanel caption="Azienda">
+			<h:panelGroup layout="block"
+				rendered="#{aziendaBean._action=='visualizza'}">
+				<ui:include src="../stat/view/tabAziendaPanel.xhtml" />
+			</h:panelGroup>
+		</o:subPanel>
+
+		<o:subPanel caption="Domanda">
+			<h:panelGroup layout="block"
+				rendered="#{domandaBean._action=='visualizza'}">
+				<ui:include src="../stat/view/tabDomandaPanel.xhtml" />
+			</h:panelGroup>
+		</o:subPanel>
+
+		<o:subPanel caption="Campione">
+			<h:panelGroup layout="block"
+				rendered="#{campioneBean._action=='visualizza' and controlloBean._action=='visualizza'}">
+				<ui:include src="../stat/view/tabCampionePanel.xhtml" />
+			</h:panelGroup>
+			<h:panelGroup layout="block"
+				rendered="#{campioneBean._action=='aggiungi' or campioneBean._action=='modifica'}">
+				<ui:include src="../stat/edit/tabCampioneEditPanel.xhtml" />
+			</h:panelGroup>
+			<h:panelGroup layout="block"
+				rendered="#{controlloBean._action=='aggiungi' or controlloBean._action=='modifica'}">
+				<ui:include src="../stat/edit/tabControlloEditPanel.xhtml" />
+			</h:panelGroup>
+		</o:subPanel>
+
+		<o:subPanel caption="Condizionalita">
+			<h:panelGroup layout="block"
+				rendered="#{(esitoCondBean._datiDaVisualizzare=='ESITI CONDIZIONALITA' and 
+      			esitoCondBean._action =='visualizza') or 
+      			(esitoCondBean._datiDaVisualizzare=='MATRICE AMMISSIBILITA IDEALE' and matrAmmIdealeBean._action =='visualizza')}">
+				<ui:include src="../stat/view/tabEsitoCondPanel_ListBox.xhtml" />
+			</h:panelGroup>
+			<h:panelGroup layout="block"
+				rendered="#{esitoCondBean._datiDaVisualizzare=='ESITI CONDIZIONALITA' and 
+      			esitoCondBean._action=='visualizza'}">
+				<ui:include src="../stat/view/tabEsitoCondPanel.xhtml" />
+			</h:panelGroup>
+			<h:panelGroup layout="block"
+				rendered="#{esitoCondBean._datiDaVisualizzare=='ESITI CONDIZIONALITA' and
+				(esitoCondBean._action=='aggiungiAtto' or esitoCondBean._action=='modificaAtto')}">
+				<ui:include src="../stat/edit/tabEsitoCondAttoEditPanel.xhtml" />
+			</h:panelGroup>
+			<h:panelGroup layout="block"
+				rendered="#{esitoCondBean._datiDaVisualizzare=='ESITI CONDIZIONALITA' and 
+				(esitoCondBean._action=='aggiungi' or esitoCondBean._action=='modifica')}">
+				<ui:include src="../stat/edit/tabEsitoCondEditPanel.xhtml" />
+			</h:panelGroup>
+			<h:panelGroup layout="block"
+				rendered="#{esitoCondBean._datiDaVisualizzare=='MATRICE AMMISSIBILITA IDEALE' and 
+      			matrAmmIdealeBean._action=='visualizza'}">
+				<ui:include src="../stat/view/tabEsitoCondPanel_MatrAmmIdeale.xhtml" />
+			</h:panelGroup>
+
+		</o:subPanel>
+
+		<o:subPanel caption="Impegni">
+			<h:panelGroup layout="block"
+				rendered="#{esitoImpegniBean._action=='visualizza' and esitoImpegniExtraBean._action=='visualizza'}">
+				<ui:include src="../stat/view/tabEsitoImpegniPanel.xhtml" />
+			</h:panelGroup>
+			<h:panelGroup layout="block"
+				rendered="#{esitoImpegniBean._action=='aggiungi' or esitoImpegniBean._action=='modifica'}">
+				<ui:include src="../stat/edit/tabEsitoImpegniEditPanel.xhtml" />
+			</h:panelGroup>
+			<h:panelGroup layout="block"
+				rendered="#{esitoImpegniExtraBean._action=='aggiungi' or esitoImpegniExtraBean._action=='modifica'}">
+				<ui:include src="../stat/edit/tabEsitoImpegniExtraEditPanel.xhtml" />
+			</h:panelGroup>
+		</o:subPanel>
+		
+		<o:subPanel caption="RM-FIT e FER">
+			<h:panelGroup layout="block"
+				rendered="#{esitoImpegniRMFITFERBean._action == 'visualizza' and esitoImpegniRMFITFERExtraBean._action == 'visualizza'}">
+				<ui:include src="../stat/view/tabEsitoRMFITFERPanel.xhtml" />
+			</h:panelGroup>
+			<h:panelGroup layout="block"
+					rendered="#{esitoImpegniRMFITFERBean._action=='aggiungi' or esitoImpegniRMFITFERBean._action=='modifica'}">
+					<ui:include
+						src="../stat/edit/tabEsitoImpegniRMFITFEREditPanel.xhtml" />
+			</h:panelGroup>
+			<h:panelGroup layout="block"
+					rendered="#{esitoImpegniRMFITFERExtraBean._action=='aggiungi' or esitoImpegniRMFITFERExtraBean._action=='modifica'}">
+					<ui:include
+						src="../stat/edit/tabEsitoImpegniRMFITFERExtraEditPanel.xhtml" />
+			</h:panelGroup>
+		</o:subPanel>
+		
+		<o:subPanel caption="Superfici">
+			<h:panelGroup layout="block"
+				rendered="#{esitoSupBean._action=='visualizza'}">
+				<ui:include src="../stat/view/tabEsitoSuperficiPanel.xhtml" />
+			</h:panelGroup>
+			<h:panelGroup layout="block"
+				rendered="#{esitoSupBean._action=='aggiungi' or esitoSupBean._action=='modifica'}">
+				<ui:include src="../stat/edit/tabEsitoSuperficiEditPanel.xhtml" />
+			</h:panelGroup>
+		</o:subPanel>
+
+		<o:subPanel caption="UBA">
+			<h:panelGroup layout="block"
+				rendered="#{ubaBean._action=='visualizza' and ubaAmmBean._action == 'visualizza'}">
+				<ui:include src="../stat/view/tabUBAPanel.xhtml" />
+			</h:panelGroup>
+			<h:panelGroup layout="block"
+				rendered="#{ubaBean._action=='aggiungi' or ubaBean._action=='modifica'}">
+				<ui:include src="../stat/edit/tabUBAEditPanel.xhtml" />
+			</h:panelGroup>
+			<h:panelGroup layout="block"
+				rendered="#{ubaAmmBean._action=='aggiungi' or ubaAmmBean._action=='modifica'}">
+				<ui:include src="../stat/edit/tabUBAAmmEditPanel.xhtml" />
+			</h:panelGroup>
+		</o:subPanel>
+
+		<o:subPanel caption="Tutela Acque">
+			<h:panelGroup layout="block"
+				rendered="#{tutelaAcqueBean._action=='visualizza'}">
+				<ui:include src="../stat/view/tabTutelaAcquePanel.xhtml" />
+			</h:panelGroup>
+			<h:panelGroup layout="block"
+				rendered="#{tutelaAcqueBean._action=='aggiungi' or tutelaAcqueBean._action=='modifica'}">
+				<ui:include src="../stat/edit/tabTutelaAcqueEditPanel.xhtml" />
+			</h:panelGroup>
+		</o:subPanel>
+		<o:subPanel caption="Zootecnia">
+			<h:panelGroup layout="block"
+				rendered="#{esitoZootBean._action=='visualizza'}">
+				<ui:include src="../stat/view/tabEsitoZootPanel.xhtml" />
+			</h:panelGroup>
+			<h:panelGroup layout="block"
+				rendered="#{esitoZootBean._action=='aggiungi' or esitoZootBean._action=='modifica'}">
+				<ui:include src="../stat/edit/tabEsitoZootEditPanel.xhtml" />
+			</h:panelGroup>
+			<h:panelGroup layout="block"
+				rendered="#{esitoZootBean._action=='edit_contr_amm_bovini'}">
+				<ui:include src="../stat/edit/tabEsitoZootContrBovEditPanel.xhtml" />
+			</h:panelGroup>
+			<h:panelGroup layout="block"
+				rendered="#{esitoZootBean._action=='edit_contr_amm_ovicaprini'}">
+				<ui:include src="../stat/edit/tabEsitoZootContrOviEditPanel.xhtml" />
+			</h:panelGroup>
+			<h:panelGroup layout="block"
+				rendered="#{esitoZootBean._action=='edit_contr_cond'}">
+				<ui:include src="../stat/edit/tabEsitoZootContrCondEditPanel.xhtml" />
+			</h:panelGroup>
+			<h:panelGroup layout="block"
+				rendered="#{esitoZootBean._action=='edit_esito_amm_bovini'}">
+				<ui:include src="../stat/edit/tabEsitoZootEsitoBovEditPanel.xhtml" />
+			</h:panelGroup>
+			<h:panelGroup layout="block"
+				rendered="#{esitoZootBean._action=='edit_esito_amm_ovicaprini'}">
+				<ui:include src="../stat/edit/tabEsitoZootEsitoOviEditPanel.xhtml" />
+			</h:panelGroup>
+			<h:panelGroup layout="block"
+				rendered="#{esitoZootBean._action=='edit_dati_controllo'}">
+				<ui:include
+					src="../stat/edit/tabEsitoZootDatiControlloEditPanel.xhtml" />
+			</h:panelGroup>
+		</o:subPanel>
+		<!--
+		<o:subPanel caption="Articolo 68">
+			<h:panelGroup layout="block"
+				rendered="#{esitoArt68Bean._action=='visualizza'}">
+				<ui:include src="../stat/view/tabEsitoArt68Panel.xhtml" />
+			</h:panelGroup>
+			<h:panelGroup layout="block"
+				rendered="#{esitoArt68Bean._action=='aggiungi' or esitoArt68Bean._action=='modifica'}">
+				<ui:include src="../stat/edit/tabEsitoArt68EditPanel.xhtml" />
+			</h:panelGroup>
+		</o:subPanel>
+		-->
+	</o:tabbedPane>
+</div>

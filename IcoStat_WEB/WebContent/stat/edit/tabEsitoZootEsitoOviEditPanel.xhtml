@@ -1,0 +1,222 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<div  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:o="http://openfaces.org/"
+      xmlns:t="http://myfaces.apache.org/tomahawk" >
+      
+      
+	
+	<div>
+		<b><h:outputText value="#{esitoZootBean._titoloPagina}" escape="true" /></b>
+		<br/><br/>
+		
+		<br/><br/>
+		<table>					
+			<tr >
+				<td>CUAA:</td>
+				<td><h:outputText value="#{esitoZootBean._esitoZootStato._cuaa}"/></td>
+			</tr>
+			<tr>
+				<td>Campagna:</td>
+				<td><h:outputText value="#{esitoZootBean._esitoZootStato._campagna}"/></td>
+			</tr>
+			<tr>
+				<td>Domanda:</td>
+				<td><h:outputText value="#{esitoZootBean._esitoZootStato._domanda}"/></td>
+			</tr>
+		</table>
+		<br/><br/>
+		
+		<h:outputText value="Esito dei controlli" escape="true" style="text-decoration:underline"/>
+		<br/><br/>
+		<table>
+		<!--  
+			<tr>
+				<td style="width:300px">Esito Controllo Titoli Speciali:</td>
+				<td>
+					<o:dropDownField id="selectZootEsitoTitSpecOvi"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{esitoZootBean._esitoZootEsitoAmmOvi._esitoControlloTitoliSpeciali}"
+			               listItemStyle="white-space: nowrap;" 
+			               listStyle="height:100px !important;"              
+			               style="width:100px;">
+						<o:dropDownItems value="#{esitoZootBean._listEsito}"/>
+					</o:dropDownField>
+				</td>
+			</tr>					
+			<tr>
+				<td>- Ammissibilità Titoli Speciali:</td>
+				<td>
+					<o:selectOneRadio id="selectAmmTS" value="#{esitoZootBean._esitoZootEsitoAmmOvi._flgAmmControlloTitoliSpeciali}">
+						<f:selectItems id="valueSelectAmmTS" value="#{esitoZootBean._listRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>	
+			
+			<tr>
+				<td >Esito Controllo Art. 68 - Int. 168:</td>
+				<td>
+					<o:dropDownField id="selectZootEsitoArt68Int168"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{esitoZootBean._esitoZootEsitoAmmOvi._esitoControlloArt68Int168}"
+			               listItemStyle="white-space: nowrap;"    
+			               listStyle="height:100px !important;"           
+			               style="width:100px;">
+						<o:dropDownItems value="#{esitoZootBean._listEsito}"/>
+					</o:dropDownField>
+				</td>
+			</tr>					
+			<tr>
+				<td>- Percentuale di riduzione Art. 68 - Int. 168:</td>
+				<td><h:inputText value="#{esitoZootBean._esitoZootEsitoAmmOvi._percRidControlloArt68Int168}" size="11" /></td>
+			</tr>
+				-->	
+			<tr>
+				<td >Esito Controllo - Int. 320:</td>
+				<td>
+					<o:dropDownField id="selectZootEsitoInt320"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{esitoZootBean._esitoZootEsitoAmmOvi._esi_contr_320}"
+			               listItemStyle="white-space: nowrap;"       
+			               listStyle="height:100px !important;"        
+			               style="width:100px;">
+						<o:dropDownItems value="#{esitoZootBean._listEsito}"/>
+					</o:dropDownField>
+				</td>
+			</tr>					
+			<tr>
+				<td>- Percentuale di riduzione - Int. 320:</td>
+				<td><h:inputText value="#{esitoZootBean._esitoZootEsitoAmmOvi._perc_rid_320}" size="11" /></td>
+			</tr>
+		</table>
+		<!--  
+		<br/><br/>
+		<h:outputText value="Applicazione della sanzione (se esito negativo) - Intervento 168" escape="true" style="text-decoration:underline"/>
+		<br/><br/>
+		<table>
+			<tr>
+				<td style="width:450px">Applicazione della percentuale di riduzione determinata:</td>
+				<td>
+					<o:selectOneRadio value="#{esitoZootBean._esitoZootEsitoAmmOvi._sanzFlgApplPercRid}">
+						<f:selectItems value="#{esitoZootBean._listRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>					
+			<tr>
+				<td>- Percentuale di riduzione determinata:</td>
+				<td><h:inputText value="#{esitoZootBean._esitoZootEsitoAmmOvi._sanzPercRid}" size="11" /></td>
+			</tr>
+			<tr>
+				<td>Applicazione del doppio della percentuale di riduzione determinata:</td>
+				<td>
+					<o:selectOneRadio value="#{esitoZootBean._esitoZootEsitoAmmOvi._sanzFlgApplPercRidDoppia}">
+						<f:selectItems value="#{esitoZootBean._listRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>					
+			<tr>
+				<td>- Percentuale di riduzione determinata:</td>
+				<td><h:inputText value="#{esitoZootBean._esitoZootEsitoAmmOvi._sanzPercRidDoppia}" size="11" /></td>
+			</tr>
+			<tr>
+				<td style="width:300px">Esclusione del pagamento:</td>
+				<td>
+					<o:selectOneRadio value="#{esitoZootBean._esitoZootEsitoAmmOvi._sanzFlgEsclusione}">
+						<f:selectItems value="#{esitoZootBean._listRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>					
+			<tr>
+				<td>- Percentuale di riduzione determinata:</td>
+				<td><h:inputText value="#{esitoZootBean._esitoZootEsitoAmmOvi._sanzPercRidEsclusione}" size="11" /></td>
+			</tr>		
+			<tr>
+				<td style="width:300px">Ulteriore esclusione del pagamento:</td>
+				<td>
+					<o:selectOneRadio value="#{esitoZootBean._esitoZootEsitoAmmOvi._sanzFlgEsclusioneUlteriore}">
+						<f:selectItems value="#{esitoZootBean._listRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>	
+		</table>
+		-->	
+		<br/><br/>
+		<h:outputText value="Applicazione della sanzione - Intervento 320" escape="true" style="text-decoration:underline"/>
+		<br/><br/>
+		<table>
+			<tr>
+				<td style="width:450px">Applicazione della percentuale di riduzione determinata:</td>
+				<td>
+					<o:selectOneRadio value="#{esitoZootBean._esitoZootEsitoAmmOvi._flg_appl_perc_rid_320}">
+						<f:selectItems value="#{esitoZootBean._listRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>					
+			<tr>
+				<td>- Percentuale di riduzione determinata:</td>
+				<td><h:inputText value="#{esitoZootBean._esitoZootEsitoAmmOvi._perc_rid_esi_320}" size="11" /></td>
+			</tr>
+			<tr>
+				<td>Applicazione del doppio della percentuale di riduzione determinata:</td>
+				<td>
+					<o:selectOneRadio value="#{esitoZootBean._esitoZootEsitoAmmOvi._flg_2x_perc_rid_320}">
+						<f:selectItems value="#{esitoZootBean._listRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>					
+			<tr>
+				<td>- Percentuale di riduzione determinata:</td>
+				<td><h:inputText value="#{esitoZootBean._esitoZootEsitoAmmOvi._perc_rid_2x_320}" size="11" /></td>
+			</tr>
+			<tr>
+				<td style="width:300px">Esclusione del pagamento:</td>
+				<td>
+					<o:selectOneRadio value="#{esitoZootBean._esitoZootEsitoAmmOvi._flg_esc_pag_320}">
+						<f:selectItems value="#{esitoZootBean._listRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>					
+			<tr>
+				<td>- Percentuale di riduzione determinata:</td>
+				<td><h:inputText value="#{esitoZootBean._esitoZootEsitoAmmOvi._perc_rid_esc_pag_320}" size="11" /></td>
+			</tr>		
+			<tr>
+				<td style="width:300px">Ulteriore esclusione del pagamento:</td>
+				<td>
+					<o:selectOneRadio value="#{esitoZootBean._esitoZootEsitoAmmOvi._flg_ult_esc_pag_320}">
+						<f:selectItems value="#{esitoZootBean._listRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>	
+		</table>
+		<br/>
+		
+		Note: <h:inputText value="#{esitoZootBean._esitoZootEsitoAmmOvi._note}" size="50" />
+	
+		<br/><br/><br/>
+		<h:commandButton action="#{esitoZootBean.salvaEsitoAmmOvi}" value="Salva" id="salvaEsitoOviZoot"/>
+		<h:outputText value="  " escape="false" />
+		<h:commandButton action="#{esitoZootBean.annullaEsitoAmmOvi}" value="Annulla" id="annullaEsitoOviZoot"/>
+		
+		<o:popupLayer id="popupEsitoOviZootEditLayer"
+              visible="#{esitoZootBean._messageVisible}"
+              hideOnOuterClick="true"
+              hidingTimeout="5000"
+              styleClass="popupStyle"
+              left="200"
+              top="150">
+		  <h:outputText styleClass="popupMessage" value="#{esitoZootBean._message}"/>
+		</o:popupLayer>
+			
+	
+	</div>
+
+</div>
+    

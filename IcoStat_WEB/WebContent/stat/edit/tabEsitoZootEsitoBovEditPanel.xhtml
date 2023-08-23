@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<div  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:o="http://openfaces.org/"
+      xmlns:t="http://myfaces.apache.org/tomahawk" >
+
+	<div>
+		<b><h:outputText value="#{esitoZootBean._titoloPagina}" escape="true" /></b>
+		<br/><br/>	
+		
+		<h:outputText value="Dati azienda" escape="true" style="text-decoration:underline" />
+		<br/><br/>
+		<table>					
+			<tr >
+				<td>CUAA:</td>
+				<td><h:outputText value="#{esitoZootBean._esitoZootStato._cuaa}"/></td>
+			</tr>
+			<tr>
+				<td>Campagna:</td>
+				<td><h:outputText value="#{esitoZootBean._esitoZootStato._campagna}"/></td>
+			</tr>
+			<tr>
+				<td>Domanda:</td>
+				<td><h:outputText value="#{esitoZootBean._esitoZootStato._domanda}"/></td>
+			</tr>
+			<tr>
+				<td style="width:300px">Intervento:</td>
+				<td>
+					<o:dropDownField id="selectIntervento"
+						   disabled="#{esitoZootBean._selectInterventoDisable}"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               listStyle="height:100px !important;"
+			               value="#{esitoZootBean._esitoZootEsitoAmmBov._intervento}"
+			               listItemStyle="white-space: nowrap;"               
+			               style="width:100px;">
+						<o:dropDownItems value="#{esitoZootBean._listInterventi}"/>
+						<o:ajax event="change" render="tableZootEsitoFields salvaEsitoBovZoot annullaEsitoBovZoot cancellaEsitoBovZoot selectIntervento selectZootEsito percRidApplZootEsito applPercDetZootEsito percDetZootEsito applPercDet2xZootEsito percDet2xZootEsito esclPagZootEsito percRidEsclZootEsito ultEsclPagZootEsito noteZootEsito" listener="#{esitoZootBean.selectInterventoChange}"/>
+					</o:dropDownField>
+				</td>
+			</tr>
+		</table>
+		<br/><br/>	
+		<h:outputText value="Esito dei controlli" escape="true" style="text-decoration:underline;"/>
+		<br/><br/>
+		<table>
+			<tr>
+				<td style="width:300px">Esito Controllo</td>
+				<td>
+					<o:dropDownField id="selectZootEsito"
+			               suggestionMode="custom"
+			               disabled="#{!esitoZootBean._selectInterventoDisable}"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{esitoZootBean._esitoZootEsitoAmmBov._esito_controllo}"
+			               listStyle="height:100px !important;"
+			               listItemStyle="white-space: nowrap;"               
+			               style="width:100px;">
+						<o:dropDownItems value="#{esitoZootBean._listEsito}"/>
+					</o:dropDownField>
+				</td>
+			</tr>					
+			<tr>
+				<td>- Percentuale di riduzione:</td>
+				<td><h:inputText id="percRidApplZootEsito" disabled="#{!esitoZootBean._selectInterventoDisable}" value="#{esitoZootBean._esitoZootEsitoAmmBov._perc_rid_esito_controllo}" size="11" /></td>
+			</tr>			
+		</table>
+
+		<br/><br/>
+		<h:outputText value="Applicazione della sanzione (se esito negativo) " escape="true" style="text-decoration:underline;"/>
+		<br/><br/>
+		<table>
+			<tr>
+				<td style="width:450px">Applicazione della percentuale di riduzione determinata:</td>
+				<td>
+					<o:selectOneRadio id="applPercDetZootEsito" disabled="#{!esitoZootBean._selectInterventoDisable}" value="#{esitoZootBean._esitoZootEsitoAmmBov._appl_perc_rid_determinata}">
+						<f:selectItems value="#{esitoZootBean._listRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>					
+			<tr>
+				<td>- Percentuale di riduzione determinata:</td>
+				<td><h:inputText id="percDetZootEsito" disabled="#{!esitoZootBean._selectInterventoDisable}" value="#{esitoZootBean._esitoZootEsitoAmmBov._perc_rid_determinata}" size="11" /></td>
+			</tr>
+			<tr>
+				<td>Applicazione del doppio della percentuale di riduzione determinata:</td>
+				<td>
+					<o:selectOneRadio id="applPercDet2xZootEsito" disabled="#{!esitoZootBean._selectInterventoDisable}" value="#{esitoZootBean._esitoZootEsitoAmmBov._appl_perc_rid_determinata_2x}">
+						<f:selectItems value="#{esitoZootBean._listRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>					
+			<tr>
+				<td>- Percentuale di riduzione determinata:</td>
+				<td><h:inputText id="percDet2xZootEsito" disabled="#{!esitoZootBean._selectInterventoDisable}" value="#{esitoZootBean._esitoZootEsitoAmmBov._perc_rid_determinata_2x}" size="11" /></td>
+			</tr>
+			<tr>
+				<td style="width:300px">Esclusione del pagamento:</td>
+				<td>
+					<o:selectOneRadio id="esclPagZootEsito" disabled="#{!esitoZootBean._selectInterventoDisable}" value="#{esitoZootBean._esitoZootEsitoAmmBov._escl_pagamento}">
+						<f:selectItems value="#{esitoZootBean._listRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>					
+			<tr>
+				<td>- Percentuale di riduzione determinata:</td>
+				<td><h:inputText id="percRidEsclZootEsito" disabled="#{!esitoZootBean._selectInterventoDisable}" value="#{esitoZootBean._esitoZootEsitoAmmBov._perc_rid_escl_pagamento}" size="11" /></td>
+			</tr>		
+			<tr>
+				<td style="width:300px">Ulteriore esclusione del pagamento:</td>
+				<td>
+					<o:selectOneRadio id="ultEsclPagZootEsito" disabled="#{!esitoZootBean._selectInterventoDisable}" value="#{esitoZootBean._esitoZootEsitoAmmBov._ulteriore_escl_pagamento}">
+						<f:selectItems value="#{esitoZootBean._listRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>	
+		</table>
+		<br/>
+		Note: <h:inputText id="noteZootEsito" disabled="#{!esitoZootBean._selectInterventoDisable}" value="#{esitoZootBean._esitoZootEsitoAmmBov._note}" size="50" />
+				
+		<br/><br/>
+		<h:commandButton action="#{esitoZootBean.salvaEsitoAmmBov}" value="Salva" id="salvaEsitoBovZoot" disabled="#{!esitoZootBean._selectInterventoDisable}"/>
+		<h:outputText value="  " escape="false" />
+		<h:commandButton action="#{esitoZootBean.annullaEsitoAmmBov}" value="Annulla" id="annullaEsitoBovZoot" disabled="#{!esitoZootBean._selectInterventoDisable}"/>
+<h:outputText value="  " escape="false" />
+		<h:commandButton action="#{esitoZootBean.cancellaEsitoIntAmmBov}" value="Cancella" id="cancellaEsitoBovZoot" disabled="#{!esitoZootBean._selectInterventoDisable}"/>		
+		<h:outputText value="  " escape="false" />
+		<h:commandButton action="#{esitoZootBean.indietroEsitoAmmBov}" value="Indietro" id="indietroEsitoBovZoot" />
+		<o:popupLayer id="popupEsitoBovZootEditLayer"
+              visible="#{esitoZootBean._messageVisible}"
+              hideOnOuterClick="true"
+              hidingTimeout="5000"
+              styleClass="popupStyle"
+              left="200"
+              top="50">
+		  <h:outputText styleClass="popupMessage" value="#{esitoZootBean._message}"/>
+		</o:popupLayer>
+	
+	</div>
+
+</div>
+    

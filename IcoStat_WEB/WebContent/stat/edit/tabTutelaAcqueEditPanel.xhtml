@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<div  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:o="http://openfaces.org/"
+      xmlns:t="http://myfaces.apache.org/tomahawk" >
+
+	<div>
+		<b><h:outputText value="#{tutelaAcqueBean._titoloPagina}" escape="true" /></b>
+		<br/><br/>
+		<table>
+			<tr>
+				<td>Campagna:</td>
+				<td><o:dropDownField id="selectCampagnaTutelaAcque"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{tutelaAcqueBean._tutelaAcque._campagna}"
+			               listItemStyle="white-space: nowrap;"       
+			               listStyle="height:100px !important;"        
+			               style="width:200px;border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;"
+			               disabled="#{tutelaAcqueBean._readOnly}">
+						<o:dropDownItems value="#{tutelaAcqueBean._listCampagna}"/>
+					</o:dropDownField></td>
+			</tr>
+			<tr>
+				<td style="width:250">CUAA:</td>
+				<td>
+					<h:inputText value="#{tutelaAcqueBean._tutelaAcque._cuaa}" size="30" readonly="#{tutelaAcqueBean._readOnly}"
+					style="border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;"/>
+				</td>
+			</tr>
+			
+			
+			<tr>
+				<td>Punti di Altitudine:</td>
+				<td>
+					<h:inputText value="#{tutelaAcqueBean._tutelaAcque._punti_altitudine}" size="30" />
+				</td>
+			</tr>
+			
+			<tr>
+				<td>UBA Accertate TA:</td>
+				<td><h:inputText value="#{tutelaAcqueBean._tutelaAcque._uba_acc}" size="30" /></td>
+			</tr>
+			
+			<tr>
+				<td>UBA Accertate PSR:</td>
+				<td><h:inputText value="#{tutelaAcqueBean._tutelaAcque._uba_acc_psr}" size="30" /></td>
+			</tr>
+			
+			<tr>
+				<td>Carico alpeggio PSR:</td>
+				<td><h:inputText value="#{tutelaAcqueBean._tutelaAcque._carico_alpeggio_psr}" size="30" /></td>
+			</tr>
+			<tr>
+				<td>Carico bestiame attuale TA:</td>
+				<td><h:inputText value="#{tutelaAcqueBean._tutelaAcque._carico_bestiame_attuale_ta}" size="30" /></td>
+			</tr>
+			<tr>
+				<td>Carico bestiame attuale PSR:</td>
+				<td><h:inputText value="#{tutelaAcqueBean._tutelaAcque._carico_bestiame_attuale_psr}" size="30" /></td>
+			</tr>
+			
+			<tr>
+				<td>Tolleranza carico bestiame massima TA:</td>
+				<td><h:inputText value="#{tutelaAcqueBean._tutelaAcque._tolleranza_car_best_max_ta}" size="30" /></td>
+			</tr>
+			<tr>
+				<td>Tolleranza carico bestiame massima PSR:</td>
+				<td><h:inputText value="#{tutelaAcqueBean._tutelaAcque._tolleranza_car_best_max_psr}" size="30" /></td>
+			</tr>
+			
+			<tr>
+				<td>Media annuale carico bestiame:</td>
+				<td><h:inputText value="#{tutelaAcqueBean._tutelaAcque._avg_ann_carico_best}" size="30" /></td>
+			</tr>
+			
+			<tr>
+				<td>Capacità stoccaggi:</td>
+				<td><o:dropDownField id="selectCapacitaStoccaggiTutelaAcque"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{tutelaAcqueBean._tutelaAcque._capacita_stoccaggi}"
+			               listItemStyle="white-space: nowrap;"        
+			               listStyle="height:100px !important;"       
+			               style="width:200px;">
+						<o:dropDownItems value="#{tutelaAcqueBean._listCapacitaStoccaggi}"/>
+					</o:dropDownField></td>
+			</tr>
+			<tr>
+				<td>Stoccaggi tenuti in funzione:</td>
+				<td><o:dropDownField id="selectStoccaggiInFunzioneTutelaAcque"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{tutelaAcqueBean._tutelaAcque._stoccaggi_tenuti_in_funzione}"
+			               listItemStyle="white-space: nowrap;"  
+			               listStyle="height:100px !important;"             
+			               style="width:200px;">
+						<o:dropDownItems value="#{tutelaAcqueBean._listStoccaggiInFunzione}"/>
+					</o:dropDownField></td>
+			</tr>
+			<tr>
+				<td>Esito stoccaggi:</td>
+				<td><o:dropDownField id="selectEsitoStoccaggiTutelaAcque"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{tutelaAcqueBean._tutelaAcque._esito_stoccaggi}"
+			               listItemStyle="white-space: nowrap;"     
+			               listStyle="height:100px !important;"          
+			               style="width:200px;">
+						<o:dropDownItems value="#{tutelaAcqueBean._listEsitoStoccaggi}"/>
+					</o:dropDownField></td>
+			</tr>
+			<tr>
+				<td>Dichiarazioni presenti:</td>
+				<td><h:inputText value="#{tutelaAcqueBean._tutelaAcque._dichiarazioni_presenti}" size="80" /></td>
+			</tr>
+			<tr>
+				<td>Esito carico bestiame TA:</td>
+				<td><o:dropDownField id="selectEsitoTutelaAcque"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{tutelaAcqueBean._tutelaAcque._esito_carico_bestiame_ta}"
+			               listItemStyle="white-space: nowrap;" 
+			               listStyle="height:100px !important;"              
+			               style="width:200px;">
+						<o:dropDownItems value="#{tutelaAcqueBean._listEsitoCaricoBestTA}"/>
+					</o:dropDownField></td>
+			</tr>
+			
+			<tr>
+				<td>Esito carico bestiame PSR:</td>
+				<td><o:dropDownField id="selectEsitoTutelaAcquePSR"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               listStyle="height:100px !important;"
+			               value="#{tutelaAcqueBean._tutelaAcque._esito_carico_bestiame_psr}"
+			               listItemStyle="white-space: nowrap;"               
+			               style="width:200px;">
+						<o:dropDownItems value="#{tutelaAcqueBean._listEsitoCaricoBestPSR}"/>
+					</o:dropDownField></td>
+			</tr>
+			
+			<tr>
+				<td>Stato:</td>
+				<td><o:dropDownField id="selectStatoTutelaAcque"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               listStyle="height:100px !important;"
+			               value="#{tutelaAcqueBean._tutelaAcque._stato}"
+			               listItemStyle="white-space: nowrap;"               
+			               style="width:200px;">
+						<o:dropDownItems value="#{tutelaAcqueBean._listStato}"/>
+					</o:dropDownField></td>
+			</tr>
+			<tr>
+				<td>Note:</td>
+				<td><h:inputText value="#{tutelaAcqueBean._tutelaAcque._note}" size="80" /></td>
+			</tr>
+		</table>
+		<br/>
+			
+	    <br/>
+		<h:commandButton action="#{tutelaAcqueBean.salvaTutelaAcque}" value="Salva" id="salvaTutelaAcque" />
+		<h:outputText value="  " escape="false" />
+		<h:commandButton action="#{tutelaAcqueBean.annullaTutelaAcque}" value="Annulla" id="annullaTutelaAcque"/>
+		<o:popupLayer id="popupTutelaAcqueEditLayer"
+              visible="#{tutelaAcqueBean._messageVisible}"
+              hideOnOuterClick="true"
+              hidingTimeout="5000"
+              styleClass="popupStyle"
+              left="200"
+              top="150">
+		  <h:outputText styleClass="popupMessage" value="#{tutelaAcqueBean._message}"/>
+		</o:popupLayer>
+	</div>
+
+</div>
+    

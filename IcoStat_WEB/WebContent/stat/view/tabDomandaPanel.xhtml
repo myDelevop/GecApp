@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<div  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:o="http://openfaces.org/"
+      xmlns:t="http://myfaces.apache.org/tomahawk" >
+
+	<div>
+		<b><h:outputText value="Anagrafica domanda" escape="true" /></b>
+		<br/><br/>		
+		<o:dataTable id="tableDomanda" 
+			var="domanda" 
+			value ="#{domandaBean.elencoDomande}"
+			rowKey="#{domanda._idDomanda}" 
+			
+			line-height="10px" 
+			horizontalGridLines="1px dotted gray"
+			verticalGridLines="1px dotted gray"
+			noDataRowStyle="color: black; text-align: left; font-size: 14px"
+			font-weight="plain"
+			cellpadding="3px"
+			pageSize="100"
+			sortColumnId="cuaa"
+			sortAscending="true"
+			styleClass="table" >
+		
+			<f:facet name="below">
+	    		<o:dataTablePaginator id="paginator"/>
+	  		</f:facet>
+	  		<f:facet name="noDataMessage">
+    			<h:outputText value="#{searchBean._messageData}" />
+  			</f:facet>
+  			<!-- messaggio se la ricerca in tabella non ritorna risultati -->
+  			<f:facet name="noFilterDataMessage">
+    			<h:outputText value="Nessun dato corrisponde ai parametri di ricerca inseriti" />
+  			</f:facet>
+	  		<o:scrolling horizontal="true"/>
+	  		
+	  		<!-- permette il resizing della colonna -->
+	  		<o:columnResizing resizeHandleWidth="10px" minColWidth="50px"/>
+	  	
+	  		<!-- abilitare selezione singola della riga -->
+	  		<o:singleRowSelection rowData="#{domandaBean._selectedValue}"  />
+	  		
+	  		<!--  <o:scrolling vertical="true"/>  --> 
+			<o:column id="cuaa" styleClass="tableAziendaRiga"  header="CUAA" width="130pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{domanda._cuaa}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{domanda._cuaa}" />
+			</o:column>
+			
+			<o:column id="campagna" styleClass="tableAziendaRiga"  header="Campagna" width="100pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{domanda._campagna}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{domanda._campagna}" />
+			</o:column>
+			
+			<o:column id="misura" styleClass="tableAziendaRiga"  header="Misura" width="100pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{domanda._misura}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{domanda._misura}" />	
+			</o:column>
+			
+			<o:column id="domanda" styleClass="tableAziendaRiga"  header="Domanda" width="100pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{domanda._idDomanda}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{domanda._idDomanda}" />	
+			</o:column>
+			
+			<o:column id="dettagli" styleClass="tableAziendaRiga"  header="Dettagli" width="100pt" 
+					headerStyle="white-space: normal;">
+				<h:commandButton value="Dettagli" action="#{domandaBean.visualizzaDettagli}" rendered="#{domanda._misura!='DU'}"/>	
+			</o:column>
+		</o:dataTable>
+			
+	    <br/>
+		<h:commandButton action="#{domandaBean.esportaDomanda}" value="Esporta Dati" id="esportaDomanda" />
+		
+		<o:popupLayer id="popupDomandaLayer"
+              visible="#{domandaBean._messageVisible}"
+              hideOnOuterClick="true"
+              hidingTimeout="5000"
+              styleClass="popupStyle"
+              left="200"
+              top="150">
+		  <h:outputText styleClass="popupMessage" value="#{domandaBean._message}"/>
+		</o:popupLayer>
+		
+		<br/><br/><br/>
+		
+		<b><h:outputText value="Dettagli per CUAA: #{domandaBean._selectedValue._cuaa} e domanda: #{domandaBean._selectedValue._idDomanda}" escape="false" 
+			rendered="#{domandaBean._selectedValue._misura!=''}"/></b>
+		<br/><br/>
+		 
+		 <o:dataTable id="tableSottointerventi" 
+			var="sottointervento" 
+			value ="#{domandaBean._listSottointerventi}"
+			rowKey="#{sottointervento._codiceSottointervento}" 
+			
+			line-height="10px" 
+			horizontalGridLines="1px dotted gray"
+			verticalGridLines="1px dotted gray"
+			noDataRowStyle="color: black; text-align: left; font-size: 14px"
+			font-weight="plain"
+			cellpadding="3px"
+			pageSize="50"
+			styleClass="table" 
+			style="height:160px;"
+			rendered="#{domandaBean._selectedValue._misura!='DU' and domandaBean._selectedValue._misura!=''}">
+    
+			<f:facet name="below">
+	    		<o:dataTablePaginator id="paginator"/>
+	  		</f:facet>
+	  		<f:facet name="noDataMessage">
+    			<h:outputText value="Nessun dato caricato" />
+  			</f:facet>
+	  		<o:scrolling horizontal="true"/>
+	  		
+	  		<!-- permette il resizing della colonna -->
+	  		<o:columnResizing resizeHandleWidth="10px" minColWidth="50px"/>
+	  	
+	  		<!--  <o:scrolling vertical="true"/>  --> 
+			<o:column id="intervento" styleClass="tableAziendaRiga"  header="Intervento" width="60pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{sottointervento._codiceIntervanto}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{sottointervento._codiceIntervento}" />
+			</o:column>
+			
+			<o:column id="descr_intervento" styleClass="tableAziendaRiga"  header="Descr. Intervento" width="200pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{sottointervento._descrizioneIntervento}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{sottointervento._descrizioneIntervento}" />	
+			</o:column>
+			
+			<o:column id="sottointervento" styleClass="tableAziendaRiga"  header="Sottointervento" width="70pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{sottointervento._codiceSottointervento}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{sottointervento._codiceSottointervento}" />	
+			</o:column>
+			
+			<o:column id="descr_sottointervento" styleClass="tableAziendaRiga"  header="descr. Sottointervento" width="350pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{sottointervento._descrizioneSottointervento}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{sottointervento._descrizioneSottointervento}" />	
+			</o:column>
+		</o:dataTable>
+		
+		<br/>
+	</div>
+
+</div>
+    

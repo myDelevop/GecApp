@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<div  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:o="http://openfaces.org/"
+      xmlns:t="http://myfaces.apache.org/tomahawk" >
+
+	<div>
+		<b><h:outputText value="#{esitoSupBean._titoloPagina}" escape="true" /></b>
+		<br/><br/>
+		<table>
+			<tr>
+				<td style="width:250">CUAA:</td>
+				<td><h:inputText value="#{esitoSupBean._esitoSuperfici._cuaa}" size="30" readonly="#{esitoSupBean._readOnly}"
+					style="border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;"
+				/></td>
+			</tr>
+			<tr>
+				<td>Domanda OPR:</td>
+				<td><h:inputText id="domandaSuperfici" value="#{esitoSupBean._esitoSuperfici._domanda}" size="30" readonly="#{esitoSupBean._readOnly}"
+					style="border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;">
+					<o:ajax event="change" render="domandaImpegni" listener="#{esitoSupBean.settingDomanda}"/>
+					</h:inputText>
+				</td>
+			</tr>
+			<tr>
+				<td>Campagna:</td>
+				<td>
+					<o:dropDownField id="selectCampagnaEsitoSup"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{esitoSupBean._esitoSuperfici._campagna}"
+			               listStyle="height:100px !important;"
+			               listItemStyle="white-space: nowrap;"               
+			               style="width:200px;border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;"
+			               disabled="#{esitoSupBean._readOnly}">
+						<o:dropDownItems value="#{esitoSupBean._listCampagna}"/>
+						<o:ajax event="change" render="selectInterventoEsitoSup" listener="#{esitoSupBean.settingIntervento}"/>
+						<o:ajax event="change" render="selectSottointerventoEsitoSup" listener="#{esitoSupBean.settingSottoIntervento}"/>
+					</o:dropDownField>
+				</td>
+			</tr>
+			<tr>
+				<td class="rowSeparator">Data Controllo:</td>
+				<td class="rowSeparator">
+					<o:dateChooser id="esiSupDataControllo"
+                             pattern="dd/MM/yyyy"
+                             value="#{esitoSupBean._esitoSuperfici._dataControllo}"
+                             locale="it_IT"
+                             todayText="Oggi"
+                             noneText="Nessuno"
+                             headerStyle="background: white; color: black;"
+                             daysHeaderStyle="background: #20386b; color: white;"
+                             dayStyle="border: 1px solid white;"
+                             rolloverDayStyle="border: 1px solid #f7a902; background: white; color: black;"
+                             rolloverWeekendDayStyle="border: 1px solid #f7a902; background: white; color: #ff8a00;"
+                             selectedDayStyle="border: 1px solid #20386b; color: #20386b; background: white;"
+                             weekendDayStyle="color: #ff8a00;"
+                             footerStyle="background: white; color: black; border-top: 1px solid #20386b;"
+                             style="width: 200px!important;"
+                             typingAllowed="false"
+                             />
+				</td>
+			</tr>
+			<tr>
+				<td>Misura:</td>
+				<td><h:inputText id="misura" value="#{esitoSupBean._esitoSuperfici._misura}" size="30" disabled="true"/></td>
+			</tr>
+			<tr>
+				<td>Intervento:</td>
+				<td>
+					<o:dropDownField id="selectInterventoEsitoSup"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{esitoSupBean._esitoSuperfici._intervento}"
+			               listStyle="height:100px !important;"
+			               listItemStyle="white-space: nowrap;"               
+						   style="width:200px;border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;"
+			               disabled="#{esitoSupBean._readOnly}">
+						<o:dropDownItems value="#{esitoSupBean._listInterventi}"/>
+						<o:ajax event="change" render="misura" listener="#{esitoSupBean.settingMisura}"/>
+						<o:ajax event="change" render="selectSottointerventoEsitoSup" listener="#{esitoSupBean.settingSottoInterventoSelectIntervento}"/>
+					</o:dropDownField>
+				</td>
+			</tr>
+			<tr>
+				<td>Sottointervento:</td>
+				<td>
+					<o:dropDownField id="selectSottointerventoEsitoSup"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{esitoSupBean._esitoSuperfici._sottointervento}"
+			               listItemStyle="white-space: nowrap;"         
+			               listStyle="height:100px !important;"      
+						   style="width:200px;border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;"
+			               disabled="#{esitoSupBean._readOnly}">
+						<o:dropDownItems value="#{esitoSupBean._listSottointerventi}"/>
+						<o:ajax event="change" render="selectSottointerventoEsitoSup" listener="#{esitoSupBean.settingDomanda}"/>		
+					</o:dropDownField>	
+				</td>
+			</tr>
+			<tr>
+				<td>Superficie Dichiarata Netta:</td>
+				<td><h:inputText value="#{esitoSupBean._esitoSuperfici._supDichiarata}" size="30" /></td>
+			</tr>
+			<tr>
+				<td>Superficie Accertata Netta:</td>
+				<td><h:inputText value="#{esitoSupBean._esitoSuperfici._supAccertata}" size="30" /></td>
+			</tr>
+			<tr>
+				<td>Differenza:</td>
+				<td><h:inputText value="#{esitoSupBean._esitoSuperfici._differenza}" size="30" /></td>
+			</tr>
+			<tr>
+				<td>Scostamento %:</td>
+				<td><h:inputText value="#{esitoSupBean._esitoSuperfici._scostPerc}" size="30" /></td>
+			</tr>
+			<tr>
+				<td style="width:250">Sanzione:</td>
+				<td>
+					<o:selectOneRadio id="selectSanzioneAnnullataEsitoSup" value="#{esitoSupBean._esitoSuperfici._sanzioneAnnullata}">
+						<f:selectItems value="#{esitoSupBean._listSanzioneAnnullata}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:250">Cartellino Giallo:</td>
+				<td>
+					<o:selectOneRadio id="selectCartellinoGialloEsitoSup" value="#{esitoSupBean._esitoSuperfici._cartellino_giallo}">
+						<f:selectItems value="#{esitoSupBean._listCartellino_Giallo}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>
+			<tr>
+				<td>Sanzione m&sup2;:</td>
+				<td><h:inputText value="#{esitoSupBean._esitoSuperfici._sanzione}" size="30" /></td>
+			</tr>
+			<tr>
+				<td>Effetto:</td>
+				<td><h:inputText value="#{esitoSupBean._esitoSuperfici._effetto}" size="30" /></td>
+			</tr>
+			<tr>
+				<td>Note:</td>
+				<td><h:inputText value="#{esitoSupBean._esitoSuperfici._note}" size="100" /></td>
+			</tr>
+		</table>
+		<br/>
+		<h:commandButton action="#{esitoSupBean.salvaEsito}" value="Salva" id="salvaEsitoSup"/>
+		<h:outputText value="  " escape="false" />
+		<h:commandButton action="#{esitoSupBean.annullaEsito}" value="Annulla" id="annullaEsitoSup" />
+		<o:popupLayer id="popupEsitoSupEditLayer"
+              visible="#{esitoSupBean._messageVisible}"
+              hideOnOuterClick="true"
+              hidingTimeout="5000"
+              styleClass="popupStyle"
+              left="150"
+              top="150">
+		  <h:outputText styleClass="popupMessage" value="#{esitoSupBean._message}"/>
+		</o:popupLayer>
+	</div>
+</div>
+    

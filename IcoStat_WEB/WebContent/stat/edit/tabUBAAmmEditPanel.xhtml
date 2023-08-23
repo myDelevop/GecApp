@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<div  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:o="http://openfaces.org/"
+      xmlns:t="http://myfaces.apache.org/tomahawk" >
+
+	<div>
+		<b><h:outputText value="#{ubaAmmBean._titoloPagina}" escape="true" /></b>
+		<br/><br/>
+		<table>
+			<tr>
+				<td>Campagna:</td>
+				<td>
+					<o:dropDownField id="selectCampagnaUBAAmm"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{ubaAmmBean._uba._campagna}"
+			               listItemStyle="white-space: nowrap;"  
+			               listStyle="height:100px !important;"             
+			               style="width:200px;border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;"
+			               disabled="#{ubaAmmBean._readOnly}">
+						<o:dropDownItems value="#{ubaAmmBean._listCampagna}"/>
+						<o:ajax event="change" render="intervento_idUBAAmm" listener="#{ubaAmmBean.settingIntervento}"/>
+					</o:dropDownField></td>
+			</tr>
+			<tr>
+				<td style="width:250">CUAA:</td>
+				<td><h:inputText value="#{ubaAmmBean._uba._cuaa}" size="30" readonly="#{ubaAmmBean._readOnly}"
+				 style="border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;"
+				/></td>
+			</tr>
+			<tr>
+				<td>Domanda:</td>
+				<td><h:inputText value="#{ubaAmmBean._uba._domanda}" size="30" readonly="#{ubaAmmBean._readOnly}"
+				style="border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;"/></td>
+			</tr>
+			<tr>
+				<td>Intervento:</td>
+				<td><h:inputText value="#{ubaAmmBean._uba._intervento}" size="30" readonly="true" id="intervento_idUBAAmm"
+				style="border-style: solid; border-width: 2px; border-color: #FFC266; background: #FFF5E6;"/></td>
+			</tr>
+			<tr>
+				<td>Esito:</td>
+				<td>
+					<o:dropDownField id="selectEsitoUBAAmm"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               listStyle="height:100px !important;"
+			               customValueAllowed="false"
+			               value="#{ubaAmmBean._uba._esito}"
+			               listItemStyle="white-space: nowrap;"               
+			               style="width:200px;">
+						<o:dropDownItems value="#{ubaAmmBean._listEsito}"/>
+						<o:ajax event="change" render="percRidUBAAmm" listener="#{ubaAmmBean.disablePercRid}" />
+					</o:dropDownField>
+				</td>
+			</tr>
+			<tr>
+				<td>Stato:</td>
+				<td>
+					<o:dropDownField id="selectStatoPostCommissioneUBAAmm"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{ubaAmmBean._uba._stato}"
+			               listItemStyle="white-space: nowrap;"  
+			               listStyle="height:100px !important;"             
+			               style="width:200px;">
+						<o:dropDownItems value="#{ubaAmmBean._listStato}"/>
+					</o:dropDownField>
+				</td>
+			</tr>
+			<tr>
+				<td>UBA Richiesti:</td>
+				<td>
+					<h:inputText value="#{ubaAmmBean._uba._ubaRich}" size="30">
+						<o:ajax event="change" render="uba_irreg_edit" listener="#{ubaAmmBean.calcolaDifferenza}"/>
+					</h:inputText>
+				</td>
+			</tr>
+			<tr>
+				<td>UBA Accertati:</td>
+				<td>
+					<h:inputText value="#{ubaAmmBean._uba._ubaAcc}" size="30">
+						<o:ajax event="change" render="uba_irreg_edit" listener="#{ubaAmmBean.calcolaDifferenza}"/>
+					</h:inputText>
+				</td>
+			</tr>
+			<tr>
+				<td>UBA Irregolari:</td>
+				<td><h:inputText id="uba_irreg_edit" value="#{ubaAmmBean._uba._ubaIrreg}" size="30" /></td>
+			</tr>
+			<tr>
+				<td>% Riduzione:</td>
+				<td><h:inputText id="percRidUBAAmm" value="#{ubaAmmBean._uba._percRid}" size="30" disabled="#{ubaAmmBean._disablePercRid}"/></td>
+			</tr>
+			<tr>
+				<td>Note:</td>
+				<td><h:inputText value="#{ubaAmmBean._uba._note}" size="80" /></td>
+			</tr>
+		</table>
+		<br/>
+		<h:commandButton action="#{ubaAmmBean.salvaUba}" value="Salva" id="salvaUBAAmm"/>
+		<h:outputText value="  " escape="false" />
+		<h:commandButton action="#{ubaAmmBean.annullaUba}" value="Annulla" id="annullaUBAAmm" />
+		<o:popupLayer id="popupUbaAmmEditLayer"
+              visible="#{ubaAmmBean._messageVisible}"
+              hideOnOuterClick="true"
+              hidingTimeout="5000"
+              styleClass="popupStyle"
+              left="200"
+              top="150">
+		  <h:outputText styleClass="popupMessage" value="#{ubaAmmBean._message}"/>
+		</o:popupLayer>
+	</div>
+</div>
+    

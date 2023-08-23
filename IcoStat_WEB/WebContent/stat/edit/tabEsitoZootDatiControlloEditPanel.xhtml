@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<div  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:o="http://openfaces.org/"
+      xmlns:t="http://myfaces.apache.org/tomahawk" >
+
+	<div>
+		<b><h:outputText value="#{esitoZootBean._titoloPagina}" escape="true" /></b>
+		<br/><br/>
+		
+		<h:outputText value="Dati azienda" escape="true" style="text-decoration:underline" />
+		<br/><br/>
+		<table>					
+			<tr >
+				<td>CUAA:</td>
+				<td><h:outputText value="#{esitoZootBean._esitoZootStato._cuaa}"/></td>
+			</tr>
+			<tr>
+				<td>Campagna:</td>
+				<td><h:outputText value="#{esitoZootBean._esitoZootStato._campagna}"/></td>
+			</tr>
+			<tr>
+				<td>Domanda:</td>
+				<td><h:outputText value="#{esitoZootBean._esitoZootStato._domanda}"/></td>
+			</tr>
+			<tr><td><h:outputText value=" " /></td></tr>
+			<tr><td><h:outputText value=" " /></td></tr>
+			<tr><td><h:outputText value=" " /></td></tr>
+			<tr>
+				<td>Nome controllore:</td>
+				<td><h:inputText value="#{esitoZootBean._esitoZootStato._nomeControllore}" size="30"/></td>
+			</tr>
+		</table>
+		<br/><br/>
+		
+		<h:outputText value="Controllo effettuato in presenza del signor:" escape="true" style="text-decoration:underline"/>
+		<br/><br/>
+		<table>
+			<tr>
+				<td style="width:150px">Nome e Cognome:</td>
+				<td><h:inputText value="#{esitoZootBean._esitoZootStato._personaPresente}" size="30"/></td>
+			</tr>
+			<tr>
+				<td>In qualità di:</td>
+				<td>
+					<o:dropDownField id="selectRuoloPersonaPresente"
+			               suggestionMode="custom"
+			               autoComplete="true"
+			               customValueAllowed="false"
+			               value="#{esitoZootBean._esitoZootStato._personaPresenteRuolo}"
+			               listItemStyle="white-space: nowrap;"      
+			               listStyle="height:100px !important;"         
+			               style="width:200px;">
+						<o:dropDownItems value="#{esitoZootBean._listRuoloPersonaPresente}"/>
+					</o:dropDownField>
+				</td>
+			</tr>
+			<tr>
+				<td>Estremi documento:</td>
+				<td><h:inputText value="#{esitoZootBean._esitoZootStato._personaPresenteDocumento}" size="30" /></td>
+			</tr>					
+		</table>
+		
+		<br/><br/>
+		<h:outputText value="All. Al fascicolo di controllo" escape="true" style="text-decoration:underline"/>
+		<br/><br/>
+		<table>
+			<tr>
+				<td style="width:150px">Registro BDN:</td>
+				<td>
+					<o:selectOneRadio value="#{esitoZootBean._esitoZootStato._flgRegistroBDN}">
+						<f:selectItems value="#{esitoZootBean._listRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>
+			<tr>
+				<td>Foto Registro Stalla:</td>
+				<td>
+					<o:selectOneRadio value="#{esitoZootBean._esitoZootStato._flgFotoRegistroStalla}">
+						<f:selectItems value="#{esitoZootBean._listRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>
+			<tr>
+				<td>Altro (v. note):</td>
+				<td>
+					<o:selectOneRadio value="#{esitoZootBean._esitoZootStato._flgAltro}">
+						<f:selectItems value="#{esitoZootBean._listRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>
+			<tr>
+				<td>Note:</td>
+				<td><h:inputText value="#{esitoZootBean._esitoZootStato._note}" size="50" /></td>
+			</tr>					
+		</table>
+		
+		<br/><br/>
+		<h:outputText value="Controllo" escape="true" style="text-decoration:underline"/>
+		<br/><br/>
+		<table>
+			<tr>
+				<td style="width:300px">Data controllo:</td>
+				<td>
+					<!-- value da cambiare..metterci il campo dell'oggetto BO -->
+					<o:dateChooser id="dataControlloZoot"
+                        pattern="dd/MM/yyyy"
+                        value="#{esitoZootBean._esitoZootStato._dataControllo}"
+                        locale="it_IT"
+                        todayText="Oggi"
+                        noneText="Nessuno"
+                        headerStyle="background: white; color: black;"
+                        daysHeaderStyle="background: #20386b; color: white;"
+                        dayStyle="border: 1px solid white;"
+                        rolloverDayStyle="border: 1px solid #f7a902; background: white; color: black;"
+                        rolloverWeekendDayStyle="border: 1px solid #f7a902; background: white; color: #ff8a00;"
+                        selectedDayStyle="border: 1px solid #20386b; color: #20386b; background: white;"
+                        weekendDayStyle="color: #ff8a00;"
+                        footerStyle="background: white; color: black; border-top: 1px solid #20386b;"
+                        style="width: 200px!important;"
+                        typingAllowed="false"
+                        />
+				</td>
+			</tr>
+			<tr>
+				<td>Firma del produttore o suo rappresentante:</td>
+				<td>
+					<o:selectOneRadio value="#{esitoZootBean._esitoZootStato._flgFirmaProduttore}">
+						<f:selectItems value="#{esitoZootBean._listRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>
+			<tr>
+				<td>Firma del controllore:</td>
+				<td>
+					<o:selectOneRadio value="#{esitoZootBean._esitoZootStato._flgFirmaControllore}">
+						<f:selectItems value="#{esitoZootBean._listRadioButton}"/>       
+			        </o:selectOneRadio>
+				</td>
+			</tr>					
+		</table>
+		
+		<br/><br/>
+		<h:commandButton action="#{esitoZootBean.salvaDatiControllo}" value="Salva" id="salvaDatiControlloZoot"/>
+		<h:outputText value="  " escape="false" />
+		<h:commandButton action="#{esitoZootBean.annullaDatiControllo}" value="Annulla" id="annullaDatiControlloZoot"/>
+		
+		<o:popupLayer id="popupEsitoZootDatiControlloLayer"
+              visible="#{esitoZootBean._messageVisible}"
+              hideOnOuterClick="true"
+              hidingTimeout="5000"
+              styleClass="popupStyle"
+              left="200"
+              top="150">
+		  <h:outputText styleClass="popupMessage" value="#{esitoZootBean._message}"/>
+		</o:popupLayer>
+		
+	</div>
+
+</div>
+    

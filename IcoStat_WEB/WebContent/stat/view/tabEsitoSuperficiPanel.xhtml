@@ -1,0 +1,247 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<div  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:o="http://openfaces.org/"
+      xmlns:t="http://myfaces.apache.org/tomahawk" >
+
+	<div>
+		<b><h:outputText value="Esiti Superfici" escape="true" /></b>
+		<br/><br/>		
+		<o:dataTable id="tableEsitoSup" 
+			var="esitoSuperfici" 
+			value ="#{esitoSupBean.elencoEsitoSuperfici}"
+			rowKey="#{esitoSuperfici._cuaa}" 
+			
+			line-height="10px" 
+			horizontalGridLines="1px dotted gray"
+			verticalGridLines="1px dotted gray"
+			noDataRowStyle="color: black; text-align: left; font-size: 14px"
+			font-weight="plain"
+			cellpadding="3px"
+			pageSize="100"
+			styleClass="table" >
+			
+			<!-- per ogni colonna crea un menu per l'ordinamento e la scomparsa delle colonne -->
+			<!-- 
+			<f:facet name="columnMenu">
+		      <o:columnMenu indentStyle="color: yellow">
+		        <o:sortAscendingMenuItem/>
+		        <o:sortDescendingMenuItem/>
+		        <o:hideColumnMenuItem/>
+		        <o:menuSeparator/>
+		        <o:menuItem value="Columns">
+		          <o:columnVisibilityMenu/>
+		        </o:menuItem>
+		        <o:menuSeparator/>
+		        <o:menuItem value="Select Column" onclick="selectColumn(O$('form:fileExcel').getCurrentColumn().index);"/>
+		        <o:menuItem value="Unselect Column" onclick="unselectColumn(O$('form:fileExcel').getCurrentColumn().index);"/>
+		      </o:columnMenu>
+		    </f:facet>
+    		 -->
+    
+			<f:facet name="below">
+	    		<o:dataTablePaginator id="paginator"/>
+	  		</f:facet>
+	  		<f:facet name="noDataMessage">
+    			<h:outputText value="#{searchBean._messageData}" />
+  			</f:facet>
+  			<!-- messaggio se la ricerca in tabella non ritorna risultati -->
+  			<f:facet name="noFilterDataMessage">
+    			<h:outputText value="Nessun dato corrisponde ai parametri di ricerca inseriti" />
+  			</f:facet>
+	  		<o:scrolling horizontal="true"/>
+	  		
+	  		<!-- permette il resizing della colonna -->
+	  		<o:columnResizing resizeHandleWidth="10px" minColWidth="50px"/>
+	  		
+	  		<!-- abilitare selezione singola della riga -->
+	  		<o:singleRowSelection rowData="#{esitoSupBean._selectedValue}" rowIndex="#{esitoSupBean._selectedValueIndex}" />
+	  		
+	  		<!--  <o:scrolling vertical="true"/>  --> 
+			<o:column id="cuaa" styleClass="tableAziendaRiga"  header="CUAA" width="130pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoSuperfici._cuaa}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoSuperfici._cuaa}" />
+			</o:column>
+			
+			<o:column id="domanda" styleClass="tableAziendaRiga"  header="Domanda OPR" width="75pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoSuperfici._domanda}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoSuperfici._domanda}" />	
+			</o:column>
+
+			<o:column id="campagna" styleClass="tableAziendaRiga"  header="Campagna" width="70pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoSuperfici._campagna}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoSuperfici._campagna}" />		
+			</o:column>
+
+			<o:column id="esiSupDataControllo" styleClass="tableAziendaRiga"  header="Data Controllo" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoSuperfici._dataControlloStr}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoSuperfici._dataControlloStr}" />		
+			</o:column>
+			
+<!-- 			<o:column id="domandaAgea" styleClass="tableAziendaRiga"  header="Domanda Agea" width="75pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoSuperfici._domandaAgea}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoSuperfici._domandaAgea}" />	
+			</o:column> -->
+			
+<!-- 			<o:column id="misura" styleClass="tableAziendaRiga"  header="Misura" width="75pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoSuperfici._misura}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoSuperfici._misura}" />	
+			</o:column> -->
+			
+<!-- 			<o:column id="statoAzione" styleClass="tableAziendaRiga"  header="Stato Azione" width="110pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoSuperfici._statoAzione}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoSuperfici._statoAzione}" />		
+			</o:column>
+			
+			<o:column id="gruppoColtura" styleClass="tableAziendaRiga"  header="gruppo Coltura" width="120pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoSuperfici._gruppoColtura}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoSuperfici._gruppoColtura}" />	
+			</o:column> -->
+			
+			<o:column id="intervento" styleClass="tableAziendaRiga"  header="Intervento" width="70pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoSuperfici._intervento}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoSuperfici._intervento}" />		
+			</o:column>
+			
+			<o:column id="sottointervento" styleClass="tableAziendaRiga"  header="Sottointervento" width="90pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoSuperfici._sottointervento}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoSuperfici._sottointervento}" />	
+			</o:column>
+			
+			<o:column id="supDich" styleClass="tableAziendaRiga"  header="Sup. Dichiarata Netta" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoSuperfici._supDichiarata}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoSuperfici._supDichiarata}" />	
+			</o:column>
+			
+			<o:column id="supAcc" styleClass="tableAziendaRiga"  header="Sup. Accertata Netta" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoSuperfici._supAccertata}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoSuperfici._supAccertata}" />	
+			</o:column>
+			
+			<o:column id="diff" styleClass="tableAziendaRiga"  header="Differenza" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoSuperfici._differenza}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoSuperfici._differenza}" />		
+			</o:column>
+			
+			<o:column id="scostPerc" styleClass="tableAziendaRiga"  header="Scost. %" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoSuperfici._scostPerc}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoSuperfici._scostPerc}" />	
+			</o:column>
+
+<!-- 			<o:column id="esito" styleClass="tableAziendaRiga"  header="Esito" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoSuperfici._esito}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoSuperfici._esito}" />		
+			</o:column> -->
+
+			<o:column id="sanz" styleClass="tableAziendaRiga"  header="Sanzione" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoSuperfici._sanzioneAnnullata}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoSuperfici._sanzioneAnnullata}" />		
+			</o:column>
+			
+			<o:column id="cartellino_giallo" styleClass="tableAziendaRiga"  header="Cartellino Giallo" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoSuperfici._cartellino_giallo}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoSuperfici._cartellino_giallo}" />		
+			</o:column>
+
+			<o:column id="supSanz" styleClass="tableAziendaRiga"  header="Sanzione m&sup2;" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoSuperfici._sanzione}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoSuperfici._sanzione}" />	
+			</o:column>
+			
+			<o:column id="effetto" styleClass="tableAziendaRiga"  header="Effetto" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoSuperfici._effetto}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoSuperfici._effetto}" />		
+			</o:column>
+			
+			<o:column id="userModifica" styleClass="tableAziendaRiga"  header="User Ultima Modifica" width="110pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoSuperfici._userModifica}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoSuperfici._userModifica}" />
+			</o:column>	
+			
+			<o:column id="dataModifica" styleClass="tableAziendaRiga"  header="Data Ultima Modifica" width="80pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoSuperfici._dataModificaStr}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoSuperfici._dataModificaStr}" />
+			</o:column>
+					
+			<o:column id="note" styleClass="tableAziendaRiga"  header="Note" width="150pt" 
+					headerStyle="white-space: normal;"
+					sortingExpression="#{esitoSuperfici._note}"
+            		sortingComparator="caseInsensitiveText">
+				<h:outputText value="#{esitoSuperfici._note}" />		
+			</o:column>
+		</o:dataTable>
+			
+	    <br/>
+		<h:commandButton action="#{esitoSupBean.aggiungiEsito}" value="Aggiungi" id="aggiungiEsitoSup" rendered="#{request.isUserInRole('ROLE_WR_SUP')}"/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_SUP')}"/>
+		<h:commandButton action="#{esitoSupBean.modificaEsito}" value="Modifica" id="modificaEsitoSup" rendered="#{request.isUserInRole('ROLE_WR_SUP')}"/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_SUP')}"/>
+		<h:commandButton action="#{esitoSupBean.cancellaEsito}" value="Cancella" id="cancellaEsitoSup" rendered="#{request.isUserInRole('ROLE_WR_SUP')}">
+			<o:confirmation id="deleteEsitoSupConfirmation" 
+				message="Cancellare l'esito selezionato?"
+				details="" 
+				okButtonText="Si"
+                cancelButtonText="No"
+				draggable="true"/>
+		</h:commandButton>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_SUP')}"/>
+		<h:commandButton action="#{esitoSupBean.esportaEsito}" value="Esporta dati" id="esportaEsitoSup" rendered="#{request.isUserInRole('ROLE_WR_SUP')}"/>
+		<h:outputText value="  " escape="false" rendered="#{request.isUserInRole('ROLE_WR_SUP')}"/>
+		<h:commandButton action="#{esitoSupBean.importaEsito}" value="Importa Dati" id="importaEsitoSup" rendered="#{request.isUserInRole('ROLE_WR_SUP')}"/>
+		
+		<o:popupLayer id="popupEsitoSupLayer"
+              visible="#{esitoSupBean._messageVisible}"
+              hideOnOuterClick="true"
+              hidingTimeout="5000"
+              styleClass="popupStyle"
+              left="200"
+              top="150">
+		  <h:outputText styleClass="popupMessage" value="#{esitoSupBean._message}"/>
+		</o:popupLayer>
+	</div>
+
+</div>
+    
